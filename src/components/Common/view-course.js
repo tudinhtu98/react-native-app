@@ -3,8 +3,8 @@ import { View, Text, StyleSheet } from "react-native";
 
 const ViewCourse = (props) => {
   return (
-    <View style={{ margin: 5 }}>
-      <Text>{props.item.title}</Text>
+    <View style={styles.view}>
+      <Text style={{ flexWrap: "wrap" }}>{props.item.title}</Text>
       <Text style={styles.darkText}>{props.item.author}</Text>
       <Text
         style={styles.darkText}
@@ -16,6 +16,9 @@ const ViewCourse = (props) => {
 export default ViewCourse;
 
 const styles = StyleSheet.create({
+  view: {
+    margin: 5,
+  },
   darkText: {
     color: "darkgray",
   },
