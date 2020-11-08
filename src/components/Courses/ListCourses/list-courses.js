@@ -6,7 +6,7 @@ const ListCourses = (props) => {
   const courses = [
     {
       id: 1,
-      title: "React Native React Native React Native React Native React Native",
+      title: "123456789 123456789 123456789 123456789 123456789 123456789",
       author: "Tu Dinh Tu",
       level: "Advance",
       released: "Nov 2020",

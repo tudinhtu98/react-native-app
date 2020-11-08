@@ -17,7 +17,7 @@ export default ViewCourse;
 
 const styles = StyleSheet.create({
   view: {
-    margin: 5,
+    marginHorizontal: 5,
   },
   darkText: {
     color: "darkgray",
