@@ -1,17 +1,16 @@
 import React from "react";
-import { View, StyleSheet, Image, Text } from "react-native";
-import ViewCourse from "../../../Common/view-course";
+import {  StyleSheet, Image, TouchableOpacity } from "react-native";
 import ViewPath from "../../../Common/view-path";
 
 const SectionPathsItem = (props) => {
   return (
-    <View style={styles.item}>
+    <TouchableOpacity style={styles.item}>
       <Image
         source={{ uri: props.item.image }}
         style={styles.image}
       />
       <ViewPath item={props.item} />
-    </View>
+    </TouchableOpacity>
   );
 };
 
