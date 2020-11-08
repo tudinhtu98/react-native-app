@@ -1,5 +1,11 @@
 import React from "react";
-import { View, Text, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
 import SectionCoursesItem from "../SectionCoursesItem/section-courses-item";
 
 const SectionCourses = (props) => {
@@ -35,8 +41,11 @@ const SectionCourses = (props) => {
   };
   return (
     <View>
-      <View>
+      <View style={styles.titleView}>
         <Text>{props.title}</Text>
+        <TouchableOpacity>
+          <Text>{`See all >`}</Text>
+        </TouchableOpacity>
       </View>
       <ScrollView horizontal={true}>{renderListItems(courses)}</ScrollView>
     </View>
@@ -44,3 +53,11 @@ const SectionCourses = (props) => {
 };
 
 export default SectionCourses;
+
+const styles = StyleSheet.create({
+  titleView: {
+    margin: 5,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+});

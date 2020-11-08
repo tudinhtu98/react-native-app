@@ -3,9 +3,6 @@ import { ScrollView, View } from "react-native";
 import SectionCourses from "./SectionCourses/section-courses";
 
 const Home = (props) => {
-  const onPressNewReleases = () => {
-    console.log("onPressNewReleases");
-  };
   return (
     <ScrollView>
       <View style={{ height: 200 }}></View>

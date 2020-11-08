@@ -1,16 +1,26 @@
 import React from "react";
-import { View, StyleSheet, Image, Text } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import ViewCourse from "../../../Common/view-course";
+import ViewDotsVertical from "../../../Common/view-dots-vertical";
 
 const SectionCoursesItem = (props) => {
   return (
-    <View style={styles.item}>
-      <Image
-        source={{ uri: "https://i.imgur.com/JOJdL5G.jpeg" }}
-        style={styles.image}
-      />
+    <TouchableOpacity style={styles.item}>
+      <View>
+        <Image
+          source={{ uri: "https://i.imgur.com/JOJdL5G.jpeg" }}
+          style={styles.image}
+        />
+        <ViewDotsVertical onPress={() => alert("Pressed Dots! haha")} />
+      </View>
+
       <ViewCourse item={props.item} />
-    </View>
+    </TouchableOpacity>
   );
 };
 
