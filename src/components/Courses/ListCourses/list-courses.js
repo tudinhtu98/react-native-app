@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Button,
-  FlatList,
-  SectionList,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { FlatList, View } from "react-native";
 import ListCoursesItem from "../ListCoursesItem/list-courses-item";
 
 const ListCourses = (props) => {
@@ -37,11 +30,25 @@ const ListCourses = (props) => {
     },
   ];
 
+  const renderSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          backgroundColor: "#CED0CE",
+          marginLeft: "2%",
+          marginRight: "2%",
+        }}
+      />
+    );
+  };
+
   return (
     <View>
       <FlatList
         data={courses}
         renderItem={({ item }) => <ListCoursesItem item={item} />}
+        ItemSeparatorComponent={renderSeparator}
       />
     </View>
   );

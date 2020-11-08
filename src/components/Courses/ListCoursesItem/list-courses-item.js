@@ -9,42 +9,27 @@ import {
   Text,
 } from "react-native";
 import ViewCourse from "../../Common/view-course";
+import ViewDotsVertical from "../../Common/view-dots-vertical";
 
 const ListCoursesItem = (props) => {
-  const handlePressOption = () => {
-    Alert.alert("Thông báo", "Bạn đã chọn tuỳ chọn", [
-      {
-        text: "Huỷ",
-        style: "cancel",
-        onPress: () => {
-          console.log("Press Huỷ");
-        },
-      },
-      {
-        text: "Share",
-        style: "default",
-        onPress: () => {
-          Share.share({ message: "Hahaha share được rồi" });
-        },
-      },
-    ]);
-  };
   return (
-    <TouchableOpacity
-      style={styles.item}
-      onPress={() => {
-        console.log("Touch on course item");
-      }}
-    >
-      <Image
-        style={styles.image}
-        source={{ uri: "https://i.imgur.com/rPcR1KK.jpeg" }}
-      />
-      <ViewCourse item={props.item} />
-      <TouchableOpacity onPress={handlePressOption}>
-        <Text>...</Text>
+    <View>
+      <TouchableOpacity
+        style={styles.item}
+        onPress={() => {
+          console.log("Touch on course item");
+        }}
+      >
+        <Image
+          style={styles.image}
+          source={{ uri: "https://i.imgur.com/rPcR1KK.jpeg" }}
+        />
+        <ViewCourse item={props.item} />
       </TouchableOpacity>
-    </TouchableOpacity>
+      <View style={styles.dots}>
+        <ViewDotsVertical onPress={() => alert("Pressed Dots!")} color="black"/>
+      </View>
+    </View>
   );
 };
 
@@ -53,12 +38,21 @@ export default ListCoursesItem;
 const styles = StyleSheet.create({
   item: {
     flexDirection: "row",
-    margin: 5,
-    borderBottomColor: "gray",
-    borderBottomWidth: 1,
+    margin: 10,
+    height: 80,
   },
   image: {
     width: 100,
-    height: 100,
+    height: 80,
+  },
+  dots: {
+    position: "absolute",
+    right: 0,
+    top: 0,
+    bottom: 0,
+    padding: 5,
+    width: 35,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
