@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  View,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import ViewCourse from "../../../Common/view-course";
 import ViewDotsVertical from "../../../Common/view-dots-vertical";
 
@@ -16,7 +11,9 @@ const SectionCoursesItem = (props) => {
           source={{ uri: "https://i.imgur.com/JOJdL5G.jpeg" }}
           style={styles.image}
         />
-        <ViewDotsVertical onPress={() => alert("Pressed Dots! haha")} />
+        <View style={styles.dots}>
+          <ViewDotsVertical onPress={() => alert("Pressed Dots!")} color="white"/>
+        </View>
       </View>
 
       <ViewCourse item={props.item} />
@@ -35,5 +32,14 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 100,
+  },
+  dots: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    padding: 5,
+    width: 35,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
