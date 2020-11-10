@@ -25,7 +25,7 @@ const ForgetPassword = (props) => {
         <Text style={styles.textWhite}>Send email</Text>
       </TouchableOpacity>
       <TouchableOpacity style={[styles.button, styles.buttonGray]}>
-        <Text>Cancel</Text>
+        <Text style={styles.textWhite}>Cancel</Text>
       </TouchableOpacity>
     </View>
   );
