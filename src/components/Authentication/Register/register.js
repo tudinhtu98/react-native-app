@@ -35,7 +35,7 @@ const Register = (props) => {
         </Text>
       </View>
       <TouchableOpacity style={[styles.button, styles.buttonRegister]}>
-        <Text>REGISTER</Text>
+        <Text style={styles.textWhite}>REGISTER</Text>
       </TouchableOpacity>
     </View>
   );
@@ -76,5 +76,9 @@ const styles = StyleSheet.create({
   },
   label: {
     margin: 8,
+  },
+  textWhite: {
+    color: "white",
+    fontWeight: "bold",
   },
 });
