@@ -23,7 +23,7 @@ const Login = (props) => {
         secureTextEntry={true}
       ></TextInput>
       <TouchableOpacity style={[styles.button, styles.buttonLogin]}>
-        <Text>SIGN IN</Text>
+        <Text style={styles.textWhite}>LOGIN</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button}>
         <Text style={styles.textBlue}>FORGOT PASSWORD?</Text>
@@ -60,5 +60,9 @@ const styles = StyleSheet.create({
   },
   textBlue: {
     color: "blue",
+  },
+  textWhite: {
+    color: "white",
+    fontWeight: "bold",
   },
 });
