@@ -13,7 +13,12 @@ const Register = (props) => {
   return (
     <View style={styles.view}>
       <Text>Email</Text>
-      <TextInput style={styles.textInput}></TextInput>
+      <TextInput
+        style={styles.textInput}
+        autoCompleteType="email"
+        textContentType="emailAddress"
+        keyboardType="email-address"
+      ></TextInput>
       <Text>Password</Text>
       <TextInput style={styles.textInput} secureTextEntry={true}></TextInput>
       <Text>Confirmed Password</Text>
