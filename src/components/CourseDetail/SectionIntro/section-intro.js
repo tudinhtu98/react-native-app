@@ -6,22 +6,35 @@ const SectionIntro = (props) => {
   return (
     <View style={styles.view}>
       <Text style={styles.title}>{props.courseInfo.title}</Text>
-      <TouchableOpacity
-        onPress={() => {
-          Alert.alert("press author");
-        }}
-      >
-        <View style={styles.author}>
-          <Text>{props.courseInfo.author}</Text>
-        </View>
-      </TouchableOpacity>
+      <View style={{ flexDirection: "row" }}>
+        <TouchableOpacity
+          onPress={() => {
+            Alert.alert("press author");
+          }}
+        >
+          <View style={styles.author}>
+            <Text>{props.courseInfo.author}</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+
       <Text
         style={[styles.darkText, { margin: 5 }]}
       >{`${props.courseInfo.level} . ${props.courseInfo.released} . ${props.courseInfo.duration}`}</Text>
-      <View>
-        <TouchableOpacity style={{ margin: 5 }}>
+      <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+        <TouchableOpacity
+          style={{ margin: 5 }}
+          onPress={() => Alert.alert("onPress Bookmark")}
+        >
           <Icon name="bookmark" size={25} color="gray" />
           <Text>Bookmark</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{ margin: 5 }}
+          onPress={() => Alert.alert("onPress Share")}
+        >
+          <Icon name="share" size={25} color="gray" />
+          <Text>Share</Text>
         </TouchableOpacity>
       </View>
       <Text>{props.courseInfo.introduction}</Text>
