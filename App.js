@@ -11,6 +11,8 @@ import Browse from "./src/components/Main/Browse/browse";
 import Download from "./src/components/Main/Download/download";
 import Home from "./src/components/Main/Home/home";
 import Search from "./src/components/Main/Search/search";
+import Profile from "./src/components/Others/Profile/profile";
+import PathDetail from "./src/components/PathDetail/path-detail";
 
 export default function App() {
   return (
@@ -23,7 +25,9 @@ export default function App() {
       {/* <Login /> */}
       {/* <Register /> */}
       {/* <ForgetPassword /> */}
-      <CourseDetail />
+      {/* <CourseDetail /> */}
+      {/* <Profile /> */}
+      <PathDetail />
     </View>
   );
 }
