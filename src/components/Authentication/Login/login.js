@@ -25,10 +25,17 @@ const Login = (props) => {
       <TouchableOpacity style={[styles.button, styles.buttonLogin]}>
         <Text style={styles.textWhite}>LOGIN</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          props.navigation.navigate("ForgetPassword");
+        }}
+      >
         <Text style={styles.textBlue}>FORGOT PASSWORD?</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => {
+          props.navigation.navigate("Register");
+        }}>
         <Text style={styles.textBlue}>REGISTER FREE</Text>
       </TouchableOpacity>
     </View>

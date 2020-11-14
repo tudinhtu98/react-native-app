@@ -24,7 +24,12 @@ const ForgetPassword = (props) => {
       <TouchableOpacity style={[styles.button, styles.buttonBlue]}>
         <Text style={styles.textWhite}>Send email</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={[styles.button, styles.buttonGray]}>
+      <TouchableOpacity
+        style={[styles.button, styles.buttonGray]}
+        onPress={() => {
+          props.navigation.goBack();
+        }}
+      >
         <Text style={styles.textWhite}>Cancel</Text>
       </TouchableOpacity>
     </View>
