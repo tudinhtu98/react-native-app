@@ -8,7 +8,7 @@ const HeaderRight = (props) => {
       <TouchableOpacity
         style={styles.center}
         onPress={() => {
-          props.navigation.navigate("Settings");
+          props.navigation.navigate("Profile");
         }}
       >
         <Image
