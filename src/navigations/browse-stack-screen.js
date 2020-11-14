@@ -6,6 +6,7 @@ import Browse from "./../components/Main/Browse/browse";
 import Profile from "../components/AccountManagement/Profile/profile";
 import PathDetail from "./../components/PathDetail/path-detail";
 import Settings from "../components/AccountManagement/Settings/settings";
+import ListPaths from "../components/Paths/ListPaths/list-paths";
 
 const BrowseStack = createStackNavigator();
 
@@ -28,6 +29,11 @@ const BrowseStackScreen = () => {
           title: "Course Detail",
           // headerShown: false,
         }}
+      />
+      <BrowseStack.Screen
+        name="ListPaths"
+        component={ListPaths}
+        options={{ title: "List Paths" }}
       />
       <BrowseStack.Screen
         name="PathDetail"

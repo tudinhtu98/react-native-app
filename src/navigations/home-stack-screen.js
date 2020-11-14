@@ -6,6 +6,8 @@ import ListCourses from "./../components/Courses/ListCourses/list-courses";
 import Home from "./../components/Main/Home/home";
 import Profile from "../components/AccountManagement/Profile/profile";
 import Settings from "../components/AccountManagement/Settings/settings";
+import PathDetail from "../components/PathDetail/path-detail";
+import ListPaths from "../components/Paths/ListPaths/list-paths";
 
 const HomeStack = createStackNavigator();
 const HomeStackScreen = () => {
@@ -30,16 +32,22 @@ const HomeStackScreen = () => {
         component={CourseDetail}
         options={{
           title: "Course Detail",
-          headerStyle: {
-            backgroundColor: "#f4511e",
-          },
-          headerTintColor: "#fff",
-          headerTitleStyle: {
-            fontWeight: "bold",
-          },
+          // headerStyle: {
+          //   backgroundColor: "#f4511e",
+          // },
+          // headerTintColor: "#fff",
+          // headerTitleStyle: {
+          //   fontWeight: "bold",
+          // },
           // headerShown: false,
         }}
       />
+      <HomeStack.Screen
+        name="ListPaths"
+        component={ListPaths}
+        options={{ title: "List Paths" }}
+      />
+      <HomeStack.Screen name="PathDetail" component={PathDetail} />
     </HomeStack.Navigator>
   );
 };

@@ -13,4 +13,8 @@ export const stylesGlo = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
   },
+  textSmall: {
+    fontSize: 10,
+    color: "gray",
+  },
 });

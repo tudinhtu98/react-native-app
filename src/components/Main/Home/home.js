@@ -1,5 +1,6 @@
 import React from "react";
 import { ScrollView, View, StyleSheet } from "react-native";
+import SectionPaths from "../Browse/SectionPaths/section-paths";
 import SectionCourses from "./SectionCourses/section-courses";
 
 const Home = (props) => {
@@ -20,8 +21,8 @@ const Home = (props) => {
     <ScrollView style={styles.view}>
       <View style={{ height: 200 }}></View>
       <SectionCourses title="Continue learning" navigation={navigation} />
-      <SectionCourses title="Paths" navigation={navigation} />
-      <SectionCourses title="Channels" navigation={navigation} />
+      <SectionCourses title="Software Development" navigation={navigation} />
+      <SectionPaths title="My Paths" navigation={navigation} />
       <SectionCourses title="Bookmarks" navigation={navigation} />
     </ScrollView>
   );

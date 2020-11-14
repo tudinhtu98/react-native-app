@@ -6,27 +6,27 @@ const SectionAuthors = (props) => {
   const paths = [
     {
       id: 1,
-      image: "https://i.imgur.com/JOJdL5G.jpeg",
+      image: "https://i.imgur.com/Jvh1OQm.jpg",
       title: "Deborah Karata",
     },
     {
       id: 2,
-      image: "https://i.imgur.com/JOJdL5G.jpeg",
+      image: "https://i.imgur.com/Jvh1OQm.jpg",
       title: "Scott Allen",
     },
     {
       id: 3,
-      image: "https://i.imgur.com/JOJdL5G.jpeg",
+      image: "https://i.imgur.com/Jvh1OQm.jpg",
       title: "Joe Eames",
     },
     {
       id: 4,
-      image: "https://i.imgur.com/JOJdL5G.jpeg",
+      image: "https://i.imgur.com/Jvh1OQm.jpg",
       title: "Deborah Karata",
     },
     {
       id: 5,
-      image: "https://i.imgur.com/JOJdL5G.jpeg",
+      image: "https://i.imgur.com/Jvh1OQm.jpg",
       title: "Scott Allen",
     },
   ];

@@ -34,7 +34,7 @@ const Search = (props) => {
 
   return (
     <ScrollView style={styles.scrollView}>
-      <ViewSearch />
+      <ViewSearch navigation={props.navigation} />
       <View style={styles.viewTop}>
         <Text>Recent searchs</Text>
         <TouchableOpacity onPress={() => Alert.alert("onPress Clear all")}>

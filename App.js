@@ -5,10 +5,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import HomeStackScreen from "./src/stack-screen/home-stack-screen";
-import DownloadStackScreen from "./src/stack-screen/download-stack-screen";
-import BrowseStackScreen from "./src/stack-screen/browse-stack-screen";
-import SearchStackScreen from "./src/stack-screen/search-stack-screen";
+import HomeStackScreen from "./src/navigations/home-stack-screen";
+import DownloadStackScreen from "./src/navigations/download-stack-screen";
+import BrowseStackScreen from "./src/navigations/browse-stack-screen";
+import SearchStackScreen from "./src/navigations/search-stack-screen";
 
 const Tab = createBottomTabNavigator();
 

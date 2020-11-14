@@ -1,14 +1,8 @@
 import React from "react";
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
-import SectionPathsItem from "../SectionPathsItem/section-paths-item";
+import { View, FlatList } from "react-native";
+import ListPathsItem from "../ListPathsItem/list-paths-item";
 
-const SectionPaths = (props) => {
+const ListPaths = (props) => {
   const paths = [
     {
       id: 1,
@@ -42,7 +36,8 @@ const SectionPaths = (props) => {
     },
     {
       id: 4,
-      image: "https://i.imgur.com/MhDMe0i.jpg",
+      image:
+        "https://i.imgur.com/MhDMe0i.jpg",
       title: "Angular",
       countCourses: 15,
       duration: "56 hours",
@@ -52,36 +47,30 @@ const SectionPaths = (props) => {
     },
   ];
 
-  const renderListItems = (paths) => {
-    return paths.map((item) => (
-      <SectionPathsItem item={item} navigation={props.navigation} />
-    ));
+  const renderSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          backgroundColor: "#CED0CE",
+          marginLeft: "2%",
+          marginRight: "2%",
+        }}
+      />
+    );
   };
+
   return (
     <View>
-      <View style={styles.titleView}>
-        <Text>{props.title}</Text>
-        <TouchableOpacity
-          onPress={() => {
-            props.navigation.navigate("ListPaths", {
-              item: props.item,
-            });
-          }}
-        >
-          <Text>{`See all >`}</Text>
-        </TouchableOpacity>
-      </View>
-      <ScrollView horizontal={true}>{renderListItems(paths)}</ScrollView>
+      <FlatList
+        data={paths}
+        renderItem={({ item }) => (
+          <ListPathsItem navigation={props.navigation} item={item} />
+        )}
+        ItemSeparatorComponent={renderSeparator}
+      />
     </View>
   );
 };
 
-export default SectionPaths;
-
-const styles = StyleSheet.create({
-  titleView: {
-    margin: 10,
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-});
+export default ListPaths;
