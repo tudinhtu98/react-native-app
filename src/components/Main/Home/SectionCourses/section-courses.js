@@ -37,13 +37,19 @@ const SectionCourses = (props) => {
   ];
 
   const renderListItems = (courses) => {
-    return courses.map((item) => <SectionCoursesItem item={item} />);
+    return courses.map((item) => <SectionCoursesItem item={item} navigation={props.navigation}/>);
   };
   return (
     <View>
       <View style={styles.titleView}>
         <Text>{props.title}</Text>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            props.navigation.navigate("ListCourses", {
+              item: props.item,
+            });
+          }}
+        >
           <Text>{`See all >`}</Text>
         </TouchableOpacity>
       </View>
@@ -56,7 +62,7 @@ export default SectionCourses;
 
 const styles = StyleSheet.create({
   titleView: {
-    margin: 5,
+    margin: 10,
     flexDirection: "row",
     justifyContent: "space-between",
   },

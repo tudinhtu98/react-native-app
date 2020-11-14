@@ -4,15 +4,9 @@ import PathIntro from "./PathIntro/path-intro";
 import PathLevel from "./PathLevel/path-level";
 
 const PathDetail = (props) => {
-  const pathIntro = {
-    title: "Angular",
-    image: "https://assets.stickpng.com/thumbs/5847ea22cef1014c0b5e4833.png",
-    countCourses: 15,
-    duration: "56 hours",
-    introduction:
-      "Angular is a complete JavaScript framework for 123456789. Angular is a complete JavaScript framework for 123456789. Angular is a complete JavaScript framework for 123456789.",
-    progress: 2,
-  };
+  const item = props.route.params.item;
+  props.navigation.setOptions({ title: item.title });
+  const pathIntro = item;
   const path = [
     {
       title: "Beginner",
@@ -27,7 +21,7 @@ const PathDetail = (props) => {
   return (
     <ScrollView>
       <PathIntro pathIntro={pathIntro} />
-      <PathLevel path={path} />
+      <PathLevel path={path} navigation={props.navigation} />
     </ScrollView>
   );
 };

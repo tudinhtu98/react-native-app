@@ -7,7 +7,7 @@ const PathLevelItem = (props) => {
     <View>
       <Text style={styles.textTitle}>{props.level.title}</Text>
       <View style={styles.viewSeparate} />
-      <ListCourses />
+      <ListCourses navigation={props.navigation} />
     </View>
   );
 };

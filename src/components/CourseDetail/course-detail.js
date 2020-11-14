@@ -5,20 +5,12 @@ import SectionIntro from "./SectionIntro/section-intro";
 import VideoPlayer from "./VideoPlayer/video-player";
 
 const CourseDetail = (props) => {
-  const courseInfo = {
-    title: "Angular Fundamentals",
-    author: "Joe Eames",
-    level: "Intermediate",
-    released: "thg 2 01 2019",
-    duration: "9,6h",
-    introduction:
-      "Angular has become 123456789 123456789 123456789 123456789 123456789",
-  };
+  props.navigation.setOptions({ title: props.route.params.item.title });
   return (
     <View>
       <VideoPlayer />
       <ScrollView>
-        <SectionIntro courseInfo={courseInfo}/>
+        <SectionIntro courseInfo={props.route.params.item} />
         <ListSessions />
       </ScrollView>
     </View>
