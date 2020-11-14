@@ -1,18 +1,29 @@
 import React from "react";
 import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { stylesGlo } from "../../../../globals/styles";
 import ViewCourse from "../../../Common/view-course";
 import ViewDotsVertical from "../../../Common/view-dots-vertical";
 
 const SectionCoursesItem = (props) => {
   return (
-    <TouchableOpacity style={styles.item}>
+    <TouchableOpacity
+      style={[styles.item, stylesGlo.shadow]}
+      onPress={() => {
+        props.navigation.navigate("CourseDetail", {
+          item: props.item,
+        });
+      }}
+    >
       <View>
         <Image
           source={{ uri: "https://i.imgur.com/JOJdL5G.jpeg" }}
           style={styles.image}
         />
         <View style={styles.dots}>
-          <ViewDotsVertical onPress={() => alert("Pressed Dots!")} color="white"/>
+          <ViewDotsVertical
+            onPress={() => alert("Pressed Dots!")}
+            color="white"
+          />
         </View>
       </View>
 
@@ -25,7 +36,7 @@ export default SectionCoursesItem;
 
 const styles = StyleSheet.create({
   item: {
-    margin: 5,
+    margin: 10,
     width: 200,
     height: 200,
     backgroundColor: "lightgray",

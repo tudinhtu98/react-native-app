@@ -5,11 +5,12 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
+import { stylesGlo } from "../../globals/styles";
 
 const ImageButtonItem = (props) => {
   return (
     <ImageBackground
-      style={styles.button}
+      style={[styles.button, stylesGlo.shadow]}
       source={{ uri: "https://i.imgur.com/oO25B7I.jpeg" }}
     >
       <TouchableOpacity style={styles.touch} onPress={props.onPress}>
@@ -24,7 +25,8 @@ export default ImageButtonItem;
 const styles = StyleSheet.create({
   button: {
     height: 75,
-    margin: 5,
+    marginTop: 10,
+    marginLeft: 10,
   },
   touch: {
     flex: 1,
