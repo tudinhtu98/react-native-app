@@ -3,16 +3,12 @@ import { View, StyleSheet, Image, Text } from "react-native";
 
 const Profile = (props) => {
   return (
-    <View>
-      <View style={styles.view}>
-        <Image
-          style={styles.avatar}
-          source={{
-            uri: "https://reactnative.dev/img/tiny_logo.png",
-          }}
-        />
-        <Text style={styles.username}>Nguyễn Văn A</Text>
-      </View>
+    <View style={styles.view}>
+      <Image
+        style={styles.avatar}
+        source={require("../../../../assets/icon-account.png")}
+      />
+      <Text style={styles.username}>Nguyễn Văn A</Text>
     </View>
   );
 };

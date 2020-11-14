@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  ScrollView,
-  FlatList,
-} from "react-native";
+import { StyleSheet, ScrollView, FlatList } from "react-native";
 import ImageButton from "../../Common/image-button";
 import ImageButtonItem from "../../Common/image-button-item";
 import SectionAuthors from "./SectionAuthors/section-authors";
@@ -62,14 +58,27 @@ const Browse = (props) => {
       <ImageButton title="NEW RELEASES" onPress={onPressNewReleases()} />
       <ImageButton title="RECOMMENDED FOR YOU" onPress={onPressRecommend()} />
 
-      <FlatList horizontal={true} data={dataCategory} renderItem={renderItem} />
-      <SectionSkills title="Popular Skill" dataSkills={dataSkills}/>
-      <SectionPaths title="Paths" />
-      <SectionAuthors title="Top authors" />
+      <FlatList
+        // style={styles.viewFlatList}
+        horizontal={true}
+        data={dataCategory}
+        renderItem={renderItem}
+      />
+      <SectionSkills
+        title="Popular Skill"
+        dataSkills={dataSkills}
+        navigation={props.navigation}
+      />
+      <SectionPaths title="Paths" navigation={props.navigation} />
+      <SectionAuthors title="Top authors" navigation={props.navigation} />
     </ScrollView>
   );
 };
 
 export default Browse;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  viewFlatList: {
+    margin: 5,
+  },
+});

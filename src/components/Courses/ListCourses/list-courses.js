@@ -6,11 +6,13 @@ const ListCourses = (props) => {
   const courses = [
     {
       id: 1,
-      title: "123456789 123456789 123456789 123456789 123456789 123456789",
+      title: "Khoá học blabla 123456789 123456789 123456789 123456789",
       author: "Tu Dinh Tu",
       level: "Advance",
       released: "Nov 2020",
       duration: "30 hours",
+      introduction:
+      "Angular has become 123456789 123456789 123456789 123456789 123456789",
     },
     {
       id: 2,
@@ -19,6 +21,8 @@ const ListCourses = (props) => {
       level: "Beginner",
       released: "Nov 2020",
       duration: "29 hours",
+      introduction:
+      "Flutter has become 123456789 123456789 123456789 123456789 123456789",
     },
     {
       id: 3,
@@ -27,6 +31,8 @@ const ListCourses = (props) => {
       level: "Advance",
       released: "Nov 2020",
       duration: "30 hours",
+      introduction:
+      "IOS has become 123456789 123456789 123456789 123456789 123456789",
     },
   ];
 
@@ -47,7 +53,9 @@ const ListCourses = (props) => {
     <View>
       <FlatList
         data={courses}
-        renderItem={({ item }) => <ListCoursesItem item={item} />}
+        renderItem={({ item }) => (
+          <ListCoursesItem navigation={props.navigation} item={item} />
+        )}
         ItemSeparatorComponent={renderSeparator}
       />
     </View>

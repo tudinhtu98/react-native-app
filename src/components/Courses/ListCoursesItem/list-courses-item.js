@@ -17,7 +17,9 @@ const ListCoursesItem = (props) => {
       <TouchableOpacity
         style={styles.item}
         onPress={() => {
-          console.log("Touch on course item");
+          props.navigation.navigate("CourseDetail", {
+            item: props.item,
+          });
         }}
       >
         <Image
@@ -27,7 +29,10 @@ const ListCoursesItem = (props) => {
         <ViewCourse item={props.item} />
       </TouchableOpacity>
       <View style={styles.dots}>
-        <ViewDotsVertical onPress={() => alert("Pressed Dots!")} color="black"/>
+        <ViewDotsVertical
+          onPress={() => alert("Pressed Dots!")}
+          color="black"
+        />
       </View>
     </View>
   );

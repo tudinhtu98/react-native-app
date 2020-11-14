@@ -1,34 +1,45 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import ForgetPassword from "./src/components/Authentication/ForgetPassword/forget-password";
-import Login from "./src/components/Authentication/Login/login";
-import Register from "./src/components/Authentication/Register/register";
-import CourseDetail from "./src/components/CourseDetail/course-detail";
-import VideoPlayer from "./src/components/CourseDetail/VideoPlayer/video-player";
-import ListCourses from "./src/components/Courses/ListCourses/list-courses";
-import Browse from "./src/components/Main/Browse/browse";
-import Download from "./src/components/Main/Download/download";
-import Home from "./src/components/Main/Home/home";
-import Search from "./src/components/Main/Search/search";
-import Profile from "./src/components/AccountManagement/Profile/profile";
-import PathDetail from "./src/components/PathDetail/path-detail";
+import "react-native-gesture-handler";
+import { StyleSheet } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import HomeStackScreen from "./src/stack-screen/home-stack-screen";
+import DownloadStackScreen from "./src/stack-screen/download-stack-screen";
+import BrowseStackScreen from "./src/stack-screen/browse-stack-screen";
+import SearchStackScreen from "./src/stack-screen/search-stack-screen";
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
+  const screenOptions = ({ route }) => ({
+    tabBarIcon: ({ focused, color, size }) => {
+      let iconName;
+      if (route.name === "Search") {
+        return <MaterialIcons name={"search"} size={size} color={color} />;
+      } else if (route.name === "Home") {
+        iconName = "home-outline";
+      } else if (route.name === "Download") {
+        iconName = "download-outline";
+      } else if (route.name === "Browse") {
+        iconName = "grid";
+      }
+      return (
+        <MaterialCommunityIcons name={iconName} size={size} color={color} />
+      );
+    },
+  });
+
   return (
-    <View style={styles.container}>
-      {/* <Home /> */}
-      {/* <ListCourses /> */}
-      {/* <Browse /> */}
-      {/* <Download /> */}
-      {/* <Search /> */}
-      {/* <Login /> */}
-      {/* <Register /> */}
-      {/* <ForgetPassword /> */}
-      {/* <CourseDetail /> */}
-      {/* <Profile /> */}
-      <PathDetail />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator screenOptions={screenOptions}>
+        <Tab.Screen name="Home" component={HomeStackScreen} />
+        <Tab.Screen name="Download" component={DownloadStackScreen} />
+        <Tab.Screen name="Browse" component={BrowseStackScreen} />
+        <Tab.Screen name="Search" component={SearchStackScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 
@@ -36,7 +47,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    // alignItems: "center",
-    // justifyContent: "center",
   },
 });

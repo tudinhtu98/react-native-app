@@ -11,11 +11,11 @@ const Download = (props) => {
     <View>
       <View style={styles.view}>
         <Text>{`${data.countCourses} courses (${data.size} MB)`}</Text>
-        <TouchableOpacity onPress={()=> Alert.alert("Press Remove On")}>
+        <TouchableOpacity onPress={() => Alert.alert("Press Remove On")}>
           <Text style={styles.textRemove}>REMOVE ALL</Text>
         </TouchableOpacity>
       </View>
-      <ListCourses />
+      <ListCourses navigation={props.navigation} />
     </View>
   );
 };
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   view: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop:120,
+    marginTop: 120,
     margin: 10,
   },
   textRemove: {
