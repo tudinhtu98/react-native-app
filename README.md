@@ -1,3 +1,4 @@
 # react-native-app
 Individual project
-MSSV: 1612771
+Student ID: 1612771
+Student Name: Tu Đình Tư
