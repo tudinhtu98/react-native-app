@@ -4,7 +4,7 @@ import { stylesGlo } from "../../../../../globals/styles";
 import ListPaths from "../../../../Paths/ListPaths/list-paths";
 
 const SearchResultPaths = (props) => {
-  const countResult = 11;
+  const countResult = 4;
   return (
     <View>
       <Text

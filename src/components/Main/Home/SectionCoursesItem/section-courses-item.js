@@ -22,7 +22,7 @@ const SectionCoursesItem = (props) => {
     >
       <View>
         <Image
-          source={{ uri: "https://i.imgur.com/JOJdL5G.jpeg" }}
+          source={{ uri: props.item.image }}
           style={styles.image}
         />
         <View style={styles.dots}>

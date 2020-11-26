@@ -34,6 +34,36 @@ const ListAuthors = (props) => {
       title: "Scott Allen",
       countCourses: 1,
     },
+    {
+      id: 6,
+      image: "https://i.imgur.com/Jvh1OQm.jpg",
+      title: "Deborah Karata 2",
+      countCourses: 3,
+    },
+    {
+      id: 7,
+      image: "https://i.imgur.com/Jvh1OQm.jpg",
+      title: "Scott Allen 2",
+      countCourses: 2,
+    },
+    {
+      id: 8,
+      image: "https://i.imgur.com/Jvh1OQm.jpg",
+      title: "Joe Eames 2",
+      countCourses: 1,
+    },
+    {
+      id: 9,
+      image: "https://i.imgur.com/Jvh1OQm.jpg",
+      title: "Deborah Karata 2",
+      countCourses: 5,
+    },
+    {
+      id: 10,
+      image: "https://i.imgur.com/Jvh1OQm.jpg",
+      title: "Scott Allen 2",
+      countCourses: 1,
+    },
   ];
 
   const renderSeparator = () => {

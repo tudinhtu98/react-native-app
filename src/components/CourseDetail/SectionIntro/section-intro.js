@@ -1,5 +1,12 @@
 import React from "react";
-import { View, StyleSheet, Text, Alert, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Alert,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 const SectionIntro = (props) => {
@@ -37,7 +44,9 @@ const SectionIntro = (props) => {
           <Text>Share</Text>
         </TouchableOpacity>
       </View>
-      <Text>{props.courseInfo.introduction}</Text>
+      <ScrollView style={styles.scrollIntro}>
+        <Text>{props.courseInfo.introduction}</Text>
+      </ScrollView>
     </View>
   );
 };
@@ -47,7 +56,7 @@ export default SectionIntro;
 const styles = StyleSheet.create({
   view: {
     margin: 10,
-    height: 300,
+    height: 350,
   },
   title: {
     fontSize: 20,
@@ -64,6 +73,10 @@ const styles = StyleSheet.create({
   },
   iconCenter: {
     margin: 5,
-    alignItems: "center"
+    alignItems: "center",
+  },
+  scrollIntro: {
+    marginTop: 20,
+    height: 100,
   },
 });

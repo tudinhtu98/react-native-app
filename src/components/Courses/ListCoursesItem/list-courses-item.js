@@ -25,7 +25,7 @@ const ListCoursesItem = (props) => {
       >
         <Image
           style={styles.image}
-          source={{ uri: "https://i.imgur.com/rPcR1KK.jpeg" }}
+          source={{ uri: props.item.image }}
         />
         <ViewCourse item={props.item} />
       </TouchableOpacity>

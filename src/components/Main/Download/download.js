@@ -4,8 +4,8 @@ import ListCourses from "../../Courses/ListCourses/list-courses";
 
 const Download = (props) => {
   const data = {
-    countCourses: 3,
-    size: 12,
+    countCourses: 12,
+    size: 120,
   };
   return (
     <View>
