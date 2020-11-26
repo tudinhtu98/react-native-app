@@ -23,14 +23,14 @@ const SectionIntro = (props) => {
       >{`${props.courseInfo.level} . ${props.courseInfo.released} . ${props.courseInfo.duration}`}</Text>
       <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
         <TouchableOpacity
-          style={{ margin: 5 }}
+          style={styles.iconCenter}
           onPress={() => Alert.alert("onPress Bookmark")}
         >
-          <Icon name="bookmark" size={25} color="gray" />
+          <Icon name="bookmark-outline" size={25} color="gray" />
           <Text>Bookmark</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={{ margin: 5 }}
+          style={styles.iconCenter}
           onPress={() => Alert.alert("onPress Share")}
         >
           <Icon name="share" size={25} color="gray" />
@@ -61,5 +61,9 @@ const styles = StyleSheet.create({
   },
   darkText: {
     color: "darkgray",
+  },
+  iconCenter: {
+    margin: 5,
+    alignItems: "center"
   },
 });

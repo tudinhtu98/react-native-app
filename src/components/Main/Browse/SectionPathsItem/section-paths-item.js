@@ -8,7 +8,6 @@ const SectionPathsItem = (props) => {
     <TouchableOpacity
       style={[styles.item, stylesGlo.shadow]}
       onPress={() => {
-        props.navigation.setOptions({ title: props.item.title });
         props.navigation.navigate("PathDetail", {
           item: props.item,
         });
@@ -24,7 +23,7 @@ export default SectionPathsItem;
 
 const styles = StyleSheet.create({
   item: {
-    margin: 5,
+    margin: 10,
     width: 200,
     height: 200,
     backgroundColor: "lightgray",

@@ -4,12 +4,13 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   Alert,
   Share,
   Text,
 } from "react-native";
 import ViewCourse from "../../Common/view-course";
-import ViewDotsVertical from "../../Common/view-dots-vertical";
+import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 const ListCoursesItem = (props) => {
   return (
@@ -29,10 +30,9 @@ const ListCoursesItem = (props) => {
         <ViewCourse item={props.item} />
       </TouchableOpacity>
       <View style={styles.dots}>
-        <ViewDotsVertical
-          onPress={() => alert("Pressed Dots!")}
-          color="black"
-        />
+        <TouchableWithoutFeedback onPress={() => alert("press on dots")}>
+          <Icon name="dots-vertical" size={25} color="black" />
+        </TouchableWithoutFeedback>
       </View>
     </View>
   );
