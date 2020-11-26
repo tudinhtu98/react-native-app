@@ -1,6 +1,13 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
-import ViewDotsVertical from "../../Common/view-dots-vertical";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Alert,
+} from "react-native";
+import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 const ListSessionsItem = (props) => {
   const RenderSessionItem = (props) => {
@@ -25,10 +32,9 @@ const ListSessionsItem = (props) => {
           <Text style={{ marginHorizontal: 20 }}>{props.item.duration}</Text>
         </View>
         <View style={styles.dots}>
-          <ViewDotsVertical
-            onPress={() => alert("Pressed Dots!")}
-            color="black"
-          />
+          <TouchableWithoutFeedback onPress={() => alert("press on dots")}>
+            <Icon name="dots-vertical" size={25} color={props.color} />
+          </TouchableWithoutFeedback>
         </View>
       </View>
       <View>

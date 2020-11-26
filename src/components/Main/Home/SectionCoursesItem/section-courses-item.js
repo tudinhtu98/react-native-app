@@ -1,8 +1,14 @@
 import React from "react";
-import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { stylesGlo } from "../../../../globals/styles";
 import ViewCourse from "../../../Common/view-course";
-import ViewDotsVertical from "../../../Common/view-dots-vertical";
+import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 const SectionCoursesItem = (props) => {
   return (
@@ -20,10 +26,9 @@ const SectionCoursesItem = (props) => {
           style={styles.image}
         />
         <View style={styles.dots}>
-          <ViewDotsVertical
-            onPress={() => alert("Pressed Dots!")}
-            color="white"
-          />
+          <TouchableWithoutFeedback onPress={() => alert("press on dots")}>
+            <Icon name="dots-vertical" size={25} color="white" />
+          </TouchableWithoutFeedback>
         </View>
       </View>
 

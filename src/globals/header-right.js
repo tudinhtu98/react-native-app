@@ -1,8 +1,15 @@
-import React from "react";
-import { View, TouchableOpacity, StyleSheet, Image } from "react-native";
-import ViewDotsVertical from "../components/Common/view-dots-vertical";
+import React, { useState } from "react";
+import {
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  TouchableWithoutFeedback,
+} from "react-native";
+import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 const HeaderRight = (props) => {
+  
   return (
     <View style={[styles.view, styles.center]}>
       <TouchableOpacity
@@ -16,7 +23,9 @@ const HeaderRight = (props) => {
           source={require("../../assets/icon-account.png")}
         />
       </TouchableOpacity>
-      <ViewDotsVertical onPress={() => alert("press on dots")} />
+      <TouchableWithoutFeedback onPress={() => alert("press on dots")}>
+        <Icon name="dots-vertical" size={25}/>
+      </TouchableWithoutFeedback>
     </View>
   );
 };
