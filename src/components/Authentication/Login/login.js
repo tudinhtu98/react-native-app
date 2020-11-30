@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   TextInput,
   View,
@@ -8,12 +8,25 @@ import {
 } from "react-native";
 
 const Login = (props) => {
+  const [textEmail, setTextEmail] = useState("");
+  const [textPassword, setTextPassword] = useState("");
+  const handlePressLogin = () => {
+    if (textEmail === "admin" && textPassword === "admin") {
+      alert("Đăng nhập thành công");
+      props.route.params.setSignIn(true);
+      props.navigation.navigate("Home");
+    } else {
+      alert("Sai email hoặc mật khẩu");
+    }
+  };
   return (
     <View style={styles.view}>
       <TextInput
         style={styles.textInput}
         placeholder="Username (or Email)"
         autoCompleteType="username"
+        onChangeText={(textEmail) => setTextEmail(textEmail)}
+        defaultValue={textEmail}
       ></TextInput>
       <TextInput
         style={styles.textInput}
@@ -21,8 +34,13 @@ const Login = (props) => {
         autoCompleteType="password"
         textContentType="password"
         secureTextEntry={true}
+        onChangeText={(textPassword) => setTextPassword(textPassword)}
+        defaultValue={textPassword}
       ></TextInput>
-      <TouchableOpacity style={[styles.button, styles.buttonLogin]}>
+      <TouchableOpacity
+        style={[styles.button, styles.buttonLogin]}
+        onPress={handlePressLogin}
+      >
         <Text style={styles.textWhite}>LOGIN</Text>
       </TouchableOpacity>
       <TouchableOpacity
@@ -33,9 +51,12 @@ const Login = (props) => {
       >
         <Text style={styles.textBlue}>FORGOT PASSWORD?</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => {
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
           props.navigation.navigate("Register");
-        }}>
+        }}
+      >
         <Text style={styles.textBlue}>REGISTER FREE</Text>
       </TouchableOpacity>
     </View>
