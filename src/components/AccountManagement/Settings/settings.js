@@ -5,6 +5,9 @@ import { stylesGlo } from "../../../globals/styles";
 
 
 const Settings = (props) => {
+  const handleSignOut = () => {
+    props.navigation.navigate("Login");
+  }
   return (
     <View style={styles.view}>
       <TouchableOpacity
@@ -16,8 +19,8 @@ const Settings = (props) => {
       </TouchableOpacity>
       <View></View>
       <View>
-        <TouchableOpacity style={styles.button}>
-          <Text style={stylesGlo.textBlue}>SIGN OUT</Text>
+        <TouchableOpacity style={styles.button} onPress={handleSignOut}>
+          <Text style={stylesGlo.textBlue}>SIGNOUT</Text>
         </TouchableOpacity>
       </View>
     </View>

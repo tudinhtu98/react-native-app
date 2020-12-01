@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import {
+  ScrollView,
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import SectionPaths from "../Browse/SectionPaths/section-paths";
 import SectionCourses from "./SectionCourses/section-courses";
 
@@ -21,18 +27,23 @@ const Home = (props) => {
 
   const handlePressLogin = () => {
     props.navigation.navigate("Login", {
-      setSignIn: setSignIn
+      setSignIn: setSignIn,
     });
   };
 
   return (
     <ScrollView style={styles.view}>
-      {!isSignedIn && <View style={{ height: 150 }}>
-        <Text style={styles.textLogin}>Log in to skill up today</Text>
-        <TouchableOpacity style={styles.buttonLogin} onPress={handlePressLogin}>
-          LOG IN
-        </TouchableOpacity>
-      </View>}
+      {!isSignedIn && (
+        <View style={{ height: 150 }}>
+          <Text style={styles.textLogin}>Log in to skill up today</Text>
+          <TouchableOpacity 
+            style={styles.buttonLogin}
+            onPress={handlePressLogin}
+          >
+            <Text>LOGIN</Text>
+          </TouchableOpacity>
+        </View>
+      )}
       <SectionCourses title="Continue learning" navigation={navigation} />
       <SectionCourses title="Software Development" navigation={navigation} />
       <SectionPaths title="My Paths" navigation={navigation} />
