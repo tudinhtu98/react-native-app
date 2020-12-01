@@ -8,6 +8,9 @@ import Profile from "../components/AccountManagement/Profile/profile";
 import Settings from "../components/AccountManagement/Settings/settings";
 import PathDetail from "../components/PathDetail/path-detail";
 import ListPaths from "../components/Paths/ListPaths/list-paths";
+import Login from "../components/Authentication/Login/login";
+import ForgetPassword from "../components/Authentication/ForgetPassword/forget-password";
+import Register from "../components/Authentication/Register/register";
 
 const HomeStack = createStackNavigator();
 const HomeStackScreen = () => {
@@ -48,6 +51,9 @@ const HomeStackScreen = () => {
         options={{ title: "List Paths" }}
       />
       <HomeStack.Screen name="PathDetail" component={PathDetail} />
+      <HomeStack.Screen name="Login" component={Login} />
+      <HomeStack.Screen name="ForgetPassword" component={ForgetPassword} />
+      <HomeStack.Screen name="Register" component={Register} />
     </HomeStack.Navigator>
   );
 };

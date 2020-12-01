@@ -5,11 +5,20 @@ import {
   StyleSheet,
   Image,
   TouchableWithoutFeedback,
+  Text,
 } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from "react-native-popup-menu";
 
 const HeaderRight = (props) => {
-  
+  const hanleSelectSettings = () => {
+    props.navigation.navigate("Settings");
+  }
   return (
     <View style={[styles.view, styles.center]}>
       <TouchableOpacity
@@ -23,9 +32,16 @@ const HeaderRight = (props) => {
           source={require("../../assets/icon-account.png")}
         />
       </TouchableOpacity>
-      <TouchableWithoutFeedback onPress={() => alert("press on dots")}>
-        <Icon name="dots-vertical" size={25}/>
-      </TouchableWithoutFeedback>
+      <Menu>
+        <MenuTrigger>
+          <Icon name="dots-vertical" size={25} />
+        </MenuTrigger>
+        <MenuOptions>
+          <MenuOption onSelect={hanleSelectSettings}>
+            <Text style={styles.textMenuOption}>Settings</Text>
+          </MenuOption>
+        </MenuOptions>
+      </Menu>
     </View>
   );
 };
@@ -47,4 +63,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginRight: 15,
   },
+  textMenuOption: {
+    margin: 10
+  }
 });

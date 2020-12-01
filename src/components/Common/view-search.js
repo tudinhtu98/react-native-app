@@ -10,7 +10,7 @@ const ViewSearch = (props) => {
         onPress={() => {
           props.navigation.navigate("SearchResultTab");
         }}
-        title="Search"
+        title="Search "
       />
     </View>
   );

@@ -13,9 +13,9 @@ import ListPaths from "../../../Paths/ListPaths/list-paths";
 
 const SearchResultAll = (props) => {
   const countResult = {
-    countResultCourses: 167,
-    countResultPaths: 11,
-    countResultAuthors: 20,
+    countResultCourses: 12,
+    countResultPaths: 4,
+    countResultAuthors: 10,
   };
 
   const RenderSeparator = () => {

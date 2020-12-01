@@ -4,7 +4,7 @@ import { stylesGlo } from "../../../../../globals/styles";
 import ListCourses from "../../../../Courses/ListCourses/list-courses";
 
 const SearchResultCourses = (props) => {
-  const countResult = 167;
+  const countResult = 12;
   return (
     <View>
       <Text

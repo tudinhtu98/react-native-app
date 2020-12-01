@@ -9,6 +9,7 @@ import HomeStackScreen from "./src/navigations/home-stack-screen";
 import DownloadStackScreen from "./src/navigations/download-stack-screen";
 import BrowseStackScreen from "./src/navigations/browse-stack-screen";
 import SearchStackScreen from "./src/navigations/search-stack-screen";
+import { MenuProvider } from "react-native-popup-menu";
 
 const Tab = createBottomTabNavigator();
 
@@ -32,14 +33,16 @@ export default function App() {
   });
 
   return (
-    <NavigationContainer>
-      <Tab.Navigator screenOptions={screenOptions}>
-        <Tab.Screen name="Home" component={HomeStackScreen} />
-        <Tab.Screen name="Download" component={DownloadStackScreen} />
-        <Tab.Screen name="Browse" component={BrowseStackScreen} />
-        <Tab.Screen name="Search" component={SearchStackScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <MenuProvider>
+      <NavigationContainer>
+        <Tab.Navigator screenOptions={screenOptions}>
+          <Tab.Screen name="Home" component={HomeStackScreen} />
+          <Tab.Screen name="Download" component={DownloadStackScreen} />
+          <Tab.Screen name="Browse" component={BrowseStackScreen} />
+          <Tab.Screen name="Search" component={SearchStackScreen} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </MenuProvider>
   );
 }
 

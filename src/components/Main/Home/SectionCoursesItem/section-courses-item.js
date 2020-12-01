@@ -4,13 +4,23 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  TouchableWithoutFeedback,
+  Share,
+  Text
 } from "react-native";
 import { stylesGlo } from "../../../../globals/styles";
 import ViewCourse from "../../../Common/view-course";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from "react-native-popup-menu";
 
 const SectionCoursesItem = (props) => {
+  const handleShareCourse = () => {
+    Share.share({ message: "share course" });
+  };
   return (
     <TouchableOpacity
       style={[styles.item, stylesGlo.shadow]}
@@ -21,14 +31,27 @@ const SectionCoursesItem = (props) => {
       }}
     >
       <View>
-        <Image
-          source={{ uri: "https://i.imgur.com/JOJdL5G.jpeg" }}
-          style={styles.image}
-        />
+        <Image source={{ uri: props.item.image }} style={styles.image} />
         <View style={styles.dots}>
-          <TouchableWithoutFeedback onPress={() => alert("press on dots")}>
-            <Icon name="dots-vertical" size={25} color="white" />
-          </TouchableWithoutFeedback>
+          <Menu>
+            <MenuTrigger>
+              <Icon name="dots-vertical" size={25} color="darkgray" />
+            </MenuTrigger>
+            <MenuOptions>
+              <MenuOption>
+                <Text style={styles.textMenuOption}>Bookmark</Text>
+              </MenuOption>
+              <MenuOption>
+                <Text style={styles.textMenuOption}>Add to channel</Text>
+              </MenuOption>
+              <MenuOption>
+                <Text style={styles.textMenuOption}>Download</Text>
+              </MenuOption>
+              <MenuOption onSelect={handleShareCourse}>
+                <Text style={styles.textMenuOption}>Share</Text>
+              </MenuOption>
+            </MenuOptions>
+          </Menu>
         </View>
       </View>
 
@@ -57,5 +80,8 @@ const styles = StyleSheet.create({
     width: 35,
     justifyContent: "center",
     alignItems: "center",
+  },
+  textMenuOption: {
+    margin: 10,
   },
 });

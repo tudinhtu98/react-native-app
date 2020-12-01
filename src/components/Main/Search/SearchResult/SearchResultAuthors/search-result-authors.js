@@ -4,7 +4,7 @@ import { stylesGlo } from "../../../../../globals/styles";
 import ListAuthors from "../../../../Authors/ListAuthors/list-authors";
 
 const SearchResultAuthors = (props) => {
-  const countResult = 20;
+  const countResult = 10;
   return (
     <View>
       <Text
