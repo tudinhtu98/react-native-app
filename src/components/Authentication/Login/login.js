@@ -12,7 +12,6 @@ const Login = (props) => {
   const [textPassword, setTextPassword] = useState("");
   const handlePressLogin = () => {
     if (textEmail === "admin" && textPassword === "admin") {
-      alert("Đăng nhập thành công");
       props.route.params.setSignIn(true);
       props.navigation.navigate("Home");
     } else {
