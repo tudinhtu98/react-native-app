@@ -4,10 +4,15 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   Alert,
 } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from "react-native-popup-menu";
 
 const ListSessionsItem = (props) => {
   const RenderSessionItem = (props) => {
@@ -32,9 +37,19 @@ const ListSessionsItem = (props) => {
           <Text style={{ marginHorizontal: 20 }}>{props.item.duration}</Text>
         </View>
         <View style={styles.dots}>
-          <TouchableWithoutFeedback onPress={() => alert("press on dots")}>
-            <Icon name="dots-vertical" size={25} color={props.color} />
-          </TouchableWithoutFeedback>
+          <Menu>
+            <MenuTrigger>
+              <Icon name="dots-vertical" size={25} color="darkgray" />
+            </MenuTrigger>
+            <MenuOptions>
+              <MenuOption>
+                <Text style={styles.textMenuOption}>Bookmark</Text>
+              </MenuOption>
+              <MenuOption>
+                <Text style={styles.textMenuOption}>Download</Text>
+              </MenuOption>
+            </MenuOptions>
+          </Menu>
         </View>
       </View>
       <View>
@@ -62,5 +77,8 @@ const styles = StyleSheet.create({
     width: 35,
     justifyContent: "center",
     alignItems: "center",
+  },
+  textMenuOption: {
+    margin: 10,
   },
 });

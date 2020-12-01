@@ -17,7 +17,7 @@ const SectionCourses = (props) => {
       level: "Advance",
       released: "Nov 2020",
       duration: "30 hours",
-      image: "https://assets.stickpng.com/images/5847ea22cef1014c0b5e4833.png",
+      image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1589465644206/o_QlYgMet.png",
       introduction:
       "Angular has become 123456789 123456789 123456789 123456789 123456789",
     },
@@ -50,7 +50,7 @@ const SectionCourses = (props) => {
       level: "Advance",
       released: "Nov 2020",
       duration: "30 hours",
-      image: "https://assets.stickpng.com/images/5847ea22cef1014c0b5e4833.png",
+      image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1589465644206/o_QlYgMet.png",
       introduction:
       "Angular has become 123456789 123456789 123456789 123456789 123456789",
     },
@@ -83,7 +83,7 @@ const SectionCourses = (props) => {
       level: "Advance",
       released: "Nov 2020",
       duration: "30 hours",
-      image: "https://assets.stickpng.com/images/5847ea22cef1014c0b5e4833.png",
+      image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1589465644206/o_QlYgMet.png",
       introduction:
       "Angular has become 123456789 123456789 123456789 123456789 123456789",
     },
@@ -116,7 +116,7 @@ const SectionCourses = (props) => {
       level: "Advance",
       released: "Nov 2020",
       duration: "30 hours",
-      image: "https://assets.stickpng.com/images/5847ea22cef1014c0b5e4833.png",
+      image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1589465644206/o_QlYgMet.png",
       introduction:
       "Angular has become 123456789 123456789 123456789 123456789 123456789",
     },

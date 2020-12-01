@@ -4,15 +4,22 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  TouchableWithoutFeedback,
-  Alert,
   Share,
   Text,
 } from "react-native";
 import ViewCourse from "../../Common/view-course";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from "react-native-popup-menu";
 
 const ListCoursesItem = (props) => {
+  const handleShareCourse = () => {
+    Share.share({ message: "share course" });
+  };
   return (
     <View>
       <TouchableOpacity
@@ -23,16 +30,29 @@ const ListCoursesItem = (props) => {
           });
         }}
       >
-        <Image
-          style={styles.image}
-          source={{ uri: props.item.image }}
-        />
+        <Image style={styles.image} source={{ uri: props.item.image }} />
         <ViewCourse item={props.item} />
       </TouchableOpacity>
       <View style={styles.dots}>
-        <TouchableWithoutFeedback onPress={() => alert("press on dots")}>
-          <Icon name="dots-vertical" size={25} color="black" />
-        </TouchableWithoutFeedback>
+        <Menu>
+          <MenuTrigger>
+            <Icon name="dots-vertical" size={25} color="darkgray" />
+          </MenuTrigger>
+          <MenuOptions>
+            <MenuOption>
+              <Text style={styles.textMenuOption}>Bookmark</Text>
+            </MenuOption>
+            <MenuOption>
+              <Text style={styles.textMenuOption}>Add to channel</Text>
+            </MenuOption>
+            <MenuOption>
+              <Text style={styles.textMenuOption}>Download</Text>
+            </MenuOption>
+            <MenuOption onSelect={handleShareCourse}>
+              <Text style={styles.textMenuOption}>Share</Text>
+            </MenuOption>
+          </MenuOptions>
+        </Menu>
       </View>
     </View>
   );
@@ -59,5 +79,8 @@ const styles = StyleSheet.create({
     width: 35,
     justifyContent: "center",
     alignItems: "center",
+  },
+  textMenuOption: {
+    margin: 10,
   },
 });
