@@ -4,6 +4,7 @@ import SearchResultAll from "../components/Main/Search/SearchResult/search-resul
 import SearchResultCourses from "../components/Main/Search/SearchResult/SearchResultCourses/search-result-courses";
 import SearchResultPaths from "../components/Main/Search/SearchResult/SearchResultPaths/search-result-paths";
 import SearchResultAuthors from "../components/Main/Search/SearchResult/SearchResultAuthors/search-result-authors";
+import { ScreenKey } from "../globals/constants";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -11,22 +12,22 @@ const SearchResultTab = (props) => {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="SearchResultAll"
+        name={ScreenKey.SearchResultAll}
         component={SearchResultAll}
         options={{ title: "All" }}
       />
       <Tab.Screen
-        name="SearchResultCourses"
+        name={ScreenKey.SearchResultCourses}
         component={SearchResultCourses}
         options={{ title: "Courses" }}
       />
       <Tab.Screen
-        name="SearchResultPaths"
+        name={ScreenKey.SearchResultPaths}
         component={SearchResultPaths}
         options={{ title: "Paths" }}
       />
       <Tab.Screen
-        name="SearchResultAuthors"
+        name={ScreenKey.SearchResultAuthors}
         component={SearchResultAuthors}
         options={{ title: "Authors" }}
       />

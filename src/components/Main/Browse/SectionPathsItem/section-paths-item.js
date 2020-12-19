@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Image, TouchableOpacity } from "react-native";
+import { ScreenKey } from "../../../../globals/constants";
 import { stylesGlo } from "../../../../globals/styles";
 import ViewPath from "../../../Common/view-path";
 
@@ -8,7 +9,7 @@ const SectionPathsItem = (props) => {
     <TouchableOpacity
       style={[styles.item, stylesGlo.shadow]}
       onPress={() => {
-        props.navigation.navigate("PathDetail", {
+        props.navigation.navigate(ScreenKey.PathDetail, {
           item: props.item,
         });
       }}

@@ -1,5 +1,6 @@
 import React from "react";
 import { View, TextInput, Button, StyleSheet } from "react-native";
+import { ScreenKey } from "../../globals/constants";
 
 const ViewSearch = (props) => {
   return (
@@ -8,7 +9,7 @@ const ViewSearch = (props) => {
       <Button
         style={styles.border}
         onPress={() => {
-          props.navigation.navigate("SearchResultTab");
+          props.navigation.navigate(ScreenKey.SearchResultTab);
         }}
         title="Search "
       />

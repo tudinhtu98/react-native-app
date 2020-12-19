@@ -15,6 +15,7 @@ import {
   MenuOption,
   MenuTrigger,
 } from "react-native-popup-menu";
+import { ScreenKey } from "../../../globals/constants";
 
 const ListCoursesItem = (props) => {
   const handleShareCourse = () => {
@@ -25,7 +26,7 @@ const ListCoursesItem = (props) => {
       <TouchableOpacity
         style={styles.item}
         onPress={() => {
-          props.navigation.navigate("CourseDetail", {
+          props.navigation.navigate(ScreenKey.CourseDetail, {
             item: props.item,
           });
         }}

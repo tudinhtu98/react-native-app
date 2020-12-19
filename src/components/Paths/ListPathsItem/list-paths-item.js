@@ -1,5 +1,6 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, Image, Text } from "react-native";
+import { ScreenKey } from "../../../globals/constants";
 import { stylesGlo } from "../../../globals/styles";
 
 const ListPathsItem = (props) => {
@@ -8,7 +9,7 @@ const ListPathsItem = (props) => {
       <TouchableOpacity
         style={styles.item}
         onPress={() => {
-          props.navigation.navigate("PathDetail", {
+          props.navigation.navigate(ScreenKey.PathDetail, {
             item: props.item,
           });
         }}

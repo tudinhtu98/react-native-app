@@ -2,17 +2,19 @@ import React from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import Profile from "../Profile/profile";
 import { stylesGlo } from "../../../globals/styles";
+import { ScreenKey } from "../../../globals/constants";
+import { StackActions } from "@react-navigation/native";
 
 
 const Settings = (props) => {
   const handleSignOut = () => {
-    props.navigation.navigate("Login");
+    props.navigation.dispatch(StackActions.replace(ScreenKey.Login));
   }
   return (
     <View style={styles.view}>
       <TouchableOpacity
         onPress={() => {
-          props.navigation.navigate("Profile");
+          props.navigation.navigate(ScreenKey.Profile);
         }}
       >
         <Profile />

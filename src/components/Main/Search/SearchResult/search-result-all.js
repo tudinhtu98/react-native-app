@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
+import { ScreenKey } from "../../../../globals/constants";
 import { stylesGlo } from "../../../../globals/styles";
 import ListAuthors from "../../../Authors/ListAuthors/list-authors";
 import ListCourses from "../../../Courses/ListCourses/list-courses";
@@ -38,7 +39,7 @@ const SearchResultAll = (props) => {
         <Text>Courses</Text>
         <TouchableOpacity
           onPress={() => {
-            props.navigation.navigate("SearchResultCourses");
+            props.navigation.navigate(ScreenKey.SearchResultCourses);
           }}
         >
           <Text
@@ -53,7 +54,7 @@ const SearchResultAll = (props) => {
         <Text>Paths</Text>
         <TouchableOpacity
           onPress={() => {
-            props.navigation.navigate("SearchResultPaths");
+            props.navigation.navigate(ScreenKey.SearchResultPaths);
           }}
         >
           <Text
@@ -68,7 +69,7 @@ const SearchResultAll = (props) => {
         <Text>Authors</Text>
         <TouchableOpacity
           onPress={() => {
-            props.navigation.navigate("SearchResultAuthors");
+            props.navigation.navigate(ScreenKey.SearchResultAuthors);
           }}
         >
           <Text

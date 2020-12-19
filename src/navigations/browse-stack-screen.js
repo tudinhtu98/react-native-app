@@ -7,6 +7,7 @@ import Profile from "../components/AccountManagement/Profile/profile";
 import PathDetail from "./../components/PathDetail/path-detail";
 import Settings from "../components/AccountManagement/Settings/settings";
 import ListPaths from "../components/Paths/ListPaths/list-paths";
+import { ScreenKey } from "../globals/constants";
 
 const BrowseStack = createStackNavigator();
 
@@ -14,16 +15,16 @@ const BrowseStackScreen = () => {
   return (
     <BrowseStack.Navigator>
       <BrowseStack.Screen
-        name="Browse"
+        name={ScreenKey.Browse}
         component={Browse}
         options={({ navigation }) => ({
           headerRight: () => <HeaderRight navigation={navigation} />,
         })}
       />
-      <BrowseStack.Screen name="Profile" component={Profile} />
-      <BrowseStack.Screen name="Settings" component={Settings} />
+      <BrowseStack.Screen name={ScreenKey.Profile} component={Profile} />
+      <BrowseStack.Screen name={ScreenKey.Settings} component={Settings} />
       <BrowseStack.Screen
-        name="CourseDetail"
+        name={ScreenKey.CourseDetail}
         component={CourseDetail}
         options={{
           title: "Course Detail",
@@ -31,12 +32,12 @@ const BrowseStackScreen = () => {
         }}
       />
       <BrowseStack.Screen
-        name="ListPaths"
+        name={ScreenKey.ListPaths}
         component={ListPaths}
         options={{ title: "List Paths" }}
       />
       <BrowseStack.Screen
-        name="PathDetail"
+        name={ScreenKey.PathDetail}
         component={PathDetail}
         options={{ title: "Path Detail" }}
       />

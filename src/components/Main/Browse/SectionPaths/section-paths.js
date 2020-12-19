@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
+import { ScreenKey } from "../../../../globals/constants";
 import SectionPathsItem from "../SectionPathsItem/section-paths-item";
 
 const SectionPaths = (props) => {
@@ -63,7 +64,7 @@ const SectionPaths = (props) => {
         <Text>{props.title}</Text>
         <TouchableOpacity
           onPress={() => {
-            props.navigation.navigate("ListPaths", {
+            props.navigation.navigate(ScreenKey.ListPaths, {
               item: props.item,
             });
           }}
