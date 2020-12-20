@@ -16,6 +16,8 @@ import Login from "./src/components/Authentication/Login/login";
 import { ScreenKey } from "./src/globals/constants";
 import Register from "./src/components/Authentication/Register/register";
 import ForgetPassword from "./src/components/Authentication/ForgetPassword/forget-password";
+import Profile from "./src/components/AccountManagement/Profile/profile";
+import Settings from "./src/components/AccountManagement/Settings/settings";
 
 const Tab = createBottomTabNavigator();
 const MainNavigationStack = createStackNavigator();
@@ -72,6 +74,16 @@ export default function App() {
           name={ScreenKey.ForgetPassword}
           component={ForgetPassword}
           options={{ headerShown: false }} 
+        />
+        <MainNavigationStack.Screen
+          name={ScreenKey.Profile}
+          component={Profile}
+          // options={{ headerShown: false }} 
+        />
+        <MainNavigationStack.Screen
+          name={ScreenKey.Settings}
+          component={Settings}
+          // options={{ headerShown: false }} 
         />
         <MainNavigationStack.Screen
           name={ScreenKey.MainTab}

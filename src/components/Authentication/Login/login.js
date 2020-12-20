@@ -8,18 +8,25 @@ import {
   Text,
   Image,
 } from "react-native";
+import { login } from "../../../core/services/authentication-service";
 import { ScreenKey } from "../../../globals/constants";
 
 const Login = (props) => {
   const [textEmail, setTextEmail] = useState("");
   const [textPassword, setTextPassword] = useState("");
-  const handlePressLogin = () => {
-    if (textEmail === "admin" && textPassword === "admin") {
+  const [status, setStatus] = useState(null);
+
+  const renderLoginStatus = (status) => {
+    if (!status) {
+      return <View />;
+    } else if (status.status === 200) {
       props.navigation.dispatch(StackActions.replace(ScreenKey.MainTab));
+      return <Text>Login successed!</Text>;
     } else {
-      alert("Sai email hoặc mật khẩu");
+      return <Text>{status.errorString}</Text>;
     }
   };
+
   return (
     <View style={styles.view}>
       <View style={styles.viewImage}>
@@ -30,8 +37,8 @@ const Login = (props) => {
       </View>
       <TextInput
         style={styles.textInput}
-        placeholder="Username (or Email)"
-        autoCompleteType="username"
+        placeholder="Email"
+        autoCompleteType="email"
         onChangeText={(textEmail) => setTextEmail(textEmail)}
         defaultValue={textEmail}
       ></TextInput>
@@ -44,9 +51,12 @@ const Login = (props) => {
         onChangeText={(textPassword) => setTextPassword(textPassword)}
         defaultValue={textPassword}
       ></TextInput>
+      {renderLoginStatus(status)}
       <TouchableOpacity
         style={[styles.button, styles.buttonLogin]}
-        onPress={handlePressLogin}
+        onPress={() => {
+          setStatus(login(textEmail, textPassword));
+        }}
       >
         <Text style={styles.textWhite}>LOGIN</Text>
       </TouchableOpacity>

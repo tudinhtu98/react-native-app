@@ -3,9 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HeaderRight from "./../globals/header-right";
 import CourseDetail from "./../components/CourseDetail/course-detail";
 import Browse from "./../components/Main/Browse/browse";
-import Profile from "../components/AccountManagement/Profile/profile";
 import PathDetail from "./../components/PathDetail/path-detail";
-import Settings from "../components/AccountManagement/Settings/settings";
 import ListPaths from "../components/Paths/ListPaths/list-paths";
 import { ScreenKey } from "../globals/constants";
 
@@ -21,8 +19,6 @@ const BrowseStackScreen = () => {
           headerRight: () => <HeaderRight navigation={navigation} />,
         })}
       />
-      <BrowseStack.Screen name={ScreenKey.Profile} component={Profile} />
-      <BrowseStack.Screen name={ScreenKey.Settings} component={Settings} />
       <BrowseStack.Screen
         name={ScreenKey.CourseDetail}
         component={CourseDetail}

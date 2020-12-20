@@ -2,8 +2,6 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import HeaderRight from "./../globals/header-right";
 import Search from "./../components/Main/Search/search";
-import Profile from "../components/AccountManagement/Profile/profile";
-import Settings from "../components/AccountManagement/Settings/settings";
 import SearchResultTab from "./search-result-tab";
 import CourseDetail from "../components/CourseDetail/course-detail";
 import PathDetail from "../components/PathDetail/path-detail";
@@ -21,8 +19,6 @@ const SearchStackScreen = () => {
           headerRight: () => <HeaderRight navigation={navigation} />,
         })}
       />
-      <SearchStack.Screen name={ScreenKey.Profile} component={Profile} />
-      <SearchStack.Screen name={ScreenKey.Settings} component={Settings} />
       <SearchStack.Screen
         name={ScreenKey.SearchResultTab}
         component={SearchResultTab}
@@ -30,7 +26,10 @@ const SearchStackScreen = () => {
           title: "Search Result",
         }}
       />
-      <SearchStack.Screen name={ScreenKey.CourseDetail} component={CourseDetail} />
+      <SearchStack.Screen
+        name={ScreenKey.CourseDetail}
+        component={CourseDetail}
+      />
       <SearchStack.Screen name={ScreenKey.PathDetail} component={PathDetail} />
     </SearchStack.Navigator>
   );
