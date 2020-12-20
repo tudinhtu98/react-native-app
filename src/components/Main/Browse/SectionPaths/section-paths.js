@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
+import { ScreenKey } from "../../../../globals/constants";
 import SectionPathsItem from "../SectionPathsItem/section-paths-item";
 
 const SectionPaths = (props) => {
@@ -52,9 +53,19 @@ const SectionPaths = (props) => {
     },
   ];
 
+  const onPressSectionPathsItem = (item) => {
+    props.navigation.navigate(ScreenKey.PathDetail, { item });
+  };
+
+  const onPressSeeAll = () => {
+    props.navigation.navigate(ScreenKey.ListPaths, {
+      item: props.item,
+    });
+  };
+
   const renderListItems = (paths) => {
     return paths.map((item) => (
-      <SectionPathsItem item={item} navigation={props.navigation} />
+      <SectionPathsItem key={item.id.toString()} item={item} navigation={props.navigation} onPressSectionPathsItem={onPressSectionPathsItem} />
     ));
   };
   return (
@@ -62,11 +73,7 @@ const SectionPaths = (props) => {
       <View style={styles.titleView}>
         <Text>{props.title}</Text>
         <TouchableOpacity
-          onPress={() => {
-            props.navigation.navigate("ListPaths", {
-              item: props.item,
-            });
-          }}
+          onPress={onPressSeeAll}
         >
           <Text>{`See all >`}</Text>
         </TouchableOpacity>

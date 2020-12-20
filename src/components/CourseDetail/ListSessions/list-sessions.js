@@ -5,6 +5,7 @@ import ListSessionsItem from "../ListSessionsItem/list-sessions-item";
 const ListSessions = (props) => {
   const sessions = [
     {
+      id: 1,
       title: "Course Overview",
       duration: "2:04",
       data: [
@@ -15,6 +16,7 @@ const ListSessions = (props) => {
       ],
     },
     {
+      id: 2,
       title: "Getting Started with Angular",
       duration: "38:45",
       data: [
@@ -33,6 +35,7 @@ const ListSessions = (props) => {
       ],
     },
     {
+      id: 3,
       title: "Course Overview",
       duration: "2:04",
       data: [
@@ -43,6 +46,7 @@ const ListSessions = (props) => {
       ],
     },
     {
+      id: 4,
       title: "Getting Started with Angular",
       duration: "38:45",
       data: [
@@ -79,8 +83,11 @@ const ListSessions = (props) => {
     <View style={styles.view}>
       <FlatList
         data={sessions}
-        renderItem={({ item }) => <ListSessionsItem item={item} />}
+        renderItem={({ item }) => (
+          <ListSessionsItem key={item.id.toString()} item={item} />
+        )}
         ItemSeparatorComponent={renderSeparator}
+        keyExtractor={(item, index) => index.toString()}
       />
     </View>
   );

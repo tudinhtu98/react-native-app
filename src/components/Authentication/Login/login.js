@@ -1,3 +1,4 @@
+import { StackActions } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
   TextInput,
@@ -5,25 +6,39 @@ import {
   StyleSheet,
   TouchableOpacity,
   Text,
+  Image,
 } from "react-native";
+import { login } from "../../../core/services/authentication-service";
+import { ScreenKey } from "../../../globals/constants";
 
 const Login = (props) => {
   const [textEmail, setTextEmail] = useState("");
   const [textPassword, setTextPassword] = useState("");
-  const handlePressLogin = () => {
-    if (textEmail === "admin" && textPassword === "admin") {
-      props.route.params.setSignIn(true);
-      props.navigation.navigate("Home");
+  const [status, setStatus] = useState(null);
+
+  const renderLoginStatus = (status) => {
+    if (!status) {
+      return <View />;
+    } else if (status.status === 200) {
+      props.navigation.dispatch(StackActions.replace(ScreenKey.MainTab));
+      return <Text>Login successed!</Text>;
     } else {
-      alert("Sai email hoặc mật khẩu");
+      return <Text>{status.errorString}</Text>;
     }
   };
+
   return (
     <View style={styles.view}>
+      <View style={styles.viewImage}>
+        <Image
+          style={styles.image}
+          source={require("./../../../../assets/splash-logo.png")}
+        />
+      </View>
       <TextInput
         style={styles.textInput}
-        placeholder="Username (or Email)"
-        autoCompleteType="username"
+        placeholder="Email"
+        autoCompleteType="email"
         onChangeText={(textEmail) => setTextEmail(textEmail)}
         defaultValue={textEmail}
       ></TextInput>
@@ -36,16 +51,19 @@ const Login = (props) => {
         onChangeText={(textPassword) => setTextPassword(textPassword)}
         defaultValue={textPassword}
       ></TextInput>
+      {renderLoginStatus(status)}
       <TouchableOpacity
         style={[styles.button, styles.buttonLogin]}
-        onPress={handlePressLogin}
+        onPress={() => {
+          setStatus(login(textEmail, textPassword));
+        }}
       >
         <Text style={styles.textWhite}>LOGIN</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          props.navigation.navigate("ForgetPassword");
+          props.navigation.navigate(ScreenKey.ForgetPassword);
         }}
       >
         <Text style={styles.textBlue}>FORGOT PASSWORD?</Text>
@@ -53,7 +71,7 @@ const Login = (props) => {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          props.navigation.navigate("Register");
+          props.navigation.navigate(ScreenKey.Register);
         }}
       >
         <Text style={styles.textBlue}>REGISTER FREE</Text>
@@ -66,7 +84,12 @@ export default Login;
 
 const styles = StyleSheet.create({
   view: {
+    flex: 1,
     margin: 30,
+  },
+  viewImage: {
+    justifyContent: "center",
+    alignItems: "center",
   },
   textInput: {
     height: 55,
@@ -91,5 +114,11 @@ const styles = StyleSheet.create({
   textWhite: {
     color: "white",
     fontWeight: "bold",
+  },
+  image: {
+    margin: 50,
+    width: "60%",
+    height: undefined,
+    aspectRatio: 1.2,
   },
 });

@@ -14,17 +14,18 @@ import {
   MenuOption,
   MenuTrigger,
 } from "react-native-popup-menu";
+import { ScreenKey } from "./constants";
 
 const HeaderRight = (props) => {
   const hanleSelectSettings = () => {
-    props.navigation.navigate("Settings");
+    props.navigation.navigate(ScreenKey.Settings);
   }
   return (
     <View style={[styles.view, styles.center]}>
       <TouchableOpacity
         style={styles.center}
         onPress={() => {
-          props.navigation.navigate("Profile");
+          props.navigation.navigate(ScreenKey.Profile);
         }}
       >
         <Image

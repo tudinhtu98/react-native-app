@@ -1,5 +1,11 @@
 import React from "react";
-import { View, Text, FlatList, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 
 const SectionSkills = (props) => {
   const renderItemSkills = ({ item }) => {
@@ -22,6 +28,7 @@ const SectionSkills = (props) => {
         horizontal={true}
         data={props.dataSkills}
         renderItem={renderItemSkills}
+        keyExtractor={(item, index) => index.toString()}
       />
     </View>
   );
@@ -31,7 +38,7 @@ export default SectionSkills;
 
 const styles = StyleSheet.create({
   skillView: {
-    backgroundColor: "gray",
+    backgroundColor: "lightgray",
     borderRadius: 10,
     margin: 5,
     padding: 5,

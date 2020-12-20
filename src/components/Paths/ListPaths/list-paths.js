@@ -68,6 +68,7 @@ const ListPaths = (props) => {
           <ListPathsItem navigation={props.navigation} item={item} />
         )}
         ItemSeparatorComponent={renderSeparator}
+        keyExtractor={(item, index) => index.toString()}
       />
     </View>
   );

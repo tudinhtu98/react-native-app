@@ -8,7 +8,7 @@ const ListAuthorsItem = (props) => {
       <TouchableOpacity
         style={styles.item}
         // onPress={() => {
-        //   props.navigation.navigate("PathDetail", {
+        //   props.navigation.navigate(ScreenKey.PathDetail, {
         //     item: props.item,
         //   });
         // }}

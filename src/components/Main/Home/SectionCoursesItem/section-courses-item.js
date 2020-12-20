@@ -5,7 +5,7 @@ import {
   Image,
   TouchableOpacity,
   Share,
-  Text
+  Text,
 } from "react-native";
 import { stylesGlo } from "../../../../globals/styles";
 import ViewCourse from "../../../Common/view-course";
@@ -16,18 +16,18 @@ import {
   MenuOption,
   MenuTrigger,
 } from "react-native-popup-menu";
+import { ScreenKey } from "../../../../globals/constants";
 
 const SectionCoursesItem = (props) => {
   const handleShareCourse = () => {
     Share.share({ message: "share course" });
   };
+
   return (
     <TouchableOpacity
       style={[styles.item, stylesGlo.shadow]}
       onPress={() => {
-        props.navigation.navigate("CourseDetail", {
-          item: props.item,
-        });
+        props.onPressSectionCoursesItem(props.item);
       }}
     >
       <View>

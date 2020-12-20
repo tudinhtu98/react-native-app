@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
   view: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 120,
     margin: 10,
   },
   textRemove: {

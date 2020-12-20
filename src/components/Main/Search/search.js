@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Alert,
   TouchableOpacity,
@@ -7,6 +7,7 @@ import {
   Text,
   FlatList,
   ScrollView,
+  LogBox,
 } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import ViewSearch from "../../Common/view-search";
@@ -32,6 +33,10 @@ const Search = (props) => {
     );
   };
 
+  useEffect(() => {
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+  }, []);
+
   return (
     <ScrollView style={styles.scrollView}>
       <ViewSearch navigation={props.navigation} />
@@ -45,6 +50,7 @@ const Search = (props) => {
         <FlatList
           data={historySearchs}
           renderItem={({ item }) => renderItemHistorySearch(item)}
+          keyExtractor={(item, index) => index.toString()}
         />
       </View>
     </ScrollView>

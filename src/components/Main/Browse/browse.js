@@ -50,19 +50,20 @@ const Browse = (props) => {
     },
   ];
   const renderItem = ({ item }) => (
-    <ImageButtonItem title="NEW RELEASES" onPress={onPressNewReleases()} />
+    <ImageButtonItem title="NEW RELEASES" onPress={onPressNewReleases} />
   );
 
   return (
     <ScrollView>
-      <ImageButton title="NEW RELEASES" onPress={onPressNewReleases()} />
-      <ImageButton title="RECOMMENDED FOR YOU" onPress={onPressRecommend()} />
+      <ImageButton title="NEW RELEASES" onPress={onPressNewReleases} />
+      <ImageButton title="RECOMMENDED FOR YOU" onPress={onPressRecommend} />
 
       <FlatList
         // style={styles.viewFlatList}
         horizontal={true}
         data={dataCategory}
         renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
       />
       <SectionSkills
         title="Popular Skill"
