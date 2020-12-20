@@ -5,7 +5,7 @@ import {
   Image,
   TouchableOpacity,
   Share,
-  Text
+  Text,
 } from "react-native";
 import { stylesGlo } from "../../../../globals/styles";
 import ViewCourse from "../../../Common/view-course";
@@ -22,13 +22,12 @@ const SectionCoursesItem = (props) => {
   const handleShareCourse = () => {
     Share.share({ message: "share course" });
   };
+
   return (
     <TouchableOpacity
       style={[styles.item, stylesGlo.shadow]}
       onPress={() => {
-        props.navigation.navigate(ScreenKey.CourseDetail, {
-          item: props.item,
-        });
+        props.onPressSectionCoursesItem(props.item);
       }}
     >
       <View>

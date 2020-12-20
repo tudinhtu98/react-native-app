@@ -1,5 +1,6 @@
 import React from "react";
 import { FlatList, View } from "react-native";
+import { ScreenKey } from "../../../globals/constants";
 import ListCoursesItem from "../ListCoursesItem/list-courses-item";
 
 const ListCourses = (props) => {
@@ -11,9 +12,10 @@ const ListCourses = (props) => {
       level: "Advance",
       released: "Nov 2020",
       duration: "30 hours",
-      image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1589465644206/o_QlYgMet.png",
+      image:
+        "https://cdn.hashnode.com/res/hashnode/image/upload/v1589465644206/o_QlYgMet.png",
       introduction:
-      "Angular has become 123456789 123456789 123456789 123456789 123456789",
+        "Angular has become 123456789 123456789 123456789 123456789 123456789",
     },
     {
       id: 2,
@@ -22,9 +24,10 @@ const ListCourses = (props) => {
       level: "Beginner",
       released: "Nov 2020",
       duration: "29 hours",
-      image: "https://www.kindpng.com/picc/m/355-3557482_flutter-logo-png-transparent-png.png",
+      image:
+        "https://www.kindpng.com/picc/m/355-3557482_flutter-logo-png-transparent-png.png",
       introduction:
-      "Flutter has become 123456789 123456789 123456789 123456789 123456789",
+        "Flutter has become 123456789 123456789 123456789 123456789 123456789",
     },
     {
       id: 3,
@@ -33,9 +36,10 @@ const ListCourses = (props) => {
       level: "Advance",
       released: "Nov 2020",
       duration: "30 hours",
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/IOS_logo.svg/1200px-IOS_logo.svg.png",
+      image:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/IOS_logo.svg/1200px-IOS_logo.svg.png",
       introduction:
-      "IOS has become 123456789 123456789 123456789 123456789 123456789",
+        "IOS has become 123456789 123456789 123456789 123456789 123456789",
     },
     {
       id: 4,
@@ -44,9 +48,10 @@ const ListCourses = (props) => {
       level: "Advance",
       released: "Nov 2020",
       duration: "30 hours",
-      image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1589465644206/o_QlYgMet.png",
+      image:
+        "https://cdn.hashnode.com/res/hashnode/image/upload/v1589465644206/o_QlYgMet.png",
       introduction:
-      "Angular has become 123456789 123456789 123456789 123456789 123456789",
+        "Angular has become 123456789 123456789 123456789 123456789 123456789",
     },
     {
       id: 5,
@@ -55,9 +60,10 @@ const ListCourses = (props) => {
       level: "Beginner",
       released: "Nov 2020",
       duration: "29 hours",
-      image: "https://www.kindpng.com/picc/m/355-3557482_flutter-logo-png-transparent-png.png",
+      image:
+        "https://www.kindpng.com/picc/m/355-3557482_flutter-logo-png-transparent-png.png",
       introduction:
-      "Flutter has become 123456789 123456789 123456789 123456789 123456789",
+        "Flutter has become 123456789 123456789 123456789 123456789 123456789",
     },
     {
       id: 6,
@@ -66,9 +72,10 @@ const ListCourses = (props) => {
       level: "Advance",
       released: "Nov 2020",
       duration: "30 hours",
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/IOS_logo.svg/1200px-IOS_logo.svg.png",
+      image:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/IOS_logo.svg/1200px-IOS_logo.svg.png",
       introduction:
-      "IOS has become 123456789 123456789 123456789 123456789 123456789",
+        "IOS has become 123456789 123456789 123456789 123456789 123456789",
     },
     {
       id: 7,
@@ -77,9 +84,10 @@ const ListCourses = (props) => {
       level: "Advance",
       released: "Nov 2020",
       duration: "30 hours",
-      image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1589465644206/o_QlYgMet.png",
+      image:
+        "https://cdn.hashnode.com/res/hashnode/image/upload/v1589465644206/o_QlYgMet.png",
       introduction:
-      "Angular has become 123456789 123456789 123456789 123456789 123456789",
+        "Angular has become 123456789 123456789 123456789 123456789 123456789",
     },
     {
       id: 8,
@@ -88,9 +96,10 @@ const ListCourses = (props) => {
       level: "Beginner",
       released: "Nov 2020",
       duration: "29 hours",
-      image: "https://www.kindpng.com/picc/m/355-3557482_flutter-logo-png-transparent-png.png",
+      image:
+        "https://www.kindpng.com/picc/m/355-3557482_flutter-logo-png-transparent-png.png",
       introduction:
-      "Flutter has become 123456789 123456789 123456789 123456789 123456789",
+        "Flutter has become 123456789 123456789 123456789 123456789 123456789",
     },
     {
       id: 9,
@@ -99,9 +108,10 @@ const ListCourses = (props) => {
       level: "Advance",
       released: "Nov 2020",
       duration: "30 hours",
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/IOS_logo.svg/1200px-IOS_logo.svg.png",
+      image:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/IOS_logo.svg/1200px-IOS_logo.svg.png",
       introduction:
-      "IOS has become 123456789 123456789 123456789 123456789 123456789",
+        "IOS has become 123456789 123456789 123456789 123456789 123456789",
     },
     {
       id: 10,
@@ -110,9 +120,10 @@ const ListCourses = (props) => {
       level: "Advance",
       released: "Nov 2020",
       duration: "30 hours",
-      image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1589465644206/o_QlYgMet.png",
+      image:
+        "https://cdn.hashnode.com/res/hashnode/image/upload/v1589465644206/o_QlYgMet.png",
       introduction:
-      "Angular has become 123456789 123456789 123456789 123456789 123456789",
+        "Angular has become 123456789 123456789 123456789 123456789 123456789",
     },
     {
       id: 11,
@@ -121,9 +132,10 @@ const ListCourses = (props) => {
       level: "Beginner",
       released: "Nov 2020",
       duration: "29 hours",
-      image: "https://www.kindpng.com/picc/m/355-3557482_flutter-logo-png-transparent-png.png",
+      image:
+        "https://www.kindpng.com/picc/m/355-3557482_flutter-logo-png-transparent-png.png",
       introduction:
-      "Flutter has become 123456789 123456789 123456789 123456789 123456789",
+        "Flutter has become 123456789 123456789 123456789 123456789 123456789",
     },
     {
       id: 12,
@@ -132,9 +144,10 @@ const ListCourses = (props) => {
       level: "Advance",
       released: "Nov 2020",
       duration: "30 hours",
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/IOS_logo.svg/1200px-IOS_logo.svg.png",
+      image:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/IOS_logo.svg/1200px-IOS_logo.svg.png",
       introduction:
-      "IOS has become 123456789 123456789 123456789 123456789 123456789",
+        "IOS has become 123456789 123456789 123456789 123456789 123456789",
     },
   ];
 
@@ -151,14 +164,19 @@ const ListCourses = (props) => {
     );
   };
 
+  const onPressListCoursesItem = (item) => {
+    props.navigation.navigate(ScreenKey.CourseDetail, { item });
+  };
+
   return (
     <View>
       <FlatList
         data={courses}
         renderItem={({ item }) => (
-          <ListCoursesItem navigation={props.navigation} item={item} />
+          <ListCoursesItem key={item.id.toString()} navigation={props.navigation} item={item} onPressListCoursesItem={onPressListCoursesItem}/>
         )}
         ItemSeparatorComponent={renderSeparator}
+        keyExtractor={(item, index) => index.toString()}
       />
     </View>
   );

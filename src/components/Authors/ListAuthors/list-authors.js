@@ -87,6 +87,7 @@ const ListAuthors = (props) => {
           <ListAuthorsItem navigation={props.navigation} item={item} />
         )}
         ItemSeparatorComponent={renderSeparator}
+        keyExtractor={(item, index) => index.toString()}
       />
     </View>
   );

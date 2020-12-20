@@ -18,6 +18,7 @@ const ListSessionsItem = (props) => {
   const RenderSessionItem = (props) => {
     return props.data.map((item) => (
       <TouchableOpacity
+        key={item.title.toString()}
         style={styles.viewSession}
         onPress={() => {
           Alert.alert(`duration session: ${item.duration}`);

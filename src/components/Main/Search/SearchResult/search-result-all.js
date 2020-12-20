@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   ScrollView,
   Text,
   View,
   StyleSheet,
   TouchableOpacity,
+  LogBox,
 } from "react-native";
 import { ScreenKey } from "../../../../globals/constants";
 import { stylesGlo } from "../../../../globals/styles";
@@ -31,6 +32,10 @@ const SearchResultAll = (props) => {
       />
     );
   };
+
+  useEffect(() => {
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+  }, []);
 
   return (
     <ScrollView>

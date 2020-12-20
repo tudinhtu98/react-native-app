@@ -9,9 +9,7 @@ const SectionPathsItem = (props) => {
     <TouchableOpacity
       style={[styles.item, stylesGlo.shadow]}
       onPress={() => {
-        props.navigation.navigate(ScreenKey.PathDetail, {
-          item: props.item,
-        });
+        props.onPressSectionPathsItem(props.item);
       }}
     >
       <Image source={{ uri: props.item.image }} style={styles.image} />

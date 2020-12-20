@@ -63,6 +63,7 @@ const Browse = (props) => {
         horizontal={true}
         data={dataCategory}
         renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
       />
       <SectionSkills
         title="Popular Skill"

@@ -67,7 +67,9 @@ const SectionAuthors = (props) => {
   ];
 
   const renderListItems = (authors) => {
-    return authors.map((item) => <SectionAuthorsItem item={item} />);
+    return authors.map((item) => (
+      <SectionAuthorsItem key={item.id.toString()} item={item} />
+    ));
   };
   return (
     <View>

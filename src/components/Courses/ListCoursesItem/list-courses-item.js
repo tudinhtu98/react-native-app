@@ -26,9 +26,7 @@ const ListCoursesItem = (props) => {
       <TouchableOpacity
         style={styles.item}
         onPress={() => {
-          props.navigation.navigate(ScreenKey.CourseDetail, {
-            item: props.item,
-          });
+          props.onPressListCoursesItem(props.item);
         }}
       >
         <Image style={styles.image} source={{ uri: props.item.image }} />
