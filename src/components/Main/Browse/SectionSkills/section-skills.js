@@ -38,7 +38,7 @@ export default SectionSkills;
 
 const styles = StyleSheet.create({
   skillView: {
-    backgroundColor: "gray",
+    backgroundColor: "lightgray",
     borderRadius: 10,
     margin: 5,
     padding: 5,

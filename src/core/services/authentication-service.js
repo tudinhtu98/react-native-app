@@ -8,7 +8,7 @@ export const login = (email, password) => {
     } else {
       return {
         status: 404,
-        errorString: "Email or password are note match!",
+        errorString: "Email or password are not match!",
       };
     }
   }
