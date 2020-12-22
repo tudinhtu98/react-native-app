@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "react-native-gesture-handler";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
@@ -18,88 +18,92 @@ import Register from "./src/components/Authentication/Register/register";
 import ForgetPassword from "./src/components/Authentication/ForgetPassword/forget-password";
 import Profile from "./src/components/AccountManagement/Profile/profile";
 import Settings from "./src/components/AccountManagement/Settings/settings";
+import { ThemeProvider } from "./src/provider/theme-provider";
+import { AuthenticationProvider } from "./src/provider/authentication-provider";
 
 const Tab = createBottomTabNavigator();
 const MainNavigationStack = createStackNavigator();
 
-export default function App() {
-  const screenOptions = ({ route }) => ({
-    tabBarIcon: ({ focused, color, size }) => {
-      let iconName;
-      if (route.name === "Search") {
-        return <MaterialIcons name={"search"} size={size} color={color} />;
-      } else if (route.name === "Home") {
-        iconName = "home-outline";
-      } else if (route.name === "Download") {
-        iconName = "download-outline";
-      } else if (route.name === "Browse") {
-        iconName = "grid";
-      }
-      return (
-        <MaterialCommunityIcons name={iconName} size={size} color={color} />
-      );
-    },
-  });
+const screenOptions = ({ route }) => ({
+  tabBarIcon: ({ focused, color, size }) => {
+    let iconName;
+    if (route.name === "Search") {
+      return <MaterialIcons name={"search"} size={size} color={color} />;
+    } else if (route.name === "Home") {
+      iconName = "home-outline";
+    } else if (route.name === "Download") {
+      iconName = "download-outline";
+    } else if (route.name === "Browse") {
+      iconName = "grid";
+    }
+    return <MaterialCommunityIcons name={iconName} size={size} color={color} />;
+  },
+});
 
-  const MainTabNavigator = () => {
-    return (
-      <Tab.Navigator screenOptions={screenOptions}>
-        <Tab.Screen name="Home" component={HomeStackScreen} />
-        <Tab.Screen name="Download" component={DownloadStackScreen} />
-        <Tab.Screen name="Browse" component={BrowseStackScreen} />
-        <Tab.Screen name="Search" component={SearchStackScreen} />
-      </Tab.Navigator>
-    );
-  };
-
-  const MainNavigation = () => {
-    return (
-      <MainNavigationStack.Navigator>
-        <MainNavigationStack.Screen
-          name={ScreenKey.SplashScreen}
-          component={SplashScreen}
-          options={{ headerShown: false }} 
-        />
-        <MainNavigationStack.Screen
-          name={ScreenKey.Login}
-          component={Login}
-          options={{ headerShown: false }} 
-        />
-        <MainNavigationStack.Screen
-          name={ScreenKey.Register}
-          component={Register}
-          options={{ headerShown: false }} 
-        />
-        <MainNavigationStack.Screen
-          name={ScreenKey.ForgetPassword}
-          component={ForgetPassword}
-          options={{ headerShown: false }} 
-        />
-        <MainNavigationStack.Screen
-          name={ScreenKey.Profile}
-          component={Profile}
-          // options={{ headerShown: false }} 
-        />
-        <MainNavigationStack.Screen
-          name={ScreenKey.Settings}
-          component={Settings}
-          // options={{ headerShown: false }} 
-        />
-        <MainNavigationStack.Screen
-          name={ScreenKey.MainTab}
-          component={MainTabNavigator}
-          options={{ headerShown: false }} 
-        />
-      </MainNavigationStack.Navigator>
-    );
-  };
-
+const MainTabNavigator = () => {
   return (
-    <MenuProvider>
-      <NavigationContainer>
-        <MainNavigation />
-      </NavigationContainer>
-    </MenuProvider>
+    <Tab.Navigator screenOptions={screenOptions}>
+      <Tab.Screen name="Home" component={HomeStackScreen} />
+      <Tab.Screen name="Download" component={DownloadStackScreen} />
+      <Tab.Screen name="Browse" component={BrowseStackScreen} />
+      <Tab.Screen name="Search" component={SearchStackScreen} />
+    </Tab.Navigator>
+  );
+};
+
+const MainNavigation = () => {
+  return (
+    <MainNavigationStack.Navigator>
+      <MainNavigationStack.Screen
+        name={ScreenKey.SplashScreen}
+        component={SplashScreen}
+        options={{ headerShown: false }}
+      />
+      <MainNavigationStack.Screen
+        name={ScreenKey.Login}
+        component={Login}
+        options={{ headerShown: false }}
+      />
+      <MainNavigationStack.Screen
+        name={ScreenKey.Register}
+        component={Register}
+        options={{ headerShown: false }}
+      />
+      <MainNavigationStack.Screen
+        name={ScreenKey.ForgetPassword}
+        component={ForgetPassword}
+        options={{ headerShown: false }}
+      />
+      <MainNavigationStack.Screen
+        name={ScreenKey.Profile}
+        component={Profile}
+        // options={{ headerShown: false }}
+      />
+      <MainNavigationStack.Screen
+        name={ScreenKey.Settings}
+        component={Settings}
+        // options={{ headerShown: false }}
+      />
+      <MainNavigationStack.Screen
+        name={ScreenKey.MainTab}
+        component={MainTabNavigator}
+        options={{ headerShown: false }}
+      />
+    </MainNavigationStack.Navigator>
+  );
+};
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <AuthenticationProvider>
+        <MenuProvider>
+          <NavigationContainer>
+            <MainNavigation />
+          </NavigationContainer>
+        </MenuProvider>
+      </AuthenticationProvider>
+    </ThemeProvider>
   );
 }
 

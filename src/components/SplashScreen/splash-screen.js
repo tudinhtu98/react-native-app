@@ -15,7 +15,7 @@ export default class SplashScreen extends Component {
     this.timer = setInterval(() => {
       const newLoadingValue = this.state.loading + 1;
       this.setState({ loading: newLoadingValue });
-    }, 20);
+    }, 10);
   }
 
   componentDidUpdate() {
