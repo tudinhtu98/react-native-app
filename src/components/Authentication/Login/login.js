@@ -11,13 +11,14 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { ScreenKey } from "../../../globals/constants";
+import { stylesGlo } from "../../../globals/styles";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
 
 const renderLoginStatus = (state) => {
   if (!state.errorMessage) {
     return <View />;
   } else {
-    return <Text>{state.errorMessage}</Text>;
+    return <Text style={stylesGlo.textDanger}>{state.errorMessage}</Text>;
   }
 };
 
@@ -29,8 +30,6 @@ const Login = (props) => {
   useEffect(() => {
     if (authContext.state.isAuthenticated) {
       props.navigation.dispatch(StackActions.replace(ScreenKey.MainTab));
-    } else {
-      console.log("isAuthenticated", authContext.state.isAuthenticated);
     }
   }, [authContext.state.isAuthenticated]);
 
@@ -46,6 +45,8 @@ const Login = (props) => {
         style={styles.textInput}
         placeholder="Email"
         autoCompleteType="email"
+        keyboardType="email-address"
+        autoCapitalize="none"
         onChangeText={(textEmail) => setTextEmail(textEmail)}
         defaultValue={textEmail}
       ></TextInput>
@@ -54,12 +55,13 @@ const Login = (props) => {
         placeholder="Password"
         autoCompleteType="password"
         textContentType="password"
+        autoCapitalize="none"
         secureTextEntry={true}
         onChangeText={(textPassword) => setTextPassword(textPassword)}
         defaultValue={textPassword}
       ></TextInput>
       {authContext.state.isAuthenticating ? (
-        <ActivityIndicator />
+        <ActivityIndicator color="blue" />
       ) : (
         renderLoginStatus(authContext.state)
       )}

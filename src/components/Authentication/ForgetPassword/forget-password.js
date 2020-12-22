@@ -20,6 +20,7 @@ const ForgetPassword = (props) => {
         autoCompleteType="email"
         textContentType="emailAddress"
         keyboardType="email-address"
+        autoCapitalize = 'none'
       ></TextInput>
       <TouchableOpacity style={[styles.button, styles.buttonBlue]}>
         <Text style={styles.textWhite}>Send email</Text>
