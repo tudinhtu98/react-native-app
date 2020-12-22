@@ -1,5 +1,5 @@
 import { StackActions } from "@react-navigation/native";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   TextInput,
   View,
@@ -10,18 +10,20 @@ import {
 } from "react-native";
 import { login } from "../../../core/services/authentication-service";
 import { ScreenKey } from "../../../globals/constants";
+import { AuthenticationContext } from "../../../provider/authentication-provider";
 
 const Login = (props) => {
   const [textEmail, setTextEmail] = useState("");
   const [textPassword, setTextPassword] = useState("");
-  const [status, setStatus] = useState(null);
+  const { authentication, setAuthentication } = useContext(
+    AuthenticationContext
+  );
 
   const renderLoginStatus = (status) => {
     if (!status) {
       return <View />;
     } else if (status.status === 200) {
       props.navigation.dispatch(StackActions.replace(ScreenKey.MainTab));
-      return <Text>Login successed!</Text>;
     } else {
       return <Text>{status.errorString}</Text>;
     }
@@ -51,11 +53,11 @@ const Login = (props) => {
         onChangeText={(textPassword) => setTextPassword(textPassword)}
         defaultValue={textPassword}
       ></TextInput>
-      {renderLoginStatus(status)}
+      {renderLoginStatus(authentication)}
       <TouchableOpacity
         style={[styles.button, styles.buttonLogin]}
         onPress={() => {
-          setStatus(login(textEmail, textPassword));
+          setAuthentication(login(textEmail, textPassword));
         }}
       >
         <Text style={styles.textWhite}>LOGIN</Text>
