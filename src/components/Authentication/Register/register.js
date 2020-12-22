@@ -40,7 +40,6 @@ const Register = (props) => {
     setRegistering(true);
     apiRegister(email, phone, password)
       .then((res) => {
-        setRegistering(false);
         setRegisterStatus({
           status: res.status,
           data: res.data,
@@ -53,11 +52,13 @@ const Register = (props) => {
         }
       })
       .catch((err) => {
-        setRegistering(false);
         setRegisterStatus({
           status: err.response.status,
           data: err.response.data,
         });
+      })
+      .finally(() => {
+        setRegistering(false);
       });
   };
 

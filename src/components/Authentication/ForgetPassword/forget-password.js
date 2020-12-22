@@ -30,15 +30,16 @@ const ForgetPassword = (props) => {
     setSending(true);
     apiForgetPassSendEmail(email)
       .then((res) => {
-        setSending(false);
         setStatus({ status: res.status, message: res.data.message });
       })
       .catch((err) => {
-        setSending(false);
         setStatus({
           status: err.response.status,
           message: err.response.data.message,
         });
+      })
+      .finally(() => {
+        setSending(false);
       });
   };
 
@@ -57,11 +58,7 @@ const ForgetPassword = (props) => {
         autoCapitalize="none"
         onChangeText={(text) => setEmail(text)}
       ></TextInput>
-      {isSending ? (
-        <ActivityIndicator color="blue" />
-      ) : (
-        renderSendEmail(status)
-      )}
+      {isSending ? <ActivityIndicator color="blue" /> : renderSendEmail(status)}
       <TouchableOpacity
         style={[styles.button, styles.buttonBlue]}
         onPress={onPressSendEmail}
