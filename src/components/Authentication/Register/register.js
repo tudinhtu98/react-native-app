@@ -12,10 +12,8 @@ import {
 import { apiRegister } from "../../../core/services/register-service";
 import { stylesGlo } from "../../../globals/styles";
 
-const renderRegisterStatus = (isRegistering, registerStatus) => {
-  if (isRegistering) {
-    return <ActivityIndicator color="blue"/>;
-  } else if (registerStatus) {
+const renderRegisterStatus = (registerStatus) => {
+  if (registerStatus) {
     if (registerStatus.status === 200) {
       return (
         <Text style={stylesGlo.textSuccess}>
@@ -102,7 +100,11 @@ const Register = (props) => {
           policy.
         </Text>
       </View> */}
-      {renderRegisterStatus(isRegistering, registerStatus)}
+      {isRegistering ? (
+        <ActivityIndicator color="blue" />
+      ) : (
+        renderRegisterStatus(registerStatus)
+      )}
       <TouchableOpacity
         style={[styles.button, styles.buttonRegister]}
         onPress={onPressRegister}
