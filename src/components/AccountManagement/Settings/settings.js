@@ -9,10 +9,10 @@ import { AuthenticationContext } from "../../../provider/authentication-provider
 
 const Settings = (props) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
-  const { setAuthentication } = useContext(AuthenticationContext);
+  const authContext = useContext(AuthenticationContext);
 
   const handleSignOut = () => {
-    setAuthentication(null);
+    authContext.logout();
     props.navigation.dispatch(StackActions.popToTop());
     props.navigation.dispatch(StackActions.replace(ScreenKey.Login));
   };

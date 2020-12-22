@@ -3,7 +3,7 @@ import { View, StyleSheet, Image, Text } from "react-native";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
 
 const Profile = (props) => {
-  const { authentication } = useContext(AuthenticationContext);
+  const { state } = useContext(AuthenticationContext);
   return (
     <View style={styles.view}>
       <Image
@@ -11,7 +11,7 @@ const Profile = (props) => {
         source={require("../../../../assets/icon-account.png")}
       />
       <Text style={styles.username}>
-        {authentication ? authentication.user.fullname : "Full name"}
+        {state.userInfo ? state.userInfo.email : "email"}
       </Text>
     </View>
   );

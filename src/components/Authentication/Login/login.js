@@ -1,5 +1,6 @@
 import { StackActions } from "@react-navigation/native";
 import React, { useState, useContext } from "react";
+import { useEffect } from "react";
 import {
   TextInput,
   View,
@@ -7,27 +8,31 @@ import {
   TouchableOpacity,
   Text,
   Image,
+  ActivityIndicator,
 } from "react-native";
-import { login } from "../../../core/services/authentication-service";
 import { ScreenKey } from "../../../globals/constants";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
+
+const renderLoginStatus = (state) => {
+  if (!state.errorMessage) {
+    return <View />;
+  } else {
+    return <Text>{state.errorMessage}</Text>;
+  }
+};
 
 const Login = (props) => {
   const [textEmail, setTextEmail] = useState("");
   const [textPassword, setTextPassword] = useState("");
-  const { authentication, setAuthentication } = useContext(
-    AuthenticationContext
-  );
+  const authContext = useContext(AuthenticationContext);
 
-  const renderLoginStatus = (status) => {
-    if (!status) {
-      return <View />;
-    } else if (status.status === 200) {
+  useEffect(() => {
+    if (authContext.state.isAuthenticated) {
       props.navigation.dispatch(StackActions.replace(ScreenKey.MainTab));
     } else {
-      return <Text>{status.errorString}</Text>;
+      console.log("isAuthenticated", authContext.state.isAuthenticated);
     }
-  };
+  }, [authContext.state.isAuthenticated]);
 
   return (
     <View style={styles.view}>
@@ -53,11 +58,15 @@ const Login = (props) => {
         onChangeText={(textPassword) => setTextPassword(textPassword)}
         defaultValue={textPassword}
       ></TextInput>
-      {renderLoginStatus(authentication)}
+      {authContext.state.isAuthenticating ? (
+        <ActivityIndicator />
+      ) : (
+        renderLoginStatus(authContext.state)
+      )}
       <TouchableOpacity
         style={[styles.button, styles.buttonLogin]}
         onPress={() => {
-          setAuthentication(login(textEmail, textPassword));
+          authContext.login(textEmail, textPassword);
         }}
       >
         <Text style={styles.textWhite}>LOGIN</Text>

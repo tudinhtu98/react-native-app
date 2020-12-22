@@ -1,19 +1,9 @@
-export const login = (email, password) => {
-  if (email === "Admin") {
-    if (password === "123") {
-      return {
-        status: 200,
-        user: { username: "Admin", fullname: "Tu Đình Tư" },
-      };
-    } else {
-      return {
-        status: 404,
-        errorString: "Email or password are not match!",
-      };
-    }
-  }
-  return {
-    status: 404,
-    errorString: "Email is not existed!",
-  };
+import axios from "axios";
+import { host } from "../../globals/constants";
+
+export const apiLogin = (email, password) => {
+  return axios.post(host + "/user/login", {
+    email,
+    password,
+  });
 };
