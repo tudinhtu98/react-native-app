@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import {
   Menu,
@@ -14,28 +8,31 @@ import {
   MenuTrigger,
 } from "react-native-popup-menu";
 
+const RenderSessionItem = (props) => {
+  return props.data.map((item) => (
+    <TouchableOpacity
+      key={item.id.toString()}
+      style={styles.viewSession}
+      onPress={() => {
+        Alert.alert(`duration session: ${item.hours}`);
+      }}
+    >
+      <Text>{item.name}</Text>
+      <Text>{`${item.hours} hours`}</Text>
+    </TouchableOpacity>
+  ));
+};
+
 const ListSessionsItem = (props) => {
-  const RenderSessionItem = (props) => {
-    return props.data.map((item) => (
-      <TouchableOpacity
-        key={item.title.toString()}
-        style={styles.viewSession}
-        onPress={() => {
-          Alert.alert(`duration session: ${item.duration}`);
-        }}
-      >
-        <Text>{item.title}</Text>
-        <Text>{item.duration}</Text>
-      </TouchableOpacity>
-    ));
-  };
   return (
     <View>
       <View style={styles.view}>
         <View style={{ width: 70, height: 50, backgroundColor: "gray" }}></View>
         <View style={{ marginLeft: 10 }}>
-          <Text>{props.item.title}</Text>
-          <Text style={{ marginHorizontal: 20 }}>{props.item.duration}</Text>
+          <Text>{props.item.name}</Text>
+          <Text
+            style={{ marginHorizontal: 20 }}
+          >{`${props.item.sumHours} hours`}</Text>
         </View>
         <View style={styles.dots}>
           <Menu>
@@ -54,7 +51,7 @@ const ListSessionsItem = (props) => {
         </View>
       </View>
       <View>
-        <RenderSessionItem data={props.item.data} />
+        <RenderSessionItem data={props.item.lesson} />
       </View>
     </View>
   );
@@ -63,7 +60,7 @@ const ListSessionsItem = (props) => {
 export default ListSessionsItem;
 
 const styles = StyleSheet.create({
-  view: { flexDirection: "row", margin: 10 },
+  view: { flexDirection: "row", padding: 0 },
   viewSession: {
     flexDirection: "row",
     margin: 10,

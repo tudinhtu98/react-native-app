@@ -11,7 +11,9 @@ import {
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 const SectionIntro = (props) => {
+  const course = props.course;
   const [bookmarkIconName, setBookmarkIconName] = useState("bookmark-outline");
+
   const handleBookmark = () => {
     if (bookmarkIconName == "bookmark-outline") {
       setBookmarkIconName("bookmark");
@@ -19,12 +21,13 @@ const SectionIntro = (props) => {
       setBookmarkIconName("bookmark-outline");
     }
   };
+
   const handleShareCourse = () => {
     Share.share({ message: "share course" });
   };
   return (
     <View style={styles.view}>
-      <Text style={styles.title}>{props.courseInfo.title}</Text>
+      <Text style={styles.title}>{course.title}</Text>
       <View style={{ flexDirection: "row" }}>
         <TouchableOpacity
           onPress={() => {
@@ -32,14 +35,14 @@ const SectionIntro = (props) => {
           }}
         >
           <View style={styles.author}>
-            <Text>{props.courseInfo.author}</Text>
+            <Text>{course.instructor["name"]}</Text>
           </View>
         </TouchableOpacity>
       </View>
 
-      <Text
-        style={[styles.darkText, { margin: 5 }]}
-      >{`${props.courseInfo.level} . ${props.courseInfo.released} . ${props.courseInfo.duration}`}</Text>
+      <Text style={[styles.darkText, { margin: 5 }]}>{`${new Date(
+        course.createdAt
+      ).toDateString()} . ${course.totalHours} hours`}</Text>
       <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
         <TouchableOpacity style={styles.iconCenter} onPress={handleBookmark}>
           <Icon name={bookmarkIconName} size={25} color="gray" />
@@ -51,7 +54,7 @@ const SectionIntro = (props) => {
         </TouchableOpacity>
       </View>
       <ScrollView style={styles.scrollIntro}>
-        <Text>{props.courseInfo.introduction}</Text>
+        <Text>{course.description}</Text>
       </ScrollView>
     </View>
   );
@@ -62,7 +65,7 @@ export default SectionIntro;
 const styles = StyleSheet.create({
   view: {
     margin: 10,
-    height: 350,
+    height: 300,
   },
   title: {
     fontSize: 20,
@@ -83,6 +86,6 @@ const styles = StyleSheet.create({
   },
   scrollIntro: {
     marginTop: 20,
-    height: 100,
+    height: 50,
   },
 });

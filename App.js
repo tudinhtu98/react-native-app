@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import "react-native-gesture-handler";
-import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -20,12 +19,13 @@ import Profile from "./src/components/AccountManagement/Profile/profile";
 import Settings from "./src/components/AccountManagement/Settings/settings";
 import { ThemeProvider } from "./src/provider/theme-provider";
 import { AuthenticationProvider } from "./src/provider/authentication-provider";
+import { RecommendCourseProvider } from "./src/provider/recommend-course-provider";
 
 const Tab = createBottomTabNavigator();
 const MainNavigationStack = createStackNavigator();
 
 const screenOptions = ({ route }) => ({
-  tabBarIcon: ({ focused, color, size }) => {
+  tabBarIcon: ({ color, size }) => {
     let iconName;
     if (route.name === "Search") {
       return <MaterialIcons name={"search"} size={size} color={color} />;
@@ -97,19 +97,14 @@ export default function App() {
   return (
     <ThemeProvider>
       <AuthenticationProvider>
-        <MenuProvider>
-          <NavigationContainer>
-            <MainNavigation />
-          </NavigationContainer>
-        </MenuProvider>
+        <RecommendCourseProvider>
+          <MenuProvider>
+            <NavigationContainer>
+              <MainNavigation />
+            </NavigationContainer>
+          </MenuProvider>
+        </RecommendCourseProvider>
       </AuthenticationProvider>
     </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-});

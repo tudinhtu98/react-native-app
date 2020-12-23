@@ -16,7 +16,6 @@ import {
   MenuOption,
   MenuTrigger,
 } from "react-native-popup-menu";
-import { ScreenKey } from "../../../../globals/constants";
 
 const SectionCoursesItem = (props) => {
   const handleShareCourse = () => {
@@ -31,7 +30,7 @@ const SectionCoursesItem = (props) => {
       }}
     >
       <View>
-        <Image source={{ uri: props.item.image }} style={styles.image} />
+        <Image source={{ uri: props.item.imageUrl }} style={styles.image} />
         <View style={styles.dots}>
           <Menu>
             <MenuTrigger>
