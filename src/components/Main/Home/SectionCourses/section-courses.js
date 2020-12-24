@@ -39,9 +39,11 @@ const SectionCourses = (props) => {
       <View>
         <View style={styles.titleView}>
           <Text>{props.title}</Text>
-          <TouchableOpacity onPress={onPressSeeAll}>
-            <Text>{`See all >`}</Text>
-          </TouchableOpacity>
+          {courses.length > 0 && (
+            <TouchableOpacity onPress={onPressSeeAll}>
+              <Text>{`See all >`}</Text>
+            </TouchableOpacity>
+          )}
         </View>
         {courses.length == 0 ? (
           <Text style={stylesGlo.emptyCourses}>{textGlo.emptyCourse}</Text>

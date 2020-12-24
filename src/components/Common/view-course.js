@@ -10,7 +10,7 @@ const ViewCourse = (props) => {
         <Text style={stylesGlo.textSmall}>{props.item.subtitle}</Text>
       </View>
       <Text style={stylesGlo.textSmall}>{`${new Date(
-        props.item.createdAt
+        props.item.createdAt || props.item.updatedAt
       ).toDateString()} . ${props.item.totalHours} hours`}</Text>
     </View>
   );

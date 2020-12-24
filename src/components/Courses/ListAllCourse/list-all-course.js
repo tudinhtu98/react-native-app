@@ -7,7 +7,7 @@ const ListAllCourse = (props) => {
 
   return (
     <View>
-      <ListCourses courses={data}/>
+      <ListCourses courses={data} navigation={props.navigation} />
     </View>
   );
 };

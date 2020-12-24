@@ -5,8 +5,11 @@ import { stylesGlo } from "../../../../globals/styles";
 const SectionAuthorsItem = (props) => {
   return (
     <TouchableOpacity style={styles.item}>
-      <Image source={{ uri: props.item.image }} style={[styles.image,stylesGlo.shadow]} />
-      <Text styles={styles.text}>{props.item.title}</Text>
+      <Image
+        source={{ uri: props.item.avatar }}
+        style={[styles.image, stylesGlo.shadow]}
+      />
+      <Text styles={styles.text}>{props.item.name}</Text>
     </TouchableOpacity>
   );
 };

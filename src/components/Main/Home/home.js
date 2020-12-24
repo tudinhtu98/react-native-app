@@ -6,11 +6,13 @@ import { ProcessCourseContext } from "../../../provider/process-course-provider"
 import SectionPaths from "../Browse/SectionPaths/section-paths";
 import SectionCourses from "./SectionCourses/section-courses";
 import { FavoriteCourseContext } from "../../../provider/favorite-course-provider";
+import { CategoryContext } from "../../../provider/category-provider";
 
 const Home = (props) => {
   const recommendCourseContext = useContext(RecommendCourseContext);
   const processCourseContext = useContext(ProcessCourseContext);
   const favoriteCourseContext = useContext(FavoriteCourseContext);
+  const categoryContext = useContext(CategoryContext);
 
   const { state } = useContext(AuthenticationContext);
   const navigation = props.navigation;
@@ -19,6 +21,7 @@ const Home = (props) => {
     processCourseContext.getProcessCourse(state.token);
     favoriteCourseContext.getFavoriteCourse(state.token);
     recommendCourseContext.getRecommendCourse(state.userInfo.id, 5, 0);
+    categoryContext.getCategory();
   }, []);
 
   useEffect(() => {
@@ -53,7 +56,16 @@ const Home = (props) => {
           data={recommendCourseContext.state.data}
         />
       )}
-      <SectionPaths title="My Paths" navigation={navigation} />
+      {categoryContext.state.isLoading ? (
+        <ActivityIndicator size="large" color="blue" />
+      ) : (
+        <SectionPaths
+          title="Category"
+          navigation={navigation}
+          data={categoryContext.state.data}
+        />
+      )}
+
       {favoriteCourseContext.state.isLoading ? (
         <ActivityIndicator size="large" color="blue" />
       ) : (

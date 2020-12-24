@@ -4,8 +4,8 @@ import { View, Text, StyleSheet } from "react-native";
 const ViewPath = (props) => {
   return (
     <View style={styles.view}>
-      <Text style={{ flexWrap: "wrap" }}>{props.item.title}</Text>
-      <Text style={styles.darkText}>{`${props.item.countCourses} courses`}</Text>
+      <Text style={{ flexWrap: "wrap", fontSize: 18 }}>{props.item.name}</Text>
+      {/* <Text style={styles.darkText}>{`${props.item.countCourses} courses`}</Text> */}
     </View>
   );
 };

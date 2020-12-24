@@ -25,7 +25,7 @@ export const stylesGlo = StyleSheet.create({
   }, 
   emptyCourses: {
     margin: 10,
-    color: "lightseagreen",
+    color: "darkgray",
     fontSize: 15,
     fontWeight: "bold",
   }

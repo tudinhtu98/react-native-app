@@ -22,6 +22,7 @@ import { AuthenticationProvider } from "./src/provider/authentication-provider";
 import { RecommendCourseProvider } from "./src/provider/recommend-course-provider";
 import { ProcessCourseProvider } from "./src/provider/process-course-provider";
 import { FavoriteCourseProvider } from "./src/provider/favorite-course-provider";
+import { CategoryProvider } from "./src/provider/category-provider";
 
 const Tab = createBottomTabNavigator();
 const MainNavigationStack = createStackNavigator();
@@ -103,17 +104,19 @@ export default function App() {
   return (
     <ThemeProvider>
       <AuthenticationProvider>
-        <FavoriteCourseProvider>
-          <ProcessCourseProvider>
-            <RecommendCourseProvider>
-              <MenuProvider>
-                <NavigationContainer>
-                  <MainNavigation />
-                </NavigationContainer>
-              </MenuProvider>
-            </RecommendCourseProvider>
-          </ProcessCourseProvider>
-        </FavoriteCourseProvider>
+        <CategoryProvider>
+          <FavoriteCourseProvider>
+            <ProcessCourseProvider>
+              <RecommendCourseProvider>
+                <MenuProvider>
+                  <NavigationContainer>
+                    <MainNavigation />
+                  </NavigationContainer>
+                </MenuProvider>
+              </RecommendCourseProvider>
+            </ProcessCourseProvider>
+          </FavoriteCourseProvider>
+        </CategoryProvider>
       </AuthenticationProvider>
     </ThemeProvider>
   );
