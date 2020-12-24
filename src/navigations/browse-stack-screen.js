@@ -6,6 +6,7 @@ import Browse from "./../components/Main/Browse/browse";
 import PathDetail from "./../components/PathDetail/path-detail";
 import ListPaths from "../components/Paths/ListPaths/list-paths";
 import { ScreenKey } from "../globals/constants";
+import ListAllCourse from "../components/Courses/ListAllCourse/list-all-course";
 
 const BrowseStack = createStackNavigator();
 
@@ -18,6 +19,11 @@ const BrowseStackScreen = () => {
         options={({ navigation }) => ({
           headerRight: () => <HeaderRight navigation={navigation} />,
         })}
+      />
+      <BrowseStack.Screen
+        name={ScreenKey.ListAllCourse}
+        component={ListAllCourse}
+        options={{ title: "List all course" }}
       />
       <BrowseStack.Screen
         name={ScreenKey.CourseDetail}

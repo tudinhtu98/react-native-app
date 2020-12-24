@@ -3,7 +3,7 @@ import { View, Text, ScrollView } from "react-native";
 import SectionAuthorsItem from "../SectionAuthorsItem/section-authors-item";
 
 const SectionAuthors = (props) => {
-  const authors = props.authors;
+  const authors = props.authors || [];
 
   const renderListItems = (authors) => {
     return authors.map((item) => (
