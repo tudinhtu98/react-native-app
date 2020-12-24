@@ -7,6 +7,7 @@ import Home from "./../components/Main/Home/home";
 import PathDetail from "../components/PathDetail/path-detail";
 import ListPaths from "../components/Paths/ListPaths/list-paths";
 import { ScreenKey } from "../globals/constants";
+import ListAllCourse from "../components/Courses/ListAllCourse/list-all-course";
 
 const HomeStack = createStackNavigator();
 const HomeStackScreen = () => {
@@ -20,9 +21,9 @@ const HomeStackScreen = () => {
         })}
       />
       <HomeStack.Screen
-        name={ScreenKey.ListCourses}
-        component={ListCourses}
-        options={{ title: "List Courses" }}
+        name={ScreenKey.ListAllCourse}
+        component={ListAllCourse}
+        options={{ title: "List all course" }}
       />
       <HomeStack.Screen
         name={ScreenKey.CourseDetail}

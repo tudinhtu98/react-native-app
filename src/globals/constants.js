@@ -13,7 +13,7 @@ export const ScreenKey = {
   Download: "Download",
   Home: "Home",
   Search: "Search",
-  ListCourses: "ListCourses",
+  ListAllCourse: "ListAllCourse",
   ListPaths: "ListPaths",
   SearchResultAll: "SearchResultAll",
   SearchResultCourses: "SearchResultCourses",

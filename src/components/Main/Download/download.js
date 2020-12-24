@@ -1,21 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { TouchableOpacity, View, Text, StyleSheet, Alert } from "react-native";
+import { FavoriteCourseContext } from "../../../provider/favorite-course-provider";
 import ListCourses from "../../Courses/ListCourses/list-courses";
 
 const Download = (props) => {
-  const data = {
-    countCourses: 12,
-    size: 120,
-  };
+  const { state } = useContext(FavoriteCourseContext);
+
   return (
     <View>
       <View style={styles.view}>
-        <Text>{`${data.countCourses} courses (${data.size} MB)`}</Text>
-        <TouchableOpacity onPress={() => Alert.alert("Press Remove On")}>
-          <Text style={styles.textRemove}>REMOVE ALL</Text>
-        </TouchableOpacity>
+        <Text>{`${state.data.length} courses`}</Text>
       </View>
-      <ListCourses navigation={props.navigation} />
+      <ListCourses navigation={props.navigation} courses={state.data} />
     </View>
   );
 };

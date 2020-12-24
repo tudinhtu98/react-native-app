@@ -1,4 +1,4 @@
-import { apiGetProcessCourse } from "../core/services/process-course-service";
+import { apiGetFavoriteCourse } from "../core/services/favorite-course-service";
 
 export const GET_REQUEST = "GET_REQUEST";
 export const GET_SUCCESS = "GET_SUCCESS";
@@ -11,9 +11,9 @@ const getFailed = (data) => {
   return { type: GET_FAILED, data };
 };
 
-export const getProcessCourse = (dispatch) => (token) => {
+export const getFavoriteCourse = (dispatch) => (token) => {
   dispatch({ type: GET_REQUEST });
-  apiGetProcessCourse(token)
+  apiGetFavoriteCourse(token)
     .then((res) => {
       if (res.status === 200) {
         dispatch(getSuccess(res.data));
@@ -22,7 +22,7 @@ export const getProcessCourse = (dispatch) => (token) => {
       }
     })
     .catch((err) => {
-      console.log("Process course load fail", err.response.data);
+      console.log("Favorite course load fail", err.response.data);
       dispatch(getFailed(err.response.data));
     });
 };

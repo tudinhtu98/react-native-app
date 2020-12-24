@@ -5,7 +5,7 @@ import { stylesGlo } from "../../../globals/styles";
 import ListCoursesItem from "../ListCoursesItem/list-courses-item";
 
 const ListCourses = (props) => {
-  const courses = props.route.params.data;
+  const courses = props.courses;
 
   const renderSeparator = () => {
     return (

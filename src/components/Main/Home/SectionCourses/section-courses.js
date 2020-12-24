@@ -19,7 +19,7 @@ const SectionCourses = (props) => {
   };
 
   const onPressSeeAll = () => {
-    props.navigation.navigate(ScreenKey.ListCourses, {
+    props.navigation.navigate(ScreenKey.ListAllCourse, {
       data: courses,
     });
   };

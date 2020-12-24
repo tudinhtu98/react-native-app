@@ -21,6 +21,7 @@ import { ThemeProvider } from "./src/provider/theme-provider";
 import { AuthenticationProvider } from "./src/provider/authentication-provider";
 import { RecommendCourseProvider } from "./src/provider/recommend-course-provider";
 import { ProcessCourseProvider } from "./src/provider/process-course-provider";
+import { FavoriteCourseProvider } from "./src/provider/favorite-course-provider";
 
 const Tab = createBottomTabNavigator();
 const MainNavigationStack = createStackNavigator();
@@ -33,7 +34,7 @@ const screenOptions = ({ route }) => ({
     } else if (route.name === "Home") {
       iconName = "home-outline";
     } else if (route.name === "Download") {
-      iconName = "download-outline";
+      return <MaterialIcons name="favorite-border" size={size} color={color} />;
     } else if (route.name === "Browse") {
       iconName = "grid";
     }
@@ -45,7 +46,11 @@ const MainTabNavigator = () => {
   return (
     <Tab.Navigator screenOptions={screenOptions}>
       <Tab.Screen name="Home" component={HomeStackScreen} />
-      <Tab.Screen name="Download" component={DownloadStackScreen} />
+      <Tab.Screen
+        name="Download"
+        component={DownloadStackScreen}
+        options={{ title: "Favorite" }}
+      />
       <Tab.Screen name="Browse" component={BrowseStackScreen} />
       <Tab.Screen name="Search" component={SearchStackScreen} />
     </Tab.Navigator>
@@ -98,15 +103,17 @@ export default function App() {
   return (
     <ThemeProvider>
       <AuthenticationProvider>
-        <ProcessCourseProvider>
-          <RecommendCourseProvider>
-            <MenuProvider>
-              <NavigationContainer>
-                <MainNavigation />
-              </NavigationContainer>
-            </MenuProvider>
-          </RecommendCourseProvider>
-        </ProcessCourseProvider>
+        <FavoriteCourseProvider>
+          <ProcessCourseProvider>
+            <RecommendCourseProvider>
+              <MenuProvider>
+                <NavigationContainer>
+                  <MainNavigation />
+                </NavigationContainer>
+              </MenuProvider>
+            </RecommendCourseProvider>
+          </ProcessCourseProvider>
+        </FavoriteCourseProvider>
       </AuthenticationProvider>
     </ThemeProvider>
   );
