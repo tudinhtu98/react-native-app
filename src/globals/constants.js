@@ -25,3 +25,7 @@ export const ScreenKey = {
 export const ImageKey = {};
 
 export const host = "http://api.dev.letstudy.org";
+
+export const textGlo = {
+  emptyCourse: "Hiện chưa có khoá học nào!"
+}

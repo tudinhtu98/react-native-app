@@ -4,68 +4,6 @@ import ListSessionsItem from "../ListSessionsItem/list-sessions-item";
 
 const ListSessions = (props) => {
   const sections = props.section;
-  // const sections = [
-  //   {
-  //     id: 1,
-  //     title: "Course Overview",
-  //     duration: "2:04",
-  //     lesson: [
-  //       {
-  //         title: "Course Overview",
-  //         duration: "2:04",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "Getting Started with Angular",
-  //     duration: "38:45",
-  //     lesson: [
-  //       {
-  //         title: "Introduction",
-  //         duration: "2:55",
-  //       },
-  //       {
-  //         title: "Practice Exercises",
-  //         duration: "2:25",
-  //       },
-  //       {
-  //         title: "Introduction to TypeScript",
-  //         duration: "7:09",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "Course Overview",
-  //     duration: "2:04",
-  //     lesson: [
-  //       {
-  //         title: "Course Overview",
-  //         duration: "2:04",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 4,
-  //     title: "Getting Started with Angular",
-  //     duration: "38:45",
-  //     lesson: [
-  //       {
-  //         title: "Introduction",
-  //         duration: "2:55",
-  //       },
-  //       {
-  //         title: "Practice Exercises",
-  //         duration: "2:25",
-  //       },
-  //       {
-  //         title: "Introduction to TypeScript",
-  //         duration: "7:09",
-  //       },
-  //     ],
-  //   },
-  // ];
 
   const renderSeparator = () => {
     return (

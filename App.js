@@ -20,6 +20,7 @@ import Settings from "./src/components/AccountManagement/Settings/settings";
 import { ThemeProvider } from "./src/provider/theme-provider";
 import { AuthenticationProvider } from "./src/provider/authentication-provider";
 import { RecommendCourseProvider } from "./src/provider/recommend-course-provider";
+import { ProcessCourseProvider } from "./src/provider/process-course-provider";
 
 const Tab = createBottomTabNavigator();
 const MainNavigationStack = createStackNavigator();
@@ -97,13 +98,15 @@ export default function App() {
   return (
     <ThemeProvider>
       <AuthenticationProvider>
-        <RecommendCourseProvider>
-          <MenuProvider>
-            <NavigationContainer>
-              <MainNavigation />
-            </NavigationContainer>
-          </MenuProvider>
-        </RecommendCourseProvider>
+        <ProcessCourseProvider>
+          <RecommendCourseProvider>
+            <MenuProvider>
+              <NavigationContainer>
+                <MainNavigation />
+              </NavigationContainer>
+            </MenuProvider>
+          </RecommendCourseProvider>
+        </ProcessCourseProvider>
       </AuthenticationProvider>
     </ThemeProvider>
   );

@@ -23,4 +23,10 @@ export const stylesGlo = StyleSheet.create({
   textDanger: {
     color: "red",
   }, 
+  emptyCourses: {
+    margin: 10,
+    color: "lightseagreen",
+    fontSize: 15,
+    fontWeight: "bold",
+  }
 });

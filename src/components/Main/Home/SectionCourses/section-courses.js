@@ -8,6 +8,8 @@ import {
 } from "react-native";
 import { ScreenKey } from "../../../../globals/constants";
 import SectionCoursesItem from "../SectionCoursesItem/section-courses-item";
+import { textGlo } from "../../../../globals/constants";
+import { stylesGlo } from "../../../../globals/styles";
 
 const SectionCourses = (props) => {
   const courses = props.data || [];
@@ -34,13 +36,19 @@ const SectionCourses = (props) => {
   };
   return (
     <View>
-      <View style={styles.titleView}>
-        <Text>{props.title}</Text>
-        <TouchableOpacity onPress={onPressSeeAll}>
-          <Text>{`See all >`}</Text>
-        </TouchableOpacity>
+      <View>
+        <View style={styles.titleView}>
+          <Text>{props.title}</Text>
+          <TouchableOpacity onPress={onPressSeeAll}>
+            <Text>{`See all >`}</Text>
+          </TouchableOpacity>
+        </View>
+        {courses.length == 0 ? (
+          <Text style={stylesGlo.emptyCourses}>{textGlo.emptyCourse}</Text>
+        ) : (
+          <ScrollView horizontal={true}>{renderListItems(courses)}</ScrollView>
+        )}
       </View>
-      <ScrollView horizontal={true}>{renderListItems(courses)}</ScrollView>
     </View>
   );
 };

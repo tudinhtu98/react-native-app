@@ -1,6 +1,7 @@
 import React from "react";
-import { FlatList, View } from "react-native";
-import { ScreenKey } from "../../../globals/constants";
+import { FlatList, View, Text } from "react-native";
+import { ScreenKey, textGlo } from "../../../globals/constants";
+import { stylesGlo } from "../../../globals/styles";
 import ListCoursesItem from "../ListCoursesItem/list-courses-item";
 
 const ListCourses = (props) => {
@@ -25,23 +26,27 @@ const ListCourses = (props) => {
 
   return (
     <View>
-      <FlatList
-        data={courses}
-        renderItem={({ item }) => (
-          <ListCoursesItem
-            key={item.id.toString()}
-            navigation={props.navigation}
-            item={item}
-            onPressListCoursesItem={onPressListCoursesItem}
-          />
-        )}
-        ItemSeparatorComponent={renderSeparator}
-        keyExtractor={(item, index) => index.toString()}
-        onEndReached={() => {
-          console.log("Load more");
-        }}
-        onEndReachedThreshold={0.3}
-      />
+      {courses.length == 0 ? (
+        <Text style={stylesGlo.emptyCourses}>{textGlo.emptyCourse}</Text>
+      ) : (
+        <FlatList
+          data={courses}
+          renderItem={({ item }) => (
+            <ListCoursesItem
+              key={item.id.toString()}
+              navigation={props.navigation}
+              item={item}
+              onPressListCoursesItem={onPressListCoursesItem}
+            />
+          )}
+          ItemSeparatorComponent={renderSeparator}
+          keyExtractor={(item, index) => index.toString()}
+          onEndReached={() => {
+            console.log("Load more");
+          }}
+          onEndReachedThreshold={0.3}
+        />
+      )}
     </View>
   );
 };
