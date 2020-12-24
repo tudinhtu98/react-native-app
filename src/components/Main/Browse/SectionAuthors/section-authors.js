@@ -7,7 +7,11 @@ const SectionAuthors = (props) => {
 
   const renderListItems = (authors) => {
     return authors.map((item) => (
-      <SectionAuthorsItem key={item.id.toString()} item={item} />
+      <SectionAuthorsItem
+        key={item.id.toString()}
+        item={item}
+        navigation={props.navigation}
+      />
     ));
   };
   return (

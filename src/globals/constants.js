@@ -20,6 +20,7 @@ export const ScreenKey = {
   SearchResultPaths: "SearchResultPaths",
   SearchResultAuthors: "SearchResultAuthors",
   SearchResultTab: "SearchResultTab",
+  AuthorDetail: "AuthorDetail",
 };
 
 export const ImageKey = {};
@@ -27,5 +28,5 @@ export const ImageKey = {};
 export const host = "http://api.dev.letstudy.org";
 
 export const textGlo = {
-  emptyCourse: "Hiện chưa có khoá học nào!"
-}
+  emptyCourse: "Hiện chưa có khoá học nào!",
+};

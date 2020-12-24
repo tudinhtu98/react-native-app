@@ -1,10 +1,17 @@
 import React from "react";
 import { StyleSheet, Image, Text, TouchableOpacity } from "react-native";
+import { ScreenKey } from "../../../../globals/constants";
 import { stylesGlo } from "../../../../globals/styles";
 
 const SectionAuthorsItem = (props) => {
+  const onPressAuthorItem = () => {
+    props.navigation.navigate(ScreenKey.AuthorDetail, {
+      item: props.item,
+    });
+  };
+
   return (
-    <TouchableOpacity style={styles.item}>
+    <TouchableOpacity style={styles.item} onPress={onPressAuthorItem}>
       <Image
         source={{ uri: props.item.avatar || props.item["user.avatar"] }}
         style={[styles.image, stylesGlo.shadow]}

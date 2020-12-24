@@ -10,20 +10,19 @@ import PathLevel from "./PathLevel/path-level";
 const PathDetail = (props) => {
   const { state } = useContext(AuthenticationContext);
   const [isLoading, setLoading] = useState(true);
-  const [data, setDate] = useState({});
+  const [data, setData] = useState({});
 
   const item = props.route.params.item;
   props.navigation.setOptions({ title: item.name });
 
   useEffect(() => {
-    setLoading(true);
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
     props.navigation.setOptions({ title: props.route.params.item.title });
     //Call API
     apiGetCourseByCategoryId(state.token, props.route.params.item.id, 10, 0)
       .then((res) => {
         if (res.status === 200) {
-          setDate(res.data.payload);
+          setData(res.data.payload);
         } else {
           throw new Error(err);
         }
