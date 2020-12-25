@@ -3,6 +3,10 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGOUT,
+  CHANGE_INFO_SUCCESS,
+  CHANGE_INFO_FAILED,
+  CHANGE_PASSWORD_SUCCESS,
+  CHANGE_PASSWORD_FAILED,
 } from "../action/authentication-action";
 
 export const reducer = (preState, action) => {
@@ -19,7 +23,12 @@ export const reducer = (preState, action) => {
         errorMessage: null,
       };
     case LOGIN_FAILED:
-      return { ...preState, isAuthenticated: false, isAuthenticating: false, errorMessage: action.data.message };
+      return {
+        ...preState,
+        isAuthenticated: false,
+        isAuthenticating: false,
+        errorMessage: action.data.message,
+      };
     case LOGOUT:
       return {
         ...preState,
@@ -29,6 +38,28 @@ export const reducer = (preState, action) => {
         userInfo: null,
         errorMessage: null,
       };
+    case CHANGE_PASSWORD_SUCCESS:
+      return {
+        ...preState,
+        isAuthenticated: false,
+        isAuthenticating: false,
+        token: null,
+        errorMessage: null,
+      };
+    case CHANGE_INFO_SUCCESS:
+      return {
+        ...preState,
+        isAuthenticating: false,
+        userInfo: action.data.payload,
+        errorMessage: null,
+      };
+    case CHANGE_INFO_FAILED:
+    case CHANGE_PASSWORD_FAILED:
+      return {
+        ...preState,
+        errorMessage: action.data.message,
+      };
+
     default:
       throw new Error();
   }
