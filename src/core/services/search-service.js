@@ -23,3 +23,10 @@ export const apiSearchHistory = (token) => {
     },
   });
 };
+export const apiDeleteHistory = (token, historyId) => {
+  return axios.delete(host + `/course/delete-search-history/${historyId}`, {
+    headers: {
+      authorization: "Bearer " + token,
+    },
+  });
+};

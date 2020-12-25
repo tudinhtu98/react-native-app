@@ -12,7 +12,10 @@ import {
 } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import ViewSearch from "../../Common/view-search";
-import { apiSearchHistory } from "../../../core/services/search-service";
+import {
+  apiDeleteHistory,
+  apiSearchHistory,
+} from "../../../core/services/search-service";
 import { useContext } from "react/cjs/react.development";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
 import { SearchContext } from "../../../provider/search-provider";
@@ -24,36 +27,10 @@ const Search = (props) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState({});
 
-  const onRefreshHistorySearch = () => {
+  useEffect(() => {
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
     callAPISearchHistory();
-  };
-
-  const onPressHistorySearch = (item) => {
-    search(item.content, state.token, 20, 0);
-    props.navigation.navigate(ScreenKey.SearchResultTab, {
-      keyword: item.content,
-    });
-  };
-
-  const renderItemHistorySearch = (item) => {
-    return (
-      <TouchableOpacity
-        onPress={() => {
-          onPressHistorySearch(item);
-        }}
-      >
-        <View style={styles.viewItem}>
-          <Icon
-            style={styles.icon}
-            name="history"
-            size={25}
-            color={props.color}
-          />
-          <Text>{item.content}</Text>
-        </View>
-      </TouchableOpacity>
-    );
-  };
+  }, []);
 
   const callAPISearchHistory = () => {
     apiSearchHistory(state.token)
@@ -72,10 +49,58 @@ const Search = (props) => {
       });
   };
 
-  useEffect(() => {
-    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+  const onRefreshHistorySearch = () => {
     callAPISearchHistory();
-  }, []);
+  };
+
+  const onPressHistorySearch = (item) => {
+    search(item.content, state.token, 20, 0);
+    props.navigation.navigate(ScreenKey.SearchResultTab, {
+      keyword: item.content,
+    });
+  };
+
+  const onPressDeleteHistorySearch = (historyId) => {
+    apiDeleteHistory(state.token, historyId).then(() => {
+      callAPISearchHistory();
+    });
+  };
+
+  const renderItemHistorySearch = (item) => {
+    return (
+      <View style={styles.viewHistoryItem}>
+        <View style={styles.viewItem}>
+          <TouchableOpacity
+            onPress={() => {
+              onPressDeleteHistorySearch(item.id);
+            }}
+          >
+            <Icon
+              style={styles.icon}
+              name="delete-outline"
+              size={25}
+              color={props.color}
+            />
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity
+          onPress={() => {
+            onPressHistorySearch(item);
+          }}
+        >
+          <View style={styles.viewItem}>
+            <Icon
+              style={styles.icon}
+              name="history"
+              size={25}
+              color={props.color}
+            />
+            <Text>{item.content}</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    );
+  };
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -118,6 +143,10 @@ const styles = StyleSheet.create({
     margin: 5,
     marginTop: 20,
     justifyContent: "space-between",
+  },
+  viewHistoryItem: {
+    margin: 5,
+    flexDirection: "row",
   },
   viewItem: {
     flexDirection: "row",
