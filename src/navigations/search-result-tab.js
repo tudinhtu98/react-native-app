@@ -9,6 +9,10 @@ import { ScreenKey } from "../globals/constants";
 const Tab = createMaterialTopTabNavigator();
 
 const SearchResultTab = (props) => {
+  props.navigation.setOptions({
+    title: `Results for: "${props.route.params.keyword}"`,
+  });
+
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -21,11 +25,11 @@ const SearchResultTab = (props) => {
         component={SearchResultCourses}
         options={{ title: "Courses" }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name={ScreenKey.SearchResultPaths}
         component={SearchResultPaths}
         options={{ title: "Paths" }}
-      />
+      /> */}
       <Tab.Screen
         name={ScreenKey.SearchResultAuthors}
         component={SearchResultAuthors}

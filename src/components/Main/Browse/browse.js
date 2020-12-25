@@ -82,12 +82,12 @@ const Browse = (props) => {
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
       />
-      <SectionSkills
+      {/* <SectionSkills
         title="Popular Skill"
         dataSkills={dataSkills}
         navigation={props.navigation}
-      />
-      <SectionPaths title="Paths" navigation={props.navigation} />
+      /> */}
+      {/* <SectionPaths title="Paths" navigation={props.navigation} /> */}
       {authorContext.state.isLoading ? (
         <ActivityIndicator size="large" color="blue" />
       ) : (
@@ -102,9 +102,3 @@ const Browse = (props) => {
 };
 
 export default Browse;
-
-const styles = StyleSheet.create({
-  viewFlatList: {
-    margin: 5,
-  },
-});

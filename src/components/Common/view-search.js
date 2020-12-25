@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -7,15 +7,28 @@ import {
   StyleSheet,
 } from "react-native";
 import { ScreenKey } from "../../globals/constants";
+import { AuthenticationContext } from "../../provider/authentication-provider";
+import { SearchContext } from "../../provider/search-provider";
 
 const ViewSearch = (props) => {
+  const { state } = useContext(AuthenticationContext);
+  const { search } = useContext(SearchContext);
+  const [keyword, setKeyword] = useState("");
+
   return (
     <View style={{ flexDirection: "row" }}>
-      <TextInput style={styles.border} placeholder="Search text" />
+      <TextInput
+        style={styles.border}
+        placeholder="Search text"
+        onChangeText={(keyword) => setKeyword(keyword)}
+      />
       <TouchableOpacity
         style={styles.buttonSearch}
         onPress={() => {
-          props.navigation.navigate(ScreenKey.SearchResultTab);
+          search(keyword, state.token, 20, 0);
+          props.navigation.navigate(ScreenKey.SearchResultTab, {
+            keyword: keyword,
+          });
         }}
       >
         <Text>Search</Text>
@@ -42,5 +55,5 @@ const styles = StyleSheet.create({
     borderColor: "deepskyblue",
     backgroundColor: "deepskyblue",
     padding: 10,
-  }
+  },
 });

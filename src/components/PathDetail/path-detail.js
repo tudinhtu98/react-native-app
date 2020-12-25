@@ -17,7 +17,6 @@ const PathDetail = (props) => {
 
   useEffect(() => {
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
-    props.navigation.setOptions({ title: props.route.params.item.title });
     //Call API
     apiGetCourseByCategoryId(state.token, props.route.params.item.id, 10, 0)
       .then((res) => {
