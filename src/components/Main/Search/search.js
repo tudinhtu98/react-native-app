@@ -61,9 +61,13 @@ const Search = (props) => {
   };
 
   const onPressDeleteHistorySearch = (historyId) => {
-    apiDeleteHistory(state.token, historyId).then(() => {
-      callAPISearchHistory();
-    });
+    apiDeleteHistory(state.token, historyId)
+      .then(() => {
+        callAPISearchHistory();
+      })
+      .catch((err) => {
+        console.log("Delete history failed", err);
+      });
   };
 
   const renderItemHistorySearch = (item) => {

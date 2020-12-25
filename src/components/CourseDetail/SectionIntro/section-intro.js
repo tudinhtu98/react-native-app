@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -8,18 +8,61 @@ import {
   ScrollView,
   Share,
 } from "react-native";
-import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import {
+  apiGetCourseLikeStatus,
+  apiLikeCourse,
+} from "../../../core/services/course-service";
+import { AuthenticationContext } from "../../../provider/authentication-provider";
 
 const SectionIntro = (props) => {
   const course = props.course;
-  const [bookmarkIconName, setBookmarkIconName] = useState("bookmark-outline");
+  const { state } = useContext(AuthenticationContext);
+  const [favoriteIconName, setFavoriteIconName] = useState("favorite-border");
+  const [likeStatus, setLikeStatus] = useState(false);
 
-  const handleBookmark = () => {
-    if (bookmarkIconName == "bookmark-outline") {
-      setBookmarkIconName("bookmark");
+  const CallAPIGetCourseLikeStatus = () => {
+    apiGetCourseLikeStatus(state.token, course.id)
+      .then((res) => {
+        if (res.status === 200) {
+          setLikeStatus(res.data.likeStatus);
+        } else {
+          throw new Error(err);
+        }
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  };
+
+  const CallAPILike = () => {
+    apiLikeCourse(state.token, course.id)
+      .then((res) => {
+        if (res.status === 200) {
+          setLikeStatus(res.data.likeStatus);
+        } else {
+          throw new Error(err);
+        }
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  };
+
+  useEffect(() => {
+    CallAPIGetCourseLikeStatus();
+  }, []);
+
+  useEffect(() => {
+    if (likeStatus) {
+      setFavoriteIconName("favorite");
     } else {
-      setBookmarkIconName("bookmark-outline");
+      setFavoriteIconName("favorite-border");
     }
+  }, [likeStatus]);
+
+  const handleFavorite = () => {
+    CallAPILike();
   };
 
   const handleShareCourse = () => {
@@ -44,12 +87,12 @@ const SectionIntro = (props) => {
         course.createdAt
       ).toDateString()} . ${course.totalHours} hours`}</Text>
       <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
-        <TouchableOpacity style={styles.iconCenter} onPress={handleBookmark}>
-          <Icon name={bookmarkIconName} size={25} color="gray" />
-          <Text>Bookmark</Text>
+        <TouchableOpacity style={styles.iconCenter} onPress={handleFavorite}>
+          <MaterialIcons name={favoriteIconName} size={25} color="red" />
+          <Text>Like</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.iconCenter} onPress={handleShareCourse}>
-          <Icon name="share" size={25} color="gray" />
+          <MaterialIcons name="share" size={25} color="gray" />
           <Text>Share</Text>
         </TouchableOpacity>
       </View>
