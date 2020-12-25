@@ -107,7 +107,7 @@ const Profile = (props) => {
         transparent={true}
         visible={isEditing}
         onRequestClose={() => {
-          console.log("Modal has been closed.");
+          onPressCancelProfile();
         }}
       >
         <View style={styles.centeredView}>
@@ -148,7 +148,7 @@ const Profile = (props) => {
         transparent={true}
         visible={isEditingPass}
         onRequestClose={() => {
-          console.log("Modal has been closed.");
+          onPressCancelChangePass();
         }}
       >
         <View style={styles.centeredView}>
