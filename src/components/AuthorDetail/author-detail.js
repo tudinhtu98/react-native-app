@@ -11,9 +11,7 @@ const AuthorDetail = (props) => {
   const item = props.route.params.item;
   props.navigation.setOptions({ title: item.name || item["user.name"] });
 
-  useEffect(() => {
-    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
-    //Call API
+  const CallAPIGetAuthorDetail = () => {
     apiGetAuthorDetail(item.id)
       .then((res) => {
         if (res.status === 200) {
@@ -28,6 +26,11 @@ const AuthorDetail = (props) => {
       .finally(() => {
         setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+    CallAPIGetAuthorDetail();
   }, []);
 
   return (

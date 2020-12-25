@@ -17,11 +17,7 @@ const CourseDetail = (props) => {
   const [isLoading, setLoading] = useState(true);
   const [course, setCourse] = useState({});
 
-  useEffect(() => {
-    setLoading(true);
-    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
-    props.navigation.setOptions({ title: props.route.params.item.title });
-    //Call API
+  const CallAPIGetCourseDetail = () => {
     apiGetCourseDetail(props.route.params.item.id)
       .then((res) => {
         if (res.status === 200) {
@@ -36,6 +32,13 @@ const CourseDetail = (props) => {
       .finally(() => {
         setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+    props.navigation.setOptions({ title: props.route.params.item.title });
+    CallAPIGetCourseDetail();
   }, []);
 
   return (

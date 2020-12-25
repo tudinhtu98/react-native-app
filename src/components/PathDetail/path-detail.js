@@ -15,9 +15,7 @@ const PathDetail = (props) => {
   const item = props.route.params.item;
   props.navigation.setOptions({ title: item.name });
 
-  useEffect(() => {
-    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
-    //Call API
+  const CallAPIGetCourseByCategoryId = () => {
     apiGetCourseByCategoryId(state.token, props.route.params.item.id, 10, 0)
       .then((res) => {
         if (res.status === 200) {
@@ -32,6 +30,11 @@ const PathDetail = (props) => {
       .finally(() => {
         setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+    CallAPIGetCourseByCategoryId();
   }, []);
 
   return (

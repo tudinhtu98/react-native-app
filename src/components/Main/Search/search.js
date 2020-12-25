@@ -74,7 +74,6 @@ const Search = (props) => {
 
   useEffect(() => {
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
-    //Call API
     callAPISearchHistory();
   }, []);
 
