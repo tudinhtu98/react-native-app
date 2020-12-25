@@ -38,3 +38,11 @@ export const apiChangePassword = (oldPass, newPass, userId, token) => {
     }
   );
 };
+
+export const apiGetMe = (token) => {
+  return axios.get(host + "/user/me", {
+    headers: {
+      authorization: "Bearer " + token,
+    },
+  });
+};

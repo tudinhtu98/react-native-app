@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   LOGIN_FAILED,
   LOGIN_REQUEST,
@@ -7,7 +8,17 @@ import {
   CHANGE_INFO_FAILED,
   CHANGE_PASSWORD_SUCCESS,
   CHANGE_PASSWORD_FAILED,
+  UPDATE_STATE,
 } from "../action/authentication-action";
+
+const storeData = async (key, value) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem(key, jsonValue);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 
 export const reducer = (preState, action) => {
   switch (action.type) {
@@ -30,15 +41,8 @@ export const reducer = (preState, action) => {
         errorMessage: action.data.message,
       };
     case LOGOUT:
-      return {
-        ...preState,
-        isAuthenticated: false,
-        isAuthenticating: false,
-        token: null,
-        userInfo: null,
-        errorMessage: null,
-      };
     case CHANGE_PASSWORD_SUCCESS:
+      storeData("authentication", {});
       return {
         ...preState,
         isAuthenticated: false,
@@ -46,6 +50,7 @@ export const reducer = (preState, action) => {
         token: null,
         errorMessage: null,
       };
+
     case CHANGE_INFO_SUCCESS:
       return {
         ...preState,
@@ -59,7 +64,11 @@ export const reducer = (preState, action) => {
         ...preState,
         errorMessage: action.data.message,
       };
-
+    case UPDATE_STATE:
+      return {
+        ...preState,
+        ...action.data,
+      };
     default:
       throw new Error();
   }

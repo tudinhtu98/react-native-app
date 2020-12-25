@@ -10,6 +10,7 @@ import {
   Image,
   ActivityIndicator,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScreenKey } from "../../../globals/constants";
 import { stylesGlo } from "../../../globals/styles";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
@@ -22,6 +23,15 @@ const renderLoginStatus = (state) => {
   }
 };
 
+const storeData = async (key, value) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem(key, jsonValue);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 const Login = (props) => {
   const [textEmail, setTextEmail] = useState("");
   const [textPassword, setTextPassword] = useState("");
@@ -29,6 +39,7 @@ const Login = (props) => {
 
   useEffect(() => {
     if (authContext.state.isAuthenticated) {
+      storeData("authentication", authContext.state);
       props.navigation.dispatch(StackActions.replace(ScreenKey.MainTab));
     }
   }, [authContext.state.isAuthenticated]);

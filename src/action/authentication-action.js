@@ -12,6 +12,7 @@ export const CHANGE_INFO_SUCCESS = "CHANGE_INFO_SUCCESS";
 export const CHANGE_INFO_FAILED = "CHANGE_INFO_FAILED";
 export const CHANGE_PASSWORD_SUCCESS = "CHANGE_PASSWORD_SUCCESS";
 export const CHANGE_PASSWORD_FAILED = "CHANGE_PASSWORD_FAILED";
+export const UPDATE_STATE = "UPDATE_STATE";
 
 const loginSuccess = (data) => {
   return { type: LOGIN_SUCCESS, data };
@@ -62,6 +63,7 @@ export const changeInfo = (dispatch) => (name, phone, token) => {
       dispatch(changeInfoFailed(err.response.data));
     });
 };
+
 export const changePassword = (dispatch) => (
   oldPass,
   newPass,
@@ -85,5 +87,12 @@ export const changePassword = (dispatch) => (
 export const logout = (dispatch) => () => {
   dispatch({
     type: LOGOUT,
+  });
+};
+
+export const updateState = (dispatch) => (data) => {
+  dispatch({
+    type: UPDATE_STATE,
+    data,
   });
 };
