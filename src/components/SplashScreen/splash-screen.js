@@ -23,7 +23,7 @@ const checkValidToken = async () => {
         return [true, data];
       }
       return [false, data];
-    });
+    }).catch(() => [false, data]);
   }
   return [false, data];
 };
