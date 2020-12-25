@@ -5,13 +5,11 @@ import { RecommendCourseContext } from "../../../provider/recommend-course-provi
 import { ProcessCourseContext } from "../../../provider/process-course-provider";
 import SectionPaths from "../Browse/SectionPaths/section-paths";
 import SectionCourses from "./SectionCourses/section-courses";
-import { FavoriteCourseContext } from "../../../provider/favorite-course-provider";
 import { CategoryContext } from "../../../provider/category-provider";
 
 const Home = (props) => {
   const recommendCourseContext = useContext(RecommendCourseContext);
   const processCourseContext = useContext(ProcessCourseContext);
-  const favoriteCourseContext = useContext(FavoriteCourseContext);
   const categoryContext = useContext(CategoryContext);
 
   const { state } = useContext(AuthenticationContext);
@@ -19,7 +17,6 @@ const Home = (props) => {
 
   useEffect(() => {
     processCourseContext.getProcessCourse(state.token);
-    favoriteCourseContext.getFavoriteCourse(state.token);
     recommendCourseContext.getRecommendCourse(state.userInfo.id, 5, 0);
     categoryContext.getCategory();
   }, []);
@@ -63,16 +60,6 @@ const Home = (props) => {
           title="Category"
           navigation={navigation}
           data={categoryContext.state.data}
-        />
-      )}
-
-      {favoriteCourseContext.state.isLoading ? (
-        <ActivityIndicator size="large" color="blue" />
-      ) : (
-        <SectionCourses
-          title="Bookmarks"
-          navigation={navigation}
-          data={favoriteCourseContext.state.data}
         />
       )}
     </ScrollView>

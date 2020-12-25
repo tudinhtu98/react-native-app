@@ -10,7 +10,7 @@ const initialState = {
   isLoading: false,
   isLoaded: false,
   errorMessage: null,
-  data: null,
+  data: [],
 };
 
 const FavoriteCourseProvider = (props) => {
