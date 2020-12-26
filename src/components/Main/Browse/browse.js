@@ -52,24 +52,7 @@ const Browse = (props) => {
       title: "IT OPS",
     },
   ];
-  const dataSkills = [
-    {
-      id: 1,
-      title: "Angular",
-    },
-    {
-      id: 2,
-      title: "JavaScript",
-    },
-    {
-      id: 3,
-      title: "C#",
-    },
-    {
-      id: 4,
-      title: "Java",
-    },
-  ];
+  
   const renderItem = ({ item }) => (
     <ImageButtonItem title="NEW RELEASES" onPress={onPressNewReleases} />
   );

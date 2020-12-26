@@ -13,6 +13,7 @@ import {
   apiGetCourseLikeStatus,
   apiLikeCourse,
 } from "../../../core/services/course-service";
+import { convertHourToMin } from "../../../core/utilities/date-time-utilities";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
 
 const SectionIntro = (props) => {
@@ -68,6 +69,7 @@ const SectionIntro = (props) => {
   const handleShareCourse = () => {
     Share.share({ message: "share course" });
   };
+
   return (
     <View style={styles.view}>
       <Text style={styles.title}>{course.title}</Text>
@@ -85,7 +87,9 @@ const SectionIntro = (props) => {
 
       <Text style={[styles.darkText, { margin: 5 }]}>{`${new Date(
         course.createdAt
-      ).toDateString()} . ${course.totalHours} hours`}</Text>
+      ).toDateString()} . ${convertHourToMin(
+        course.totalHours || 0
+      )} mins`}</Text>
       <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
         <TouchableOpacity style={styles.iconCenter} onPress={handleFavorite}>
           <MaterialIcons name={favoriteIconName} size={25} color="red" />

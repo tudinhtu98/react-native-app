@@ -11,7 +11,7 @@ const ImageButtonItem = (props) => {
   return (
     <ImageBackground
       style={[styles.button, stylesGlo.shadow]}
-      source={{ uri: "https://i.imgur.com/oO25B7I.jpeg" }}
+      source={require("../../../assets/mushroom.jpeg")}
     >
       <TouchableOpacity style={styles.touch} onPress={props.onPress}>
         <Text style={styles.text}>{props.title}</Text>

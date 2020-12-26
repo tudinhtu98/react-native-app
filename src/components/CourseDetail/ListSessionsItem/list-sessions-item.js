@@ -7,6 +7,7 @@ import {
   MenuOption,
   MenuTrigger,
 } from "react-native-popup-menu";
+import { convertHourToMin } from "../../../core/utilities/date-time-utilities";
 
 const RenderSessionItem = (props) => {
   return props.data.map((item) => (
@@ -14,11 +15,11 @@ const RenderSessionItem = (props) => {
       key={item.id.toString()}
       style={styles.viewSession}
       onPress={() => {
-        Alert.alert(`duration session: ${item.hours}`);
+        Alert.alert(`duration session: ${convertHourToMin(item.hours || 0)}`);
       }}
     >
       <Text>{item.name}</Text>
-      <Text>{`${item.hours} hours`}</Text>
+      <Text>{`${convertHourToMin(item.hours || 0)} mins`}</Text>
     </TouchableOpacity>
   ));
 };
@@ -30,9 +31,9 @@ const ListSessionsItem = (props) => {
         <View style={{ width: 70, height: 50, backgroundColor: "gray" }}></View>
         <View style={{ marginLeft: 10 }}>
           <Text>{props.item.name}</Text>
-          <Text
-            style={{ marginHorizontal: 20 }}
-          >{`${props.item.sumHours} hours`}</Text>
+          <Text style={{ marginHorizontal: 20 }}>{`${convertHourToMin(
+            props.item.sumHours || 0
+          )} mins`}</Text>
         </View>
         <View style={styles.dots}>
           <Menu>

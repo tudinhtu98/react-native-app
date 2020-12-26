@@ -14,7 +14,6 @@ export const ScreenKey = {
   Home: "Home",
   Search: "Search",
   ListAllCourse: "ListAllCourse",
-  ListPaths: "ListPaths",
   SearchResultAll: "SearchResultAll",
   SearchResultCourses: "SearchResultCourses",
   SearchResultPaths: "SearchResultPaths",

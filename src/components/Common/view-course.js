@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { convertHourToMin } from "../../core/utilities/date-time-utilities";
 import { stylesGlo } from "../../globals/styles";
 
 const ViewCourse = (props) => {
@@ -11,7 +12,9 @@ const ViewCourse = (props) => {
       </View>
       <Text style={stylesGlo.textSmall}>{`${new Date(
         props.item.createdAt || props.item.updatedAt
-      ).toDateString()} . ${props.item.totalHours} hours`}</Text>
+      ).toDateString()} . ${convertHourToMin(
+        props.item.totalHours || 0
+      )} mins`}</Text>
     </View>
   );
 };
