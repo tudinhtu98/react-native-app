@@ -6,10 +6,12 @@ import { ProcessCourseContext } from "../../../provider/process-course-provider"
 import SectionPaths from "../Browse/SectionPaths/section-paths";
 import SectionCourses from "./SectionCourses/section-courses";
 import { CategoryContext } from "../../../provider/category-provider";
+import { NewCourseContext } from "../../../provider/new-course-provider";
 
 const Home = (props) => {
   const recommendCourseContext = useContext(RecommendCourseContext);
   const processCourseContext = useContext(ProcessCourseContext);
+  const newCourseContext = useContext(NewCourseContext);
   const categoryContext = useContext(CategoryContext);
 
   const { state } = useContext(AuthenticationContext);
@@ -17,7 +19,8 @@ const Home = (props) => {
 
   useEffect(() => {
     processCourseContext.getProcessCourse(state.token);
-    recommendCourseContext.getRecommendCourse(state.userInfo.id, 5, 0);
+    recommendCourseContext.getRecommendCourse(state.userInfo.id, 10, 0);
+    newCourseContext.getNewCourse(10, 1);
     categoryContext.getCategory();
   }, []);
 

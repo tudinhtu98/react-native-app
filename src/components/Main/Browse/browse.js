@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import { ScreenKey } from "../../../globals/constants";
 import { AuthorContext } from "../../../provider/author-provider";
+import { NewCourseContext } from "../../../provider/new-course-provider";
 import { RecommendCourseContext } from "../../../provider/recommend-course-provider";
 import ImageButton from "../../Common/image-button";
 import ImageButtonItem from "../../Common/image-button-item";
@@ -16,6 +17,7 @@ import SectionSkills from "./SectionSkills/section-skills";
 
 const Browse = (props) => {
   const recommendCourseContext = useContext(RecommendCourseContext);
+  const newCourseContext = useContext(NewCourseContext);
   const authorContext = useContext(AuthorContext);
 
   useEffect(() => {
@@ -23,7 +25,9 @@ const Browse = (props) => {
   }, []);
 
   const onPressNewReleases = () => {
-    console.log("onPressNewReleases");
+    props.navigation.navigate(ScreenKey.ListAllCourse, {
+      data: newCourseContext.state.data,
+    });
   };
   const onPressRecommend = () => {
     props.navigation.navigate(ScreenKey.ListAllCourse, {
