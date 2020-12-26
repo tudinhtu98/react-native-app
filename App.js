@@ -26,6 +26,7 @@ import { CategoryProvider } from "./src/provider/category-provider";
 import { AuthorProvider } from "./src/provider/author-provider";
 import { NewCourseProvider } from "./src/provider/new-course-provider";
 import { TopSellCourseProvider } from "./src/provider/top-sell-course-provider";
+import { TopRateCourseProvider } from "./src/provider/top-rate-course-provider";
 
 const Tab = createBottomTabNavigator();
 const MainNavigationStack = createStackNavigator();
@@ -110,19 +111,21 @@ export default function App() {
         <CategoryProvider>
           <AuthorProvider>
             <TopSellCourseProvider>
-              <NewCourseProvider>
-                <FavoriteCourseProvider>
-                  <ProcessCourseProvider>
-                    <RecommendCourseProvider>
-                      <MenuProvider>
-                        <NavigationContainer>
-                          <MainNavigation />
-                        </NavigationContainer>
-                      </MenuProvider>
-                    </RecommendCourseProvider>
-                  </ProcessCourseProvider>
-                </FavoriteCourseProvider>
-              </NewCourseProvider>
+              <TopRateCourseProvider>
+                <NewCourseProvider>
+                  <FavoriteCourseProvider>
+                    <ProcessCourseProvider>
+                      <RecommendCourseProvider>
+                        <MenuProvider>
+                          <NavigationContainer>
+                            <MainNavigation />
+                          </NavigationContainer>
+                        </MenuProvider>
+                      </RecommendCourseProvider>
+                    </ProcessCourseProvider>
+                  </FavoriteCourseProvider>
+                </NewCourseProvider>
+              </TopRateCourseProvider>
             </TopSellCourseProvider>
           </AuthorProvider>
         </CategoryProvider>

@@ -2,29 +2,32 @@ import React, { useContext, useEffect } from "react";
 import { ScrollView, StyleSheet, ActivityIndicator } from "react-native";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
 import { RecommendCourseContext } from "../../../provider/recommend-course-provider";
-import { ProcessCourseContext } from "../../../provider/process-course-provider";
+// import { ProcessCourseContext } from "../../../provider/process-course-provider";
 import SectionPaths from "../Browse/SectionPaths/section-paths";
 import SectionCourses from "./SectionCourses/section-courses";
 import { CategoryContext } from "../../../provider/category-provider";
 import { NewCourseContext } from "../../../provider/new-course-provider";
 import { TopSellCourseContext } from "../../../provider/top-sell-course-provider";
+import { TopRateCourseContext } from "../../../provider/top-rate-course-provider";
 
 const Home = (props) => {
   const recommendCourseContext = useContext(RecommendCourseContext);
-  const processCourseContext = useContext(ProcessCourseContext);
+  // const processCourseContext = useContext(ProcessCourseContext);
   const newCourseContext = useContext(NewCourseContext);
   const topSellCourseContext = useContext(TopSellCourseContext);
+  const topRateCourseContext = useContext(TopRateCourseContext);
   const categoryContext = useContext(CategoryContext);
 
   const { state } = useContext(AuthenticationContext);
   const navigation = props.navigation;
 
   useEffect(() => {
-    processCourseContext.getProcessCourse(state.token);
+    // processCourseContext.getProcessCourse(state.token);
     recommendCourseContext.getRecommendCourse(state.userInfo.id, 10, 0);
     newCourseContext.getNewCourse(10, 1);
     categoryContext.getCategory();
     topSellCourseContext.getTopSellCourse(10, 1);
+    topRateCourseContext.getTopRateCourse(10, 1);
   }, []);
 
   useEffect(() => {
@@ -41,7 +44,7 @@ const Home = (props) => {
 
   return (
     <ScrollView style={styles.view}>
-      {processCourseContext.state.isLoading ? (
+      {/* {processCourseContext.state.isLoading ? (
         <ActivityIndicator size="large" color="blue" />
       ) : (
         <SectionCourses
@@ -49,7 +52,7 @@ const Home = (props) => {
           navigation={navigation}
           data={processCourseContext.state.data}
         />
-      )}
+      )} */}
       {recommendCourseContext.state.isLoading ? (
         <ActivityIndicator size="large" color="blue" />
       ) : (
@@ -57,6 +60,15 @@ const Home = (props) => {
           title="Recommended For You"
           navigation={navigation}
           data={recommendCourseContext.state.data}
+        />
+      )}
+      {topRateCourseContext.state.isLoading ? (
+        <ActivityIndicator size="large" color="blue" />
+      ) : (
+        <SectionCourses
+          title="Top Rate"
+          navigation={navigation}
+          data={topRateCourseContext.state.data}
         />
       )}
       {topSellCourseContext.state.isLoading ? (
