@@ -7,11 +7,13 @@ import SectionPaths from "../Browse/SectionPaths/section-paths";
 import SectionCourses from "./SectionCourses/section-courses";
 import { CategoryContext } from "../../../provider/category-provider";
 import { NewCourseContext } from "../../../provider/new-course-provider";
+import { TopSellCourseContext } from "../../../provider/top-sell-course-provider";
 
 const Home = (props) => {
   const recommendCourseContext = useContext(RecommendCourseContext);
   const processCourseContext = useContext(ProcessCourseContext);
   const newCourseContext = useContext(NewCourseContext);
+  const topSellCourseContext = useContext(TopSellCourseContext);
   const categoryContext = useContext(CategoryContext);
 
   const { state } = useContext(AuthenticationContext);
@@ -22,6 +24,7 @@ const Home = (props) => {
     recommendCourseContext.getRecommendCourse(state.userInfo.id, 10, 0);
     newCourseContext.getNewCourse(10, 1);
     categoryContext.getCategory();
+    topSellCourseContext.getTopSellCourse(10, 1);
   }, []);
 
   useEffect(() => {
@@ -51,9 +54,18 @@ const Home = (props) => {
         <ActivityIndicator size="large" color="blue" />
       ) : (
         <SectionCourses
-          title="Software Development"
+          title="Recommended For You"
           navigation={navigation}
           data={recommendCourseContext.state.data}
+        />
+      )}
+      {topSellCourseContext.state.isLoading ? (
+        <ActivityIndicator size="large" color="blue" />
+      ) : (
+        <SectionCourses
+          title="Top Sell"
+          navigation={navigation}
+          data={topSellCourseContext.state.data}
         />
       )}
       {categoryContext.state.isLoading ? (
