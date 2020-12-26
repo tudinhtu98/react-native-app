@@ -24,6 +24,7 @@ const RenderSessionItem = (props) => {
   ));
 };
 
+
 const ListSessionsItem = (props) => {
   return (
     <View>
@@ -31,7 +32,7 @@ const ListSessionsItem = (props) => {
         <View style={{ width: 70, height: 50, backgroundColor: "gray" }}></View>
         <View style={{ marginLeft: 10 }}>
           <Text>{props.item.name}</Text>
-          <Text style={{ marginHorizontal: 20 }}>{`${convertHourToMin(
+          <Text>{`${convertHourToMin(
             props.item.sumHours || 0
           )} mins`}</Text>
         </View>

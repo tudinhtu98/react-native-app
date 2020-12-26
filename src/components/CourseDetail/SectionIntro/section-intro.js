@@ -14,6 +14,7 @@ import {
   apiLikeCourse,
 } from "../../../core/services/course-service";
 import { convertHourToMin } from "../../../core/utilities/date-time-utilities";
+import { stylesGlo } from "../../../globals/styles";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
 
 const SectionIntro = (props) => {
@@ -100,7 +101,7 @@ const SectionIntro = (props) => {
           <Text>Share</Text>
         </TouchableOpacity>
       </View>
-      <ScrollView style={styles.scrollIntro}>
+      <ScrollView style={[styles.scrollIntro, stylesGlo.shadow]}>
         <Text>{course.description}</Text>
       </ScrollView>
     </View>
@@ -132,7 +133,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   scrollIntro: {
-    marginTop: 20,
     height: 50,
+    marginTop: 20,
+    padding: 5,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: "gray",
   },
 });
