@@ -17,4 +17,16 @@ export const stylesGlo = StyleSheet.create({
     fontSize: 10,
     color: "gray",
   },
+  textSuccess: {
+    color: "green",
+  }, 
+  textDanger: {
+    color: "red",
+  }, 
+  emptyCourses: {
+    margin: 10,
+    color: "darkgray",
+    fontSize: 15,
+    fontWeight: "bold",
+  }
 });

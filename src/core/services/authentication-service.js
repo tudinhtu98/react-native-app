@@ -1,19 +1,48 @@
-export const login = (email, password) => {
-  if (email === "Admin") {
-    if (password === "123") {
-      return {
-        status: 200,
-        user: { username: "Admin", fullname: "Tu Đình Tư" },
-      };
-    } else {
-      return {
-        status: 404,
-        errorString: "Email or password are not match!",
-      };
+import axios from "axios";
+import { host } from "../../globals/constants";
+
+export const apiLogin = (email, password) => {
+  return axios.post(host + "/user/login", {
+    email,
+    password,
+  });
+};
+
+export const apiChangeInfo = (name, phone, token) => {
+  return axios.put(
+    host + "/user/update-profile",
+    {
+      name,
+      phone,
+    },
+    {
+      headers: {
+        authorization: "Bearer " + token,
+      },
     }
-  }
-  return {
-    status: 404,
-    errorString: "Email is not existed!",
-  };
+  );
+};
+
+export const apiChangePassword = (oldPass, newPass, userId, token) => {
+  return axios.post(
+    host + "/user/change-password",
+    {
+      id: userId,
+      oldPass,
+      newPass,
+    },
+    {
+      headers: {
+        authorization: "Bearer " + token,
+      },
+    }
+  );
+};
+
+export const apiGetMe = (token) => {
+  return axios.get(host + "/user/me", {
+    headers: {
+      authorization: "Bearer " + token,
+    },
+  });
 };

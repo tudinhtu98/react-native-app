@@ -1,27 +1,57 @@
 import React, { Component } from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, ActivityIndicator } from "react-native";
 import { ScreenKey } from "../../globals/constants";
 import { StackActions } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { apiGetMe } from "../../core/services/authentication-service";
+import { AuthenticationContext } from "../../provider/authentication-provider";
+
+const retrieveData = async (key) => {
+  try {
+    const jsonValue = await AsyncStorage.getItem(key);
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const checkValidToken = async () => {
+  const data = await retrieveData("authentication");
+  if (data && data.token) {
+    return apiGetMe(data.token).then((res) => {
+      if (res.status == 200) {
+        return [true, data];
+      }
+      return [false, data];
+    }).catch(() => [false, data]);
+  }
+  return [false, data];
+};
 
 export default class SplashScreen extends Component {
+  static contextType = AuthenticationContext;
   constructor(props) {
     super(props);
     this.state = {
-      loading: 0,
+      isChecking: true,
+      isChecked: false,
+      data: {},
     };
   }
 
-  componentDidMount() {
-    this.timer = setInterval(() => {
-      const newLoadingValue = this.state.loading + 1;
-      this.setState({ loading: newLoadingValue });
-    }, 10);
+  async componentDidMount() {
+    const [check, data] = await checkValidToken();
+    this.setState({ isChecking: false, isChecked: check, data });
   }
 
   componentDidUpdate() {
-    if (this.state.loading >= 99) {
-      clearInterval(this.timer);
-      this.props.navigation.dispatch(StackActions.replace(ScreenKey.Login));
+    if (!this.state.isChecking) {
+      if (this.state.isChecked) {
+        this.context.updateState(this.state.data);
+        this.props.navigation.dispatch(StackActions.replace(ScreenKey.MainTab));
+      } else {
+        this.props.navigation.dispatch(StackActions.replace(ScreenKey.Login));
+      }
     }
   }
 
@@ -36,9 +66,11 @@ export default class SplashScreen extends Component {
           style={styles.image}
           source={require("./../../../assets/splash-logo.png")}
         />
-        <Text style={styles.textLoading}>
-          Loading... {`${this.state.loading}`}
-        </Text>
+        <ActivityIndicator
+          style={{ marginTop: 50 }}
+          size="large"
+          color="green"
+        />
       </View>
     );
   }
@@ -57,7 +89,6 @@ const styles = StyleSheet.create({
   },
   textLoading: {
     marginTop: 30,
-    fontSize: 20,
     fontWeight: "bold",
   },
 });

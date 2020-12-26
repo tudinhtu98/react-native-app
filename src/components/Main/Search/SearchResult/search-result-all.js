@@ -6,14 +6,18 @@ import {
   StyleSheet,
   TouchableOpacity,
   LogBox,
+  ActivityIndicator,
 } from "react-native";
+import { useContext } from "react/cjs/react.development";
 import { ScreenKey } from "../../../../globals/constants";
 import { stylesGlo } from "../../../../globals/styles";
+import { SearchContext } from "../../../../provider/search-provider";
 import ListAuthors from "../../../Authors/ListAuthors/list-authors";
 import ListCourses from "../../../Courses/ListCourses/list-courses";
 import ListPaths from "../../../Paths/ListPaths/list-paths";
 
 const SearchResultAll = (props) => {
+  const { state } = useContext(SearchContext);
   const countResult = {
     countResultCourses: 12,
     countResultPaths: 4,
@@ -38,24 +42,31 @@ const SearchResultAll = (props) => {
   }, []);
 
   return (
-    <ScrollView>
-      {/* Courses Result */}
-      <View style={styles.viewRow}>
-        <Text>Courses</Text>
-        <TouchableOpacity
-          onPress={() => {
-            props.navigation.navigate(ScreenKey.SearchResultCourses);
-          }}
-        >
-          <Text
-            style={stylesGlo.textSmall}
-          >{`${countResult.countResultCourses} Results >`}</Text>
-        </TouchableOpacity>
-      </View>
-      <RenderSeparator />
-      <ListCourses navigation={props.navigation} />
-      {/* Paths Result */}
-      <View style={styles.viewRow}>
+    <View>
+      {state.isLoading ? (
+        <ActivityIndicator size="large" color="blue" />
+      ) : (
+        <ScrollView>
+          {/* Courses Result */}
+          <View style={styles.viewRow}>
+            <Text>Courses</Text>
+            <TouchableOpacity
+              onPress={() => {
+                props.navigation.navigate(ScreenKey.SearchResultCourses);
+              }}
+            >
+              <Text
+                style={stylesGlo.textSmall}
+              >{`${state.data.courses.total} results >`}</Text>
+            </TouchableOpacity>
+          </View>
+          <RenderSeparator />
+          <ListCourses
+            navigation={props.navigation}
+            courses={state.data.courses.data}
+          />
+          {/* Paths Result */}
+          {/* <View style={styles.viewRow}>
         <Text>Paths</Text>
         <TouchableOpacity
           onPress={() => {
@@ -64,27 +75,32 @@ const SearchResultAll = (props) => {
         >
           <Text
             style={stylesGlo.textSmall}
-          >{`${countResult.countResultPaths} Results >`}</Text>
+          >{`${countResult.countResultPaths} results >`}</Text>
         </TouchableOpacity>
       </View>
       <RenderSeparator />
-      <ListPaths navigation={props.navigation} />
-      {/* Authors Result */}
-      <View style={styles.viewRow}>
-        <Text>Authors</Text>
-        <TouchableOpacity
-          onPress={() => {
-            props.navigation.navigate(ScreenKey.SearchResultAuthors);
-          }}
-        >
-          <Text
-            style={stylesGlo.textSmall}
-          >{`${countResult.countResultAuthors} Results >`}</Text>
-        </TouchableOpacity>
-      </View>
-      <RenderSeparator />
-      <ListAuthors navigation={props.navigation} />
-    </ScrollView>
+      <ListPaths navigation={props.navigation} /> */}
+          {/* Authors Result */}
+          <View style={styles.viewRow}>
+            <Text>Authors</Text>
+            <TouchableOpacity
+              onPress={() => {
+                props.navigation.navigate(ScreenKey.SearchResultAuthors);
+              }}
+            >
+              <Text
+                style={stylesGlo.textSmall}
+              >{`${state.data.instructors.total} results >`}</Text>
+            </TouchableOpacity>
+          </View>
+          <RenderSeparator />
+          <ListAuthors
+            navigation={props.navigation}
+            authors={state.data.instructors.data}
+          />
+        </ScrollView>
+      )}
+    </View>
   );
 };
 

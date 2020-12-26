@@ -6,6 +6,8 @@ import Browse from "./../components/Main/Browse/browse";
 import PathDetail from "./../components/PathDetail/path-detail";
 import ListPaths from "../components/Paths/ListPaths/list-paths";
 import { ScreenKey } from "../globals/constants";
+import ListAllCourse from "../components/Courses/ListAllCourse/list-all-course";
+import AuthorDetail from "../components/AuthorDetail/author-detail";
 
 const BrowseStack = createStackNavigator();
 
@@ -18,6 +20,11 @@ const BrowseStackScreen = () => {
         options={({ navigation }) => ({
           headerRight: () => <HeaderRight navigation={navigation} />,
         })}
+      />
+      <BrowseStack.Screen
+        name={ScreenKey.ListAllCourse}
+        component={ListAllCourse}
+        options={({ route }) => ({ title: route.params.title })}
       />
       <BrowseStack.Screen
         name={ScreenKey.CourseDetail}
@@ -36,6 +43,11 @@ const BrowseStackScreen = () => {
         name={ScreenKey.PathDetail}
         component={PathDetail}
         options={{ title: "Path Detail" }}
+      />
+      <BrowseStack.Screen
+        name={ScreenKey.AuthorDetail}
+        component={AuthorDetail}
+        options={{ title: "Author Detail" }}
       />
     </BrowseStack.Navigator>
   );

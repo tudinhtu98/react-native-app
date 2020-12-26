@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import {
   View,
   TouchableOpacity,
@@ -15,11 +15,13 @@ import {
   MenuTrigger,
 } from "react-native-popup-menu";
 import { ScreenKey } from "./constants";
+import { AuthenticationContext } from "../provider/authentication-provider";
 
 const HeaderRight = (props) => {
+  const { state } = useContext(AuthenticationContext);
   const hanleSelectSettings = () => {
     props.navigation.navigate(ScreenKey.Settings);
-  }
+  };
   return (
     <View style={[styles.view, styles.center]}>
       <TouchableOpacity
@@ -30,7 +32,7 @@ const HeaderRight = (props) => {
       >
         <Image
           style={styles.imageAvatar}
-          source={require("../../assets/icon-account.png")}
+          source={{ uri: state.userInfo.avatar }}
         />
       </TouchableOpacity>
       <Menu>
@@ -65,6 +67,6 @@ const styles = StyleSheet.create({
     marginRight: 15,
   },
   textMenuOption: {
-    margin: 10
-  }
+    margin: 10,
+  },
 });

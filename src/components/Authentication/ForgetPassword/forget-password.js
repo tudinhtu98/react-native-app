@@ -1,13 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   TextInput,
   View,
   StyleSheet,
   TouchableOpacity,
   Text,
+  ActivityIndicator,
 } from "react-native";
+import { apiForgetPassSendEmail } from "../../../core/services/forget-password-service";
+import { stylesGlo } from "../../../globals/styles";
+
+const renderSendEmail = (status) => {
+  if (status) {
+    if (status.status === 200) {
+      return <Text style={stylesGlo.textSuccess}>{status.message}</Text>;
+    } else {
+      return <Text style={stylesGlo.textDanger}>{status.message}</Text>;
+    }
+  }
+  return <View />;
+};
 
 const ForgetPassword = (props) => {
+  const [isSending, setSending] = useState(false);
+  const [status, setStatus] = useState("");
+  const [email, setEmail] = useState("");
+
+  const onPressSendEmail = () => {
+    setSending(true);
+    apiForgetPassSendEmail(email)
+      .then((res) => {
+        setStatus({ status: res.status, message: res.data.message });
+      })
+      .catch((err) => {
+        setStatus({
+          status: err.response.status,
+          message: err.response.data.message,
+        });
+      })
+      .finally(() => {
+        setSending(false);
+      });
+  };
+
   return (
     <View style={styles.view}>
       <Text style={styles.textIntro}>
@@ -20,8 +55,14 @@ const ForgetPassword = (props) => {
         autoCompleteType="email"
         textContentType="emailAddress"
         keyboardType="email-address"
+        autoCapitalize="none"
+        onChangeText={(text) => setEmail(text)}
       ></TextInput>
-      <TouchableOpacity style={[styles.button, styles.buttonBlue]}>
+      {isSending ? <ActivityIndicator color="blue" /> : renderSendEmail(status)}
+      <TouchableOpacity
+        style={[styles.button, styles.buttonBlue]}
+        onPress={onPressSendEmail}
+      >
         <Text style={styles.textWhite}>Send email</Text>
       </TouchableOpacity>
       <TouchableOpacity

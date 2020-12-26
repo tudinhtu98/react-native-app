@@ -1,5 +1,6 @@
 import React from "react";
 import { View, TouchableOpacity, Image, Text, StyleSheet } from "react-native";
+import { ScreenKey } from "../../../globals/constants";
 import { stylesGlo } from "../../../globals/styles";
 
 const ListAuthorsItem = (props) => {
@@ -7,18 +8,18 @@ const ListAuthorsItem = (props) => {
     <View>
       <TouchableOpacity
         style={styles.item}
-        // onPress={() => {
-        //   props.navigation.navigate(ScreenKey.PathDetail, {
-        //     item: props.item,
-        //   });
-        // }}
+        onPress={() => {
+          props.navigation.navigate(ScreenKey.AuthorDetail, {
+            item: props.item,
+          });
+        }}
       >
-        <Image style={styles.image} source={{ uri: props.item.image }} />
+        <Image style={styles.avatar} source={{ uri: props.item.avatar }} />
         <View style={styles.viewPath}>
-          <Text>{props.item.title}</Text>
+          <Text>{props.item.name}</Text>
           <Text
             style={stylesGlo.textSmall}
-          >{`${props.item.countCourses} courses`}</Text>
+          >{`${props.item.numcourses} courses`}</Text>
         </View>
       </TouchableOpacity>
     </View>
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
     margin: 10,
     height: 80,
   },
-  image: {
+  avatar: {
     width: 80,
     height: 80,
     borderRadius: 40,

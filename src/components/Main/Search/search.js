@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  Alert,
   TouchableOpacity,
   View,
   StyleSheet,
@@ -8,51 +7,131 @@ import {
   FlatList,
   ScrollView,
   LogBox,
+  ActivityIndicator,
+  RefreshControl,
 } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import ViewSearch from "../../Common/view-search";
+import {
+  apiDeleteHistory,
+  apiSearchHistory,
+} from "../../../core/services/search-service";
+import { useContext } from "react/cjs/react.development";
+import { AuthenticationContext } from "../../../provider/authentication-provider";
+import { SearchContext } from "../../../provider/search-provider";
+import { ScreenKey } from "../../../globals/constants";
 
 const Search = (props) => {
-  const historySearchs = ["react native", "nodejs", "1", "2"];
-
-  const renderItemHistorySearch = (item) => {
-    return (
-      <TouchableOpacity
-        onPress={() => Alert.alert("onPress item history search")}
-      >
-        <View style={styles.viewItem}>
-          <Icon
-            style={styles.icon}
-            name="history"
-            size={25}
-            color={props.color}
-          />
-          <Text>{item}</Text>
-        </View>
-      </TouchableOpacity>
-    );
-  };
+  const { state } = useContext(AuthenticationContext);
+  const { search } = useContext(SearchContext);
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState({});
 
   useEffect(() => {
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+    callAPISearchHistory();
   }, []);
+
+  const callAPISearchHistory = () => {
+    apiSearchHistory(state.token)
+      .then((res) => {
+        if (res.status === 200) {
+          setData(res.data.payload.data);
+        } else {
+          throw new Error(err);
+        }
+      })
+      .catch((err) => {
+        throw new Error(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const onRefreshHistorySearch = () => {
+    callAPISearchHistory();
+  };
+
+  const onPressHistorySearch = (item) => {
+    search(item.content, state.token, 20, 0);
+    props.navigation.navigate(ScreenKey.SearchResultTab, {
+      keyword: item.content,
+    });
+  };
+
+  const onPressDeleteHistorySearch = (historyId) => {
+    apiDeleteHistory(state.token, historyId)
+      .then(() => {
+        callAPISearchHistory();
+      })
+      .catch((err) => {
+        console.log("Delete history failed", err);
+      });
+  };
+
+  const renderItemHistorySearch = (item) => {
+    return (
+      <View style={styles.viewHistoryItem}>
+        <View style={styles.viewItem}>
+          <TouchableOpacity
+            onPress={() => {
+              onPressDeleteHistorySearch(item.id);
+            }}
+          >
+            <Icon
+              style={styles.icon}
+              name="delete-outline"
+              size={25}
+              color={props.color}
+            />
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity
+          onPress={() => {
+            onPressHistorySearch(item);
+          }}
+        >
+          <View style={styles.viewItem}>
+            <Icon
+              style={styles.icon}
+              name="history"
+              size={25}
+              color={props.color}
+            />
+            <Text>{item.content}</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    );
+  };
 
   return (
     <ScrollView style={styles.scrollView}>
       <ViewSearch navigation={props.navigation} />
       <View style={styles.viewTop}>
         <Text>Recent searchs</Text>
-        <TouchableOpacity onPress={() => Alert.alert("onPress Clear all")}>
+        {/* <TouchableOpacity onPress={() => Alert.alert("onPress Clear all")}>
           <Text style={styles.buttonClear}>CLEAR ALL</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
-      <View>
-        <FlatList
-          data={historySearchs}
-          renderItem={({ item }) => renderItemHistorySearch(item)}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      </View>
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <View>
+          <FlatList
+            data={data}
+            renderItem={({ item }) => renderItemHistorySearch(item)}
+            keyExtractor={(item, index) => index.toString()}
+            refreshControl={
+              <RefreshControl
+                refreshing={isLoading}
+                onRefresh={onRefreshHistorySearch}
+              />
+            }
+          />
+        </View>
+      )}
     </ScrollView>
   );
 };
@@ -68,6 +147,10 @@ const styles = StyleSheet.create({
     margin: 5,
     marginTop: 20,
     justifyContent: "space-between",
+  },
+  viewHistoryItem: {
+    margin: 5,
+    flexDirection: "row",
   },
   viewItem: {
     flexDirection: "row",

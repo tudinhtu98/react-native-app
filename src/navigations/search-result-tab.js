@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import SearchResultAll from "../components/Main/Search/SearchResult/search-result-all";
 import SearchResultCourses from "../components/Main/Search/SearchResult/SearchResultCourses/search-result-courses";
@@ -9,6 +9,12 @@ import { ScreenKey } from "../globals/constants";
 const Tab = createMaterialTopTabNavigator();
 
 const SearchResultTab = (props) => {
+  useEffect(() => {
+    props.navigation.setOptions({
+      title: `Results for: "${props.route.params.keyword}"`,
+    });
+  }, []);
+
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -21,11 +27,11 @@ const SearchResultTab = (props) => {
         component={SearchResultCourses}
         options={{ title: "Courses" }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name={ScreenKey.SearchResultPaths}
         component={SearchResultPaths}
         options={{ title: "Paths" }}
-      />
+      /> */}
       <Tab.Screen
         name={ScreenKey.SearchResultAuthors}
         component={SearchResultAuthors}

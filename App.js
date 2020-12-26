@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import "react-native-gesture-handler";
-import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -20,19 +19,27 @@ import Profile from "./src/components/AccountManagement/Profile/profile";
 import Settings from "./src/components/AccountManagement/Settings/settings";
 import { ThemeProvider } from "./src/provider/theme-provider";
 import { AuthenticationProvider } from "./src/provider/authentication-provider";
+import { RecommendCourseProvider } from "./src/provider/recommend-course-provider";
+import { ProcessCourseProvider } from "./src/provider/process-course-provider";
+import { FavoriteCourseProvider } from "./src/provider/favorite-course-provider";
+import { CategoryProvider } from "./src/provider/category-provider";
+import { AuthorProvider } from "./src/provider/author-provider";
+import { NewCourseProvider } from "./src/provider/new-course-provider";
+import { TopSellCourseProvider } from "./src/provider/top-sell-course-provider";
+import { TopRateCourseProvider } from "./src/provider/top-rate-course-provider";
 
 const Tab = createBottomTabNavigator();
 const MainNavigationStack = createStackNavigator();
 
 const screenOptions = ({ route }) => ({
-  tabBarIcon: ({ focused, color, size }) => {
+  tabBarIcon: ({ color, size }) => {
     let iconName;
     if (route.name === "Search") {
       return <MaterialIcons name={"search"} size={size} color={color} />;
     } else if (route.name === "Home") {
       iconName = "home-outline";
     } else if (route.name === "Download") {
-      iconName = "download-outline";
+      return <MaterialIcons name="favorite-border" size={size} color={color} />;
     } else if (route.name === "Browse") {
       iconName = "grid";
     }
@@ -44,7 +51,11 @@ const MainTabNavigator = () => {
   return (
     <Tab.Navigator screenOptions={screenOptions}>
       <Tab.Screen name="Home" component={HomeStackScreen} />
-      <Tab.Screen name="Download" component={DownloadStackScreen} />
+      <Tab.Screen
+        name="Download"
+        component={DownloadStackScreen}
+        options={{ title: "Favorite" }}
+      />
       <Tab.Screen name="Browse" component={BrowseStackScreen} />
       <Tab.Screen name="Search" component={SearchStackScreen} />
     </Tab.Navigator>
@@ -97,19 +108,28 @@ export default function App() {
   return (
     <ThemeProvider>
       <AuthenticationProvider>
-        <MenuProvider>
-          <NavigationContainer>
-            <MainNavigation />
-          </NavigationContainer>
-        </MenuProvider>
+        <CategoryProvider>
+          <AuthorProvider>
+            <TopSellCourseProvider>
+              <TopRateCourseProvider>
+                <NewCourseProvider>
+                  <FavoriteCourseProvider>
+                    <ProcessCourseProvider>
+                      <RecommendCourseProvider>
+                        <MenuProvider>
+                          <NavigationContainer>
+                            <MainNavigation />
+                          </NavigationContainer>
+                        </MenuProvider>
+                      </RecommendCourseProvider>
+                    </ProcessCourseProvider>
+                  </FavoriteCourseProvider>
+                </NewCourseProvider>
+              </TopRateCourseProvider>
+            </TopSellCourseProvider>
+          </AuthorProvider>
+        </CategoryProvider>
       </AuthenticationProvider>
     </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-});

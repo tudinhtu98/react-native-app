@@ -15,6 +15,7 @@ const DownloadStackScreen = () => {
         component={Download}
         options={({ navigation }) => ({
           headerRight: () => <HeaderRight navigation={navigation} />,
+          title: "Favorite",
         })}
       />
       <DownloadStack.Screen

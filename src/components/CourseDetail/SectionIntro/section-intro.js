@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -8,23 +8,72 @@ import {
   ScrollView,
   Share,
 } from "react-native";
-import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import {
+  apiGetCourseLikeStatus,
+  apiLikeCourse,
+} from "../../../core/services/course-service";
+import { convertHourToMin } from "../../../core/utilities/date-time-utilities";
+import { stylesGlo } from "../../../globals/styles";
+import { AuthenticationContext } from "../../../provider/authentication-provider";
 
 const SectionIntro = (props) => {
-  const [bookmarkIconName, setBookmarkIconName] = useState("bookmark-outline");
-  const handleBookmark = () => {
-    if (bookmarkIconName == "bookmark-outline") {
-      setBookmarkIconName("bookmark");
-    } else {
-      setBookmarkIconName("bookmark-outline");
-    }
+  const course = props.course;
+  const { state } = useContext(AuthenticationContext);
+  const [favoriteIconName, setFavoriteIconName] = useState("favorite-border");
+  const [likeStatus, setLikeStatus] = useState(false);
+
+  const CallAPIGetCourseLikeStatus = () => {
+    apiGetCourseLikeStatus(state.token, course.id)
+      .then((res) => {
+        if (res.status === 200) {
+          setLikeStatus(res.data.likeStatus);
+        } else {
+          throw new Error(err);
+        }
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
   };
+
+  const CallAPILike = () => {
+    apiLikeCourse(state.token, course.id)
+      .then((res) => {
+        if (res.status === 200) {
+          setLikeStatus(res.data.likeStatus);
+        } else {
+          throw new Error(err);
+        }
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  };
+
+  useEffect(() => {
+    CallAPIGetCourseLikeStatus();
+  }, []);
+
+  useEffect(() => {
+    if (likeStatus) {
+      setFavoriteIconName("favorite");
+    } else {
+      setFavoriteIconName("favorite-border");
+    }
+  }, [likeStatus]);
+
+  const handleFavorite = () => {
+    CallAPILike();
+  };
+
   const handleShareCourse = () => {
     Share.share({ message: "share course" });
   };
+
   return (
     <View style={styles.view}>
-      <Text style={styles.title}>{props.courseInfo.title}</Text>
+      <Text style={styles.title}>{course.title}</Text>
       <View style={{ flexDirection: "row" }}>
         <TouchableOpacity
           onPress={() => {
@@ -32,26 +81,28 @@ const SectionIntro = (props) => {
           }}
         >
           <View style={styles.author}>
-            <Text>{props.courseInfo.author}</Text>
+            <Text>{course.instructor["name"]}</Text>
           </View>
         </TouchableOpacity>
       </View>
 
-      <Text
-        style={[styles.darkText, { margin: 5 }]}
-      >{`${props.courseInfo.level} . ${props.courseInfo.released} . ${props.courseInfo.duration}`}</Text>
+      <Text style={[styles.darkText, { margin: 5 }]}>{`${new Date(
+        course.createdAt
+      ).toDateString()} . ${convertHourToMin(
+        course.totalHours || 0
+      )} mins`}</Text>
       <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
-        <TouchableOpacity style={styles.iconCenter} onPress={handleBookmark}>
-          <Icon name={bookmarkIconName} size={25} color="gray" />
-          <Text>Bookmark</Text>
+        <TouchableOpacity style={styles.iconCenter} onPress={handleFavorite}>
+          <MaterialIcons name={favoriteIconName} size={25} color="red" />
+          <Text>Like</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.iconCenter} onPress={handleShareCourse}>
-          <Icon name="share" size={25} color="gray" />
+          <MaterialIcons name="share" size={25} color="gray" />
           <Text>Share</Text>
         </TouchableOpacity>
       </View>
-      <ScrollView style={styles.scrollIntro}>
-        <Text>{props.courseInfo.introduction}</Text>
+      <ScrollView style={[styles.scrollIntro, stylesGlo.shadow]}>
+        <Text>{course.description}</Text>
       </ScrollView>
     </View>
   );
@@ -62,7 +113,7 @@ export default SectionIntro;
 const styles = StyleSheet.create({
   view: {
     margin: 10,
-    height: 350,
+    height: 300,
   },
   title: {
     fontSize: 20,
@@ -82,7 +133,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   scrollIntro: {
+    height: 50,
     marginTop: 20,
-    height: 100,
+    padding: 5,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: "gray",
   },
 });

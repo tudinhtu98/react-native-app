@@ -1,5 +1,6 @@
 import { StackActions } from "@react-navigation/native";
 import React, { useState, useContext } from "react";
+import { useEffect } from "react";
 import {
   TextInput,
   View,
@@ -7,27 +8,41 @@ import {
   TouchableOpacity,
   Text,
   Image,
+  ActivityIndicator,
 } from "react-native";
-import { login } from "../../../core/services/authentication-service";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScreenKey } from "../../../globals/constants";
+import { stylesGlo } from "../../../globals/styles";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
+
+const renderLoginStatus = (state) => {
+  if (!state.errorMessage) {
+    return <View />;
+  } else {
+    return <Text style={stylesGlo.textDanger}>{state.errorMessage}</Text>;
+  }
+};
+
+const storeData = async (key, value) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem(key, jsonValue);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 
 const Login = (props) => {
   const [textEmail, setTextEmail] = useState("");
   const [textPassword, setTextPassword] = useState("");
-  const { authentication, setAuthentication } = useContext(
-    AuthenticationContext
-  );
+  const authContext = useContext(AuthenticationContext);
 
-  const renderLoginStatus = (status) => {
-    if (!status) {
-      return <View />;
-    } else if (status.status === 200) {
+  useEffect(() => {
+    if (authContext.state.isAuthenticated) {
+      storeData("authentication", authContext.state);
       props.navigation.dispatch(StackActions.replace(ScreenKey.MainTab));
-    } else {
-      return <Text>{status.errorString}</Text>;
     }
-  };
+  }, [authContext.state.isAuthenticated]);
 
   return (
     <View style={styles.view}>
@@ -41,6 +56,8 @@ const Login = (props) => {
         style={styles.textInput}
         placeholder="Email"
         autoCompleteType="email"
+        keyboardType="email-address"
+        autoCapitalize="none"
         onChangeText={(textEmail) => setTextEmail(textEmail)}
         defaultValue={textEmail}
       ></TextInput>
@@ -49,15 +66,20 @@ const Login = (props) => {
         placeholder="Password"
         autoCompleteType="password"
         textContentType="password"
+        autoCapitalize="none"
         secureTextEntry={true}
         onChangeText={(textPassword) => setTextPassword(textPassword)}
         defaultValue={textPassword}
       ></TextInput>
-      {renderLoginStatus(authentication)}
+      {authContext.state.isAuthenticating ? (
+        <ActivityIndicator color="blue" />
+      ) : (
+        renderLoginStatus(authContext.state)
+      )}
       <TouchableOpacity
         style={[styles.button, styles.buttonLogin]}
         onPress={() => {
-          setAuthentication(login(textEmail, textPassword));
+          authContext.login(textEmail, textPassword);
         }}
       >
         <Text style={styles.textWhite}>LOGIN</Text>

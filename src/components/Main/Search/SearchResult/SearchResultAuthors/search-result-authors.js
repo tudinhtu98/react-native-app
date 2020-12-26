@@ -1,16 +1,27 @@
-import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import React, { useContext } from "react";
+import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
 import { stylesGlo } from "../../../../../globals/styles";
+import { SearchContext } from "../../../../../provider/search-provider";
 import ListAuthors from "../../../../Authors/ListAuthors/list-authors";
 
 const SearchResultAuthors = (props) => {
-  const countResult = 10;
+  const { state } = useContext(SearchContext);
+
   return (
     <View>
-      <Text
-        style={[styles.textResult, stylesGlo.textSmall]}
-      >{`${countResult} Results`}</Text>
-      <ListAuthors />
+      {state.isLoading ? (
+        <ActivityIndicator size="large" color="blue" />
+      ) : (
+        <View>
+          <Text
+            style={[styles.textResult, stylesGlo.textSmall]}
+          >{`${state.data.instructors.total} results`}</Text>
+          <ListAuthors
+            navigation={props.navigation}
+            authors={state.data.instructors.data}
+          />
+        </View>
+      )}
     </View>
   );
 };

@@ -1,16 +1,27 @@
-import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import React, { useContext } from "react";
+import { Text, View, StyleSheet, ActivityIndicator } from "react-native";
 import { stylesGlo } from "../../../../../globals/styles";
+import { SearchContext } from "../../../../../provider/search-provider";
 import ListCourses from "../../../../Courses/ListCourses/list-courses";
 
 const SearchResultCourses = (props) => {
-  const countResult = 12;
+  const { state } = useContext(SearchContext);
+
   return (
     <View>
-      <Text
-        style={[styles.textResult, stylesGlo.textSmall]}
-      >{`${countResult} Results`}</Text>
-      <ListCourses navigation={props.navigation} />
+      {state.isLoading ? (
+        <ActivityIndicator size="large" color="blue" />
+      ) : (
+        <View>
+          <Text
+            style={[styles.textResult, stylesGlo.textSmall]}
+          >{`${state.data.courses.total} results`}</Text>
+          <ListCourses
+            navigation={props.navigation}
+            courses={state.data.courses.data}
+          />
+        </View>
+      )}
     </View>
   );
 };
