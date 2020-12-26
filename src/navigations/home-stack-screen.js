@@ -8,6 +8,7 @@ import PathDetail from "../components/PathDetail/path-detail";
 import ListPaths from "../components/Paths/ListPaths/list-paths";
 import { ScreenKey } from "../globals/constants";
 import ListAllCourse from "../components/Courses/ListAllCourse/list-all-course";
+import AuthorDetail from "../components/AuthorDetail/author-detail";
 
 const HomeStack = createStackNavigator();
 const HomeStackScreen = () => {
@@ -23,29 +24,28 @@ const HomeStackScreen = () => {
       <HomeStack.Screen
         name={ScreenKey.ListAllCourse}
         component={ListAllCourse}
-        options={{ title: "List all course" }}
+        options={({ route }) => ({ title: route.params.title })}
       />
       <HomeStack.Screen
         name={ScreenKey.CourseDetail}
         component={CourseDetail}
-        options={{
-          title: "Course Detail",
-          // headerStyle: {
-          //   backgroundColor: "#f4511e",
-          // },
-          // headerTintColor: "#fff",
-          // headerTitleStyle: {
-          //   fontWeight: "bold",
-          // },
-          // headerShown: false,
-        }}
+        options={({ route }) => ({ title: route.params.title })}
       />
       <HomeStack.Screen
         name={ScreenKey.ListPaths}
         component={ListPaths}
-        options={{ title: "List Paths" }}
+        options={({ route }) => ({ title: route.params.title })}
       />
-      <HomeStack.Screen name={ScreenKey.PathDetail} component={PathDetail} />
+      <HomeStack.Screen
+        name={ScreenKey.PathDetail}
+        component={PathDetail}
+        options={({ route }) => ({ title: route.params.title })}
+      />
+      <HomeStack.Screen
+        name={ScreenKey.AuthorDetail}
+        component={AuthorDetail}
+        options={({ route }) => ({ title: route.params.title })}
+      />
     </HomeStack.Navigator>
   );
 };

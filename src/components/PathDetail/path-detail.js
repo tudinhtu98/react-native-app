@@ -12,9 +12,6 @@ const PathDetail = (props) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState({});
 
-  const item = props.route.params.item;
-  props.navigation.setOptions({ title: item.name });
-
   const CallAPIGetCourseByCategoryId = () => {
     apiGetCourseByCategoryId(state.token, props.route.params.item.id, 10, 0)
       .then((res) => {

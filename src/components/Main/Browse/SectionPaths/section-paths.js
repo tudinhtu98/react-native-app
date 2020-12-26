@@ -12,7 +12,10 @@ import SectionPathsItem from "../SectionPathsItem/section-paths-item";
 const SectionPaths = (props) => {
   const categories = props.data || [];
   const onPressSectionPathsItem = (item) => {
-    props.navigation.navigate(ScreenKey.PathDetail, { item });
+    props.navigation.navigate(ScreenKey.PathDetail, {
+      item,
+      title: item.name,
+    });
   };
 
   // const onPressSeeAll = () => {

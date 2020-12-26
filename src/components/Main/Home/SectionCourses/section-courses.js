@@ -15,12 +15,16 @@ const SectionCourses = (props) => {
   const courses = props.data || [];
 
   const onPressSectionCoursesItem = (item) => {
-    props.navigation.navigate(ScreenKey.CourseDetail, { item });
+    props.navigation.navigate(ScreenKey.CourseDetail, {
+      item,
+      title: item.name,
+    });
   };
 
   const onPressSeeAll = () => {
     props.navigation.navigate(ScreenKey.ListAllCourse, {
       data: courses,
+      title: props.title,
     });
   };
 

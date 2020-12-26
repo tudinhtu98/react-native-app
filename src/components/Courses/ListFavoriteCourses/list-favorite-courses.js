@@ -50,7 +50,7 @@ const ListFavoriteCourses = (props) => {
           ItemSeparatorComponent={renderSeparator}
           keyExtractor={(item, index) => index.toString()}
           onEndReached={() => {
-            console.log("Load more");
+            // console.log("Load more");
           }}
           onEndReachedThreshold={0.3}
           refreshControl={

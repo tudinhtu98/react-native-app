@@ -37,15 +37,6 @@ const ListCoursesItem = (props) => {
             <Icon name="dots-vertical" size={25} color="darkgray" />
           </MenuTrigger>
           <MenuOptions>
-            <MenuOption>
-              <Text style={styles.textMenuOption}>Bookmark</Text>
-            </MenuOption>
-            <MenuOption>
-              <Text style={styles.textMenuOption}>Add to channel</Text>
-            </MenuOption>
-            <MenuOption>
-              <Text style={styles.textMenuOption}>Download</Text>
-            </MenuOption>
             <MenuOption onSelect={handleShareCourse}>
               <Text style={styles.textMenuOption}>Share</Text>
             </MenuOption>
