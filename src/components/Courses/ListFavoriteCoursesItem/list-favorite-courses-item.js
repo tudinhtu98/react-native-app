@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Image,
   View,
@@ -7,7 +7,6 @@ import {
   Share,
   Text,
 } from "react-native";
-import ViewCourse from "../../Common/view-course";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import {
   Menu,
@@ -16,11 +15,31 @@ import {
   MenuTrigger,
 } from "react-native-popup-menu";
 import { stylesGlo } from "../../../globals/styles";
+import { FavoriteCourseContext } from "../../../provider/favorite-course-provider";
+import { apiLikeCourse } from "../../../core/services/course-service";
+import { AuthenticationContext } from "../../../provider/authentication-provider";
 
 const ListFavoriteCoursesItem = (props) => {
+  const { state } = useContext(AuthenticationContext);
+  const { dislikeCourse } = useContext(FavoriteCourseContext);
   const handleShareCourse = () => {
     Share.share({ message: "share course" });
   };
+
+  const onSelectDislikeCourse = () => {
+    apiLikeCourse(state.token, props.item.id)
+      .then((res) => {
+        if (res.status === 200) {
+          dislikeCourse(props.item.id);
+        } else {
+          throw new Error(err);
+        }
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  };
+
   return (
     <View>
       <TouchableOpacity
@@ -37,7 +56,7 @@ const ListFavoriteCoursesItem = (props) => {
           </View>
           <Text
             style={stylesGlo.textSmall}
-          >{`${props.item.courseAveragePoint} stars`}</Text>
+          >{`${props.item.coursePrice}đ . ${props.item.courseSoldNumber} đã bán`}</Text>
         </View>
       </TouchableOpacity>
       <View style={styles.dots}>
@@ -46,7 +65,7 @@ const ListFavoriteCoursesItem = (props) => {
             <Icon name="dots-vertical" size={25} color="darkgray" />
           </MenuTrigger>
           <MenuOptions>
-            <MenuOption>
+            <MenuOption onSelect={onSelectDislikeCourse}>
               <Text style={styles.textMenuOption}>Remove from favorite</Text>
             </MenuOption>
             <MenuOption>

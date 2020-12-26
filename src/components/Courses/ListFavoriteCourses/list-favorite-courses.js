@@ -1,10 +1,14 @@
-import React from "react";
-import { FlatList, View, Text } from "react-native";
+import React, { useContext } from "react";
+import { FlatList, View, Text, RefreshControl } from "react-native";
 import { ScreenKey, textGlo } from "../../../globals/constants";
 import { stylesGlo } from "../../../globals/styles";
+import { AuthenticationContext } from "../../../provider/authentication-provider";
+import { FavoriteCourseContext } from "../../../provider/favorite-course-provider";
 import ListFavoriteCoursesItem from "../ListFavoriteCoursesItem/list-favorite-courses-item";
 
 const ListFavoriteCourses = (props) => {
+  const { state } = useContext(AuthenticationContext);
+  const favoriteCourseContext = useContext(FavoriteCourseContext);
   const courses = props.courses;
 
   const renderSeparator = () => {
@@ -18,6 +22,10 @@ const ListFavoriteCourses = (props) => {
         }}
       />
     );
+  };
+
+  const onRefresh = () => {
+    favoriteCourseContext.getFavoriteCourse(state.token);
   };
 
   const onPressListFavoriteCoursesItem = (item) => {
@@ -45,6 +53,12 @@ const ListFavoriteCourses = (props) => {
             console.log("Load more");
           }}
           onEndReachedThreshold={0.3}
+          refreshControl={
+            <RefreshControl
+              refreshing={favoriteCourseContext.state.data.isLoading}
+              onRefresh={onRefresh}
+            />
+          }
         />
       )}
     </View>

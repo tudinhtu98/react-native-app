@@ -3,6 +3,7 @@ import { apiGetFavoriteCourse } from "../core/services/favorite-course-service";
 export const GET_REQUEST = "GET_REQUEST";
 export const GET_SUCCESS = "GET_SUCCESS";
 export const GET_FAILED = "GET_FAILED";
+export const DISLIKE_SUCCESS = "DISLIKE_SUCCESS";
 
 const getSuccess = (data) => {
   return { type: GET_SUCCESS, data };
@@ -25,4 +26,8 @@ export const getFavoriteCourse = (dispatch) => (token) => {
       console.log("Favorite course load fail", err.response.data);
       dispatch(getFailed(err.response.data));
     });
+};
+
+export const dislikeCourse = (dispatch) => (courseId) => {
+  dispatch({ type: DISLIKE_SUCCESS, data: { courseId } });
 };

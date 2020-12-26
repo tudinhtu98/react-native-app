@@ -2,6 +2,7 @@ import {
   GET_REQUEST,
   GET_SUCCESS,
   GET_FAILED,
+  DISLIKE_SUCCESS,
 } from "../action/favorite-course-action";
 
 export const reducer = (preState, action) => {
@@ -23,6 +24,13 @@ export const reducer = (preState, action) => {
         isLoaded: false,
         isLoading: false,
         errorMessage: action.data.message,
+      };
+    case DISLIKE_SUCCESS:
+      return {
+        ...preState,
+        data: preState.data.filter(
+          (course) => course.id !== action.data.courseId
+        ),
       };
     default:
       throw new Error();
