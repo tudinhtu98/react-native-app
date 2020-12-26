@@ -37,7 +37,7 @@ const CourseDetail = (props) => {
   useEffect(() => {
     setLoading(true);
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
-    props.navigation.setOptions({ title: props.route.params.item.title });
+    props.navigation.setOptions({ title: props.route.params.title });
     CallAPIGetCourseDetail();
   }, []);
 

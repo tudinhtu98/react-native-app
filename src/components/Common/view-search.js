@@ -20,6 +20,7 @@ const ViewSearch = (props) => {
       <TextInput
         style={styles.border}
         placeholder="Search text"
+        autoFocus={true}
         onChangeText={(keyword) => setKeyword(keyword)}
       />
       <TouchableOpacity

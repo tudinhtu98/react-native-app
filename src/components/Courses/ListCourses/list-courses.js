@@ -21,7 +21,10 @@ const ListCourses = (props) => {
   };
 
   const onPressListCoursesItem = (item) => {
-    props.navigation.navigate(ScreenKey.CourseDetail, { item });
+    props.navigation.navigate(ScreenKey.CourseDetail, {
+      item,
+      title: item.title,
+    });
   };
 
   return (

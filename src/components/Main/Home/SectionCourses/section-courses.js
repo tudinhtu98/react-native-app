@@ -17,7 +17,7 @@ const SectionCourses = (props) => {
   const onPressSectionCoursesItem = (item) => {
     props.navigation.navigate(ScreenKey.CourseDetail, {
       item,
-      title: item.name,
+      title: item.title,
     });
   };
 

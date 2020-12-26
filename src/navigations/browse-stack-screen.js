@@ -24,7 +24,7 @@ const BrowseStackScreen = () => {
       <BrowseStack.Screen
         name={ScreenKey.ListAllCourse}
         component={ListAllCourse}
-        options={{ title: "List all course" }}
+        options={({ route }) => ({ title: route.params.title })}
       />
       <BrowseStack.Screen
         name={ScreenKey.CourseDetail}

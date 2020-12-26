@@ -27,11 +27,13 @@ const Browse = (props) => {
   const onPressNewReleases = () => {
     props.navigation.navigate(ScreenKey.ListAllCourse, {
       data: newCourseContext.state.data,
+      title: "New Releases",
     });
   };
   const onPressRecommend = () => {
     props.navigation.navigate(ScreenKey.ListAllCourse, {
       data: recommendCourseContext.state.data,
+      title: "Recommend For You",
     });
   };
   const dataCategory = [
@@ -52,7 +54,7 @@ const Browse = (props) => {
       title: "IT OPS",
     },
   ];
-  
+
   const renderItem = ({ item }) => (
     <ImageButtonItem title="NEW RELEASES" onPress={onPressNewReleases} />
   );

@@ -29,7 +29,10 @@ const ListFavoriteCourses = (props) => {
   };
 
   const onPressListFavoriteCoursesItem = (item) => {
-    props.navigation.navigate(ScreenKey.CourseDetail, { item });
+    props.navigation.navigate(ScreenKey.CourseDetail, {
+      item,
+      title: item.courseTitle,
+    });
   };
 
   return (
