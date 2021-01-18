@@ -56,7 +56,7 @@ const ListFavoriteCoursesItem = (props) => {
           </View>
           <Text
             style={stylesGlo.textSmall}
-          >{`${props.item.coursePrice}đ . ${props.item.courseSoldNumber} đã bán`}</Text>
+          >{`${props.item.coursePrice}đ . ${props.item.courseSoldNumber} sold`}</Text>
         </View>
       </TouchableOpacity>
       <View style={styles.dots}>

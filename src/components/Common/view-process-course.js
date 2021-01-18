@@ -10,6 +10,7 @@ const ViewProcessCourse = (props) => {
         <Text style={{ flexWrap: "wrap" }}>{props.item.courseTitle}</Text>
         <Text style={stylesGlo.textSmall}>{props.item.instructorName}</Text>
       </View>
+      <Text style={stylesGlo.textSmall}>{`Learned: ${props.item.learnLesson}/${props.item.total} lesson`}</Text>
       <Text style={stylesGlo.textSmall}>{`Latest learn: ${new Date(
         props.item.latestLearnTime
       ).toDateString()}`}</Text>
