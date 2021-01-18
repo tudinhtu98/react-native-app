@@ -13,6 +13,8 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import {
   apiGetCourseLikeStatus,
   apiLikeCourse,
+  apiCheckOwnCourseStatus,
+  apiAddCourse,
 } from "../../../core/services/course-service";
 import { convertHourToMin } from "../../../core/utilities/date-time-utilities";
 import { stylesGlo } from "../../../globals/styles";
@@ -22,7 +24,9 @@ const SectionIntro = (props) => {
   const course = props.route.params.course;
   const { state } = useContext(AuthenticationContext);
   const [favoriteIconName, setFavoriteIconName] = useState("favorite-border");
+  const [addIconName, setAddIconName] = useState("add");
   const [likeStatus, setLikeStatus] = useState(false);
+  const [ownStatus, setOwnStatus] = useState(false);
 
   const CallAPIGetCourseLikeStatus = () => {
     apiGetCourseLikeStatus(state.token, course.id)
@@ -30,7 +34,20 @@ const SectionIntro = (props) => {
         if (res.status === 200) {
           setLikeStatus(res.data.likeStatus);
         } else {
-          throw new Error(err);
+          throw new Error();
+        }
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  };
+  const CallAPIOwnCourseStatus = () => {
+    apiCheckOwnCourseStatus(state.token, course.id)
+      .then((res) => {
+        if (res.status === 200) {
+          setOwnStatus(res.data.payload.isUserOwnCourse);
+        } else {
+          throw new Error();
         }
       })
       .catch((err) => {
@@ -44,7 +61,7 @@ const SectionIntro = (props) => {
         if (res.status === 200) {
           setLikeStatus(res.data.likeStatus);
         } else {
-          throw new Error(err);
+          throw new Error();
         }
       })
       .catch((err) => {
@@ -52,8 +69,23 @@ const SectionIntro = (props) => {
       });
   };
 
+  const CallAPIAddCourse = () => {
+    apiAddCourse(state.token, course.id)
+      .then((res) => {
+        if (res.status === 200) {
+          setOwnStatus(true);
+        } else {
+          throw new Error();
+        }
+      })
+      .catch((err) => {
+        Alert.alert("Failed!", err.response.data.messsage);
+      });
+  };
+
   useEffect(() => {
     CallAPIGetCourseLikeStatus();
+    CallAPIOwnCourseStatus();
   }, []);
 
   useEffect(() => {
@@ -64,8 +96,19 @@ const SectionIntro = (props) => {
     }
   }, [likeStatus]);
 
+  useEffect(() => {
+    if (ownStatus) {
+      setAddIconName("check");
+    } else {
+      setAddIconName("add");
+    }
+  }, [ownStatus]);
+
   const handleFavorite = () => {
     CallAPILike();
+  };
+  const handleAddCourse = () => {
+    CallAPIAddCourse();
   };
 
   const handleShareCourse = () => {
@@ -102,6 +145,14 @@ const SectionIntro = (props) => {
         course.totalHours || 0
       )} mins`}</Text>
       <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+        <TouchableOpacity
+          style={styles.iconCenter}
+          onPress={handleAddCourse}
+          disabled={ownStatus}
+        >
+          <MaterialIcons name={addIconName} size={25} color="green" />
+          <Text>Get Course</Text>
+        </TouchableOpacity>
         <TouchableOpacity style={styles.iconCenter} onPress={handleFavorite}>
           <MaterialIcons name={favoriteIconName} size={25} color="red" />
           <Text>Like</Text>
