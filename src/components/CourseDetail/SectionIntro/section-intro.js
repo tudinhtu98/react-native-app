@@ -18,7 +18,7 @@ import { stylesGlo } from "../../../globals/styles";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
 
 const SectionIntro = (props) => {
-  const course = props.course;
+  const course = props.route.params.course;
   const { state } = useContext(AuthenticationContext);
   const [favoriteIconName, setFavoriteIconName] = useState("favorite-border");
   const [likeStatus, setLikeStatus] = useState(false);
@@ -68,7 +68,9 @@ const SectionIntro = (props) => {
   };
 
   const handleShareCourse = () => {
-    Share.share({ message: "share course" });
+    Share.share({
+      message: "http://dev.letstudy.org/course-detail/" + course.id,
+    });
   };
 
   return (
@@ -77,7 +79,7 @@ const SectionIntro = (props) => {
       <View style={{ flexDirection: "row" }}>
         <TouchableOpacity
           onPress={() => {
-            Alert.alert("press author");
+            // Alert.alert("press author");
           }}
         >
           <View style={styles.author}>

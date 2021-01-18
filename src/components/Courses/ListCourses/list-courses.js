@@ -1,3 +1,4 @@
+import { StackActions } from "@react-navigation/native";
 import React from "react";
 import { FlatList, View, Text } from "react-native";
 import { ScreenKey, textGlo } from "../../../globals/constants";
@@ -21,10 +22,12 @@ const ListCourses = (props) => {
   };
 
   const onPressListCoursesItem = (item) => {
-    props.navigation.navigate(ScreenKey.CourseDetail, {
-      item,
-      title: item.title,
-    });
+    props.navigation.dispatch(
+      StackActions.replace(ScreenKey.CourseDetail, {
+        item,
+        title: item.title,
+      })
+    );
   };
 
   return (

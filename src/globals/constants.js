@@ -19,7 +19,10 @@ export const ScreenKey = {
   SearchResultPaths: "SearchResultPaths",
   SearchResultAuthors: "SearchResultAuthors",
   SearchResultTab: "SearchResultTab",
+  CourseDetailTab: "CourseDetailTab",
   AuthorDetail: "AuthorDetail",
+  ListSessions: "ListSessions",
+  SectionIntro: "SectionIntro",
 };
 
 export const ImageKey = {};

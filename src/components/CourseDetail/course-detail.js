@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import {
-  ScrollView,
   View,
   LogBox,
   ActivityIndicator,
   Dimensions,
+  BackHandler,
 } from "react-native";
 import { apiGetCourseDetail } from "../../core/services/course-service";
-import ListSessions from "./ListSessions/list-sessions";
-import SectionIntro from "./SectionIntro/section-intro";
+import CourseDetailTab from "../../navigations/course-detail-tab";
 import VideoPlayer from "./VideoPlayer/video-player";
 
 const { height } = Dimensions.get("window");
@@ -22,7 +21,6 @@ const CourseDetail = (props) => {
     apiGetCourseDetail(props.route.params.item.id)
       .then((res) => {
         if (res.status === 200) {
-          console.log("section", res.data.payload.section);
           if (
             res.data.payload.section[0] &&
             res.data.payload.section[0].lesson[0]
@@ -42,7 +40,27 @@ const CourseDetail = (props) => {
       });
   };
 
-  const onPressSesson = () => {};
+  useEffect(() => {
+    const backAction = () => {
+      // Alert.alert("Hold on!", "Are you sure you want to go back?", [
+      //   {
+      //     text: "Cancel",
+      //     onPress: () => null,
+      //     style: "cancel"
+      //   },
+      //   { text: "YES", onPress: () => props.navigation.goBack() }
+      // ]);
+      props.navigation.goBack();
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -59,10 +77,7 @@ const CourseDetail = (props) => {
         <View style={{ flex: 1 }}>
           <VideoPlayer uriVideo={uriVideo} />
           <View style={{ height: (height * 6.22) / 10 }}>
-            <ScrollView>
-              <SectionIntro course={course} />
-              <ListSessions section={course.section} setUriVideo={setUriVideo}/>
-            </ScrollView>
+            <CourseDetailTab course={course} setUriVideo={setUriVideo} />
           </View>
         </View>
       )}

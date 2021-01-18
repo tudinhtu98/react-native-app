@@ -1,0 +1,46 @@
+import React, { useEffect } from "react";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { ScreenKey } from "../globals/constants";
+import ListSessions from "../components/CourseDetail/ListSessions/list-sessions";
+import ListAllCourse from "../components/Courses/ListAllCourse/list-all-course";
+import SectionIntro from "../components/CourseDetail/SectionIntro/section-intro";
+import { LogBox } from "react-native";
+
+const Tab = createMaterialTopTabNavigator();
+
+const CourseDetailTab = (props) => {
+  useEffect(() => {
+    LogBox.ignoreLogs([
+      "Non-serializable values were found in the navigation state",
+    ]);
+  }, []);
+  return (
+    <Tab.Navigator>
+      <Tab.Screen
+        name={ScreenKey.SectionIntro}
+        component={SectionIntro}
+        options={{ title: "Introduction" }}
+        initialParams={{
+          course: props.course,
+        }}
+      />
+      <Tab.Screen
+        name={ScreenKey.ListSessions}
+        component={ListSessions}
+        options={{ title: "Sessons" }}
+        initialParams={{
+          sections: props.course.section,
+          setUriVideo: props.setUriVideo,
+        }}
+      />
+      <Tab.Screen
+        name={ScreenKey.ListAllCourse}
+        component={ListAllCourse}
+        options={{ title: "Courses Like This" }}
+        initialParams={{ data: props.course.coursesLikeCategory }}
+      />
+    </Tab.Navigator>
+  );
+};
+
+export default CourseDetailTab;

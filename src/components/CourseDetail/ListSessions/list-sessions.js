@@ -3,7 +3,8 @@ import { View, FlatList, StyleSheet } from "react-native";
 import ListSessionsItem from "../ListSessionsItem/list-sessions-item";
 
 const ListSessions = (props) => {
-  const sections = props.section;
+  const sections = props.route.params.sections;
+  const setUriVideo = props.route.params.setUriVideo;
 
   const renderSeparator = () => {
     return (
@@ -26,7 +27,7 @@ const ListSessions = (props) => {
           <ListSessionsItem
             key={item.id.toString()}
             item={item}
-            setUriVideo={props.setUriVideo}
+            setUriVideo={setUriVideo}
           />
         )}
         ItemSeparatorComponent={renderSeparator}

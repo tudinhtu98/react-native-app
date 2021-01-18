@@ -55,10 +55,6 @@ export default class SplashScreen extends Component {
     }
   }
 
-  componentWillUnmount() {
-    clearInterval(this.timer);
-  }
-
   render() {
     return (
       <View style={styles.container}>
