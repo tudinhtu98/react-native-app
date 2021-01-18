@@ -8,6 +8,7 @@ import {
   ScrollView,
   Share,
 } from "react-native";
+import { Rating } from "react-native-ratings";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import {
   apiGetCourseLikeStatus,
@@ -76,6 +77,13 @@ const SectionIntro = (props) => {
   return (
     <View style={styles.view}>
       <Text style={styles.title}>{course.title}</Text>
+      <Rating
+        style={styles.rating}
+        imageSize={20}
+        readonly
+        startingValue={course.contentPoint || 0}
+        tintColor="lightgray"
+      />
       <View style={{ flexDirection: "row" }}>
         <TouchableOpacity
           onPress={() => {
@@ -83,7 +91,7 @@ const SectionIntro = (props) => {
           }}
         >
           <View style={styles.author}>
-            <Text>{course.instructor["name"]}</Text>
+            <Text>{course.instructor ? course.instructor["name"] : ""}</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -120,6 +128,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     margin: 5,
+  },
+  rating: {
+    margin: 5,
+    alignItems: "flex-start",
   },
   author: {
     backgroundColor: "gray",

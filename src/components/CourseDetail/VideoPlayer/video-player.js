@@ -7,7 +7,7 @@ import WebView from "react-native-webview";
 const { width, height } = Dimensions.get("window");
 
 const VideoPlayer = (props) => {
-  console.log("props.uriVideo", props.uriVideo);
+  // console.log("props.uriVideo", props.uriVideo);
   return (
     // <WebView
     //   style={{ flex: 1 }}

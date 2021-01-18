@@ -23,6 +23,7 @@ export const ScreenKey = {
   AuthorDetail: "AuthorDetail",
   ListSessions: "ListSessions",
   SectionIntro: "SectionIntro",
+  Comment: "Comment"
 };
 
 export const ImageKey = {};

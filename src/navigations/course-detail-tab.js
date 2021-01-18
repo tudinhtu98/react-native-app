@@ -5,6 +5,7 @@ import ListSessions from "../components/CourseDetail/ListSessions/list-sessions"
 import ListAllCourse from "../components/Courses/ListAllCourse/list-all-course";
 import SectionIntro from "../components/CourseDetail/SectionIntro/section-intro";
 import { LogBox } from "react-native";
+import Comment from "../components/CourseDetail/Comment/comment";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -19,7 +20,7 @@ const CourseDetailTab = (props) => {
       <Tab.Screen
         name={ScreenKey.SectionIntro}
         component={SectionIntro}
-        options={{ title: "Introduction" }}
+        options={{ title: "Info" }}
         initialParams={{
           course: props.course,
         }}
@@ -36,8 +37,16 @@ const CourseDetailTab = (props) => {
       <Tab.Screen
         name={ScreenKey.ListAllCourse}
         component={ListAllCourse}
-        options={{ title: "Courses Like This" }}
+        options={{ title: "Related Courses" }}
         initialParams={{ data: props.course.coursesLikeCategory }}
+      />
+      <Tab.Screen
+        name={ScreenKey.Comment}
+        component={Comment}
+        initialParams={{
+          ratings: props.course.ratings,
+          courseId: props.course.id,
+        }}
       />
     </Tab.Navigator>
   );

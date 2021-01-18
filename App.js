@@ -27,7 +27,6 @@ import { AuthorProvider } from "./src/provider/author-provider";
 import { NewCourseProvider } from "./src/provider/new-course-provider";
 import { TopSellCourseProvider } from "./src/provider/top-sell-course-provider";
 import { TopRateCourseProvider } from "./src/provider/top-rate-course-provider";
-import { Alert, BackHandler } from "react-native";
 
 const Tab = createBottomTabNavigator();
 const MainNavigationStack = createStackNavigator();
@@ -106,27 +105,6 @@ const MainNavigation = () => {
 };
 
 export default function App() {
-  useEffect(() => {
-    const backAction = () => {
-      Alert.alert("Hold on!", "Are you sure you want to exit?", [
-        {
-          text: "Cancel",
-          onPress: () => null,
-          style: "cancel"
-        },
-        { text: "YES", onPress: () => BackHandler.exitApp() }
-      ]);
-      return true;
-    };
-
-    const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      backAction
-    );
-
-    return () => backHandler.remove();
-  }, []);
-
   return (
     <ThemeProvider>
       <AuthenticationProvider>

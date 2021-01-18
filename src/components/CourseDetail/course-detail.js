@@ -40,27 +40,19 @@ const CourseDetail = (props) => {
       });
   };
 
-  useEffect(() => {
-    const backAction = () => {
-      // Alert.alert("Hold on!", "Are you sure you want to go back?", [
-      //   {
-      //     text: "Cancel",
-      //     onPress: () => null,
-      //     style: "cancel"
-      //   },
-      //   { text: "YES", onPress: () => props.navigation.goBack() }
-      // ]);
-      props.navigation.goBack();
-      return true;
-    };
+  // useEffect(() => {
+  //   const backAction = () => {
+  //     props.navigation.goBack();
+  //     return true;
+  //   };
 
-    const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      backAction
-    );
+  //   const backHandler = BackHandler.addEventListener(
+  //     "hardwareBackPress",
+  //     backAction
+  //   );
 
-    return () => backHandler.remove();
-  }, []);
+  //   return () => backHandler.remove();
+  // }, []);
 
   useEffect(() => {
     setLoading(true);

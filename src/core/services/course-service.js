@@ -24,3 +24,21 @@ export const apiGetCourseLikeStatus = (token, courseId) => {
     },
   });
 };
+
+export const apiAddComment = (token, courseId, point, content) => {
+  return axios.post(
+    host + `/course/rating-course`,
+    {
+      courseId,
+      formalityPoint: point.toString(),
+      contentPoint: point.toString(),
+      presentationPoint: point.toString(),
+      content,
+    },
+    {
+      headers: {
+        authorization: "Bearer " + token,
+      },
+    }
+  );
+};
