@@ -23,7 +23,11 @@ const ListSessions = (props) => {
       <FlatList
         data={sections}
         renderItem={({ item }) => (
-          <ListSessionsItem key={item.id.toString()} item={item} />
+          <ListSessionsItem
+            key={item.id.toString()}
+            item={item}
+            setUriVideo={props.setUriVideo}
+          />
         )}
         ItemSeparatorComponent={renderSeparator}
         keyExtractor={(item, index) => index.toString()}
