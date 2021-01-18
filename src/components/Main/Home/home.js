@@ -9,10 +9,12 @@ import { CategoryContext } from "../../../provider/category-provider";
 import { NewCourseContext } from "../../../provider/new-course-provider";
 import { TopSellCourseContext } from "../../../provider/top-sell-course-provider";
 import { TopRateCourseContext } from "../../../provider/top-rate-course-provider";
+import { ProcessCourseContext } from "../../../provider/process-course-provider";
+import SectionProcessCourses from "./SectionProcessCourses/section-process-courses";
 
 const Home = (props) => {
   const recommendCourseContext = useContext(RecommendCourseContext);
-  // const processCourseContext = useContext(ProcessCourseContext);
+  const processCourseContext = useContext(ProcessCourseContext);
   const newCourseContext = useContext(NewCourseContext);
   const topSellCourseContext = useContext(TopSellCourseContext);
   const topRateCourseContext = useContext(TopRateCourseContext);
@@ -22,7 +24,7 @@ const Home = (props) => {
   const navigation = props.navigation;
 
   useEffect(() => {
-    // processCourseContext.getProcessCourse(state.token);
+    processCourseContext.getProcessCourse(state.token);
     recommendCourseContext.getRecommendCourse(state.userInfo.id, 10, 0);
     newCourseContext.getNewCourse(10, 1);
     categoryContext.getCategory();
@@ -44,15 +46,15 @@ const Home = (props) => {
 
   return (
     <ScrollView style={styles.view}>
-      {/* {processCourseContext.state.isLoading ? (
+      {processCourseContext.state.isLoading ? (
         <ActivityIndicator size="large" color="blue" />
       ) : (
-        <SectionCourses
+        <SectionProcessCourses
           title="Continue learning"
           navigation={navigation}
           data={processCourseContext.state.data}
         />
-      )} */}
+      )}
       {recommendCourseContext.state.isLoading ? (
         <ActivityIndicator size="large" color="blue" />
       ) : (
