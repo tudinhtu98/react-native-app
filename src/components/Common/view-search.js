@@ -9,8 +9,10 @@ import {
 import { ScreenKey } from "../../globals/constants";
 import { AuthenticationContext } from "../../provider/authentication-provider";
 import { SearchContext } from "../../provider/search-provider";
+import { ThemeContext } from "../../provider/theme-provider";
 
 const ViewSearch = (props) => {
+  const { theme } = useContext(ThemeContext);
   const { state } = useContext(AuthenticationContext);
   const { search } = useContext(SearchContext);
   const [keyword, setKeyword] = useState("");
@@ -18,8 +20,9 @@ const ViewSearch = (props) => {
   return (
     <View style={{ flexDirection: "row" }}>
       <TextInput
-        style={styles.border}
+        style={{ ...styles.border, color: theme.foreground }}
         placeholder="Search text"
+        placeholderTextColor="gray"
         autoFocus={true}
         onChangeText={(keyword) => setKeyword(keyword)}
       />
@@ -32,7 +35,7 @@ const ViewSearch = (props) => {
           });
         }}
       >
-        <Text>Search</Text>
+        <Text style={{ color: "white" }}>Search</Text>
       </TouchableOpacity>
     </View>
   );

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { View, StyleSheet, TouchableOpacity, Text, Image } from "react-native";
 import Profile from "../Profile/profile";
 import { stylesGlo } from "../../../globals/styles";
@@ -6,6 +6,16 @@ import { ScreenKey } from "../../../globals/constants";
 import { StackActions } from "@react-navigation/native";
 import { ThemeContext } from "../../../provider/theme-provider";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const storeData = async (key, value) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem(key, jsonValue);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 
 const Settings = (props) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -21,6 +31,10 @@ const Settings = (props) => {
     props.navigation.dispatch(StackActions.replace(ScreenKey.Login));
   };
 
+  useEffect(() => {
+    storeData("themeName", theme.name);
+  }, [theme]);
+
   return (
     <View style={{ ...styles.view, backgroundColor: theme.background }}>
       <TouchableOpacity
@@ -33,18 +47,26 @@ const Settings = (props) => {
             style={styles.avatar}
             source={{ uri: authContext.state.userInfo.avatar }}
           />
-          <Text style={styles.textLarge}>{name}</Text>
+          <Text style={{ ...styles.textLarge, color: theme.foreground }}>
+            {name}
+          </Text>
         </View>
       </TouchableOpacity>
       <View></View>
       <View>
-        <TouchableOpacity style={styles.button} onPress={handleSignOut}>
-          <Text style={stylesGlo.textBlue}>SIGNOUT</Text>
+        <TouchableOpacity
+          style={{ ...styles.button, borderColor: theme.foreground }}
+          onPress={handleSignOut}
+        >
+          <Text style={{ color: theme.foreground }}>SIGNOUT</Text>
         </TouchableOpacity>
       </View>
       <View>
-        <TouchableOpacity style={styles.button} onPress={toggleTheme}>
-          <Text style={stylesGlo.textBlue}>Change theme</Text>
+        <TouchableOpacity
+          style={{ ...styles.button, borderColor: theme.foreground }}
+          onPress={toggleTheme}
+        >
+          <Text style={{ color: theme.foreground }}>Change theme</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -55,7 +77,8 @@ export default Settings;
 
 const styles = StyleSheet.create({
   view: {
-    margin: 10,
+    padding: 10,
+    height: "100%",
   },
   viewProfile: {
     flexDirection: "row",
@@ -69,7 +92,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: "blue",
   },
   avatar: {
     height: 70,

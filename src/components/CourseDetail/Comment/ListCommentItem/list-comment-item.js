@@ -1,25 +1,31 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Text, View, StyleSheet, Image } from "react-native";
 import { Rating } from "react-native-ratings";
+import { ThemeContext } from "../../../../provider/theme-provider";
 
 const ListCommentItem = (props) => {
+  const { theme } = useContext(ThemeContext);
   return (
     <View>
       <View style={styles.viewProfile}>
         <Image style={styles.avatar} source={{ uri: props.item.user.avatar }} />
-        <Text style={styles.textUsername}>{props.item.user.name}</Text>
+        <Text style={{ ...styles.textUsername, color: theme.foreground }}>
+          {props.item.user.name}
+        </Text>
         <Rating
           style={styles.rating}
           imageSize={17}
           readonly
           startingValue={props.item.contentPoint || 0}
-          tintColor="lightgray"
+          tintColor={theme.background}
         />
       </View>
       <Text style={styles.textDatetime}>
         {new Date(props.item.createdAt || props.item.updatedAt).toDateString()}
       </Text>
-      <Text style={styles.textContent}>{props.item.content}</Text>
+      <Text style={{ ...styles.textContent, color: theme.foreground }}>
+        {props.item.content}
+      </Text>
     </View>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   LogBox,
@@ -8,11 +8,13 @@ import {
 } from "react-native";
 import { apiGetCourseDetail } from "../../core/services/course-service";
 import CourseDetailTab from "../../navigations/course-detail-tab";
+import { ThemeContext } from "../../provider/theme-provider";
 import VideoPlayer from "./VideoPlayer/video-player";
 
 const { height } = Dimensions.get("window");
 
 const CourseDetail = (props) => {
+  const { theme } = useContext(ThemeContext);
   const [isLoading, setLoading] = useState(true);
   const [course, setCourse] = useState({});
   const [uriVideo, setUriVideo] = useState("");
@@ -62,7 +64,7 @@ const CourseDetail = (props) => {
   }, []);
 
   return (
-    <View>
+    <View style={{ height: "100%", backgroundColor: theme.background }}>
       {isLoading ? (
         <ActivityIndicator size="large" color="blue" />
       ) : (

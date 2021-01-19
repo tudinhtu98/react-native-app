@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, TouchableOpacity, Image, Text, StyleSheet } from "react-native";
 import { ScreenKey } from "../../../globals/constants";
 import { stylesGlo } from "../../../globals/styles";
+import { ThemeContext } from "../../../provider/theme-provider";
 
 const ListAuthorsItem = (props) => {
+  const { theme } = useContext(ThemeContext);
   return (
     <View>
       <TouchableOpacity
@@ -16,7 +18,7 @@ const ListAuthorsItem = (props) => {
       >
         <Image style={styles.avatar} source={{ uri: props.item.avatar }} />
         <View style={styles.viewPath}>
-          <Text>{props.item.name}</Text>
+          <Text style={{ color: theme.foreground }}>{props.item.name}</Text>
           <Text
             style={stylesGlo.textSmall}
           >{`${props.item.numcourses} courses`}</Text>

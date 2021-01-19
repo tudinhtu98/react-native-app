@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import {
@@ -9,24 +9,28 @@ import {
 } from "react-native-popup-menu";
 import { convertHourToMin } from "../../../core/utilities/date-time-utilities";
 import { stylesGlo } from "../../../globals/styles";
-
-const RenderSessionItem = (props) => {
-  return props.data.map((item) => (
-    <TouchableOpacity
-      key={item.id.toString()}
-      style={styles.viewSession}
-      onPress={() => {
-        // Alert.alert(`duration session: ${convertHourToMin(item.hours || 0)}`);
-        props.setUriVideo(item.videoUrl);
-      }}
-    >
-      <Text>{item.name}</Text>
-      <Text>{`${convertHourToMin(item.hours || 0)} mins`}</Text>
-    </TouchableOpacity>
-  ));
-};
+import { ThemeContext } from "../../../provider/theme-provider";
 
 const ListSessionsItem = (props) => {
+  const { theme } = useContext(ThemeContext);
+
+  const RenderSessionItem = (props) => {
+    return props.data.map((item) => (
+      <TouchableOpacity
+        key={item.id.toString()}
+        style={styles.viewSession}
+        onPress={() => {
+          // Alert.alert(`duration session: ${convertHourToMin(item.hours || 0)}`);
+          props.setUriVideo(item.videoUrl);
+        }}
+      >
+        <Text style={{ color: theme.foreground }}>{item.name}</Text>
+        <Text style={{ color: theme.foreground }}>{`${convertHourToMin(
+          item.hours || 0
+        )} mins`}</Text>
+      </TouchableOpacity>
+    ));
+  };
   return (
     <View>
       <View style={styles.view}>
@@ -36,8 +40,10 @@ const ListSessionsItem = (props) => {
           </Text>
         </View>
         <View style={{ marginLeft: 10 }}>
-          <Text>{props.item.name}</Text>
-          <Text>{`${convertHourToMin(props.item.sumHours || 0)} mins`}</Text>
+          <Text style={{ color: theme.foreground }}>{props.item.name}</Text>
+          <Text style={{ color: theme.foreground }}>{`${convertHourToMin(
+            props.item.sumHours || 0
+          )} mins`}</Text>
         </View>
         <View style={styles.dots}>
           <Menu>
@@ -56,7 +62,10 @@ const ListSessionsItem = (props) => {
         </View>
       </View>
       <View>
-        <RenderSessionItem data={props.item.lesson} setUriVideo={props.setUriVideo}/>
+        <RenderSessionItem
+          data={props.item.lesson}
+          setUriVideo={props.setUriVideo}
+        />
       </View>
     </View>
   );
@@ -65,7 +74,7 @@ const ListSessionsItem = (props) => {
 export default ListSessionsItem;
 
 const styles = StyleSheet.create({
-  view: { flexDirection: "row", padding: 0 },
+  view: { flexDirection: "row", paddingTop: 5 },
   viewSession: {
     flexDirection: "row",
     margin: 10,

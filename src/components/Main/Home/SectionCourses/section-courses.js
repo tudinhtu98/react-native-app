@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
@@ -10,8 +10,10 @@ import { ScreenKey } from "../../../../globals/constants";
 import SectionCoursesItem from "../SectionCoursesItem/section-courses-item";
 import { textGlo } from "../../../../globals/constants";
 import { stylesGlo } from "../../../../globals/styles";
+import { ThemeContext } from "../../../../provider/theme-provider";
 
 const SectionCourses = (props) => {
+  const { theme } = useContext(ThemeContext);
   const courses = props.data || [];
 
   const onPressSectionCoursesItem = (item) => {
@@ -42,10 +44,10 @@ const SectionCourses = (props) => {
     <View>
       <View>
         <View style={styles.titleView}>
-          <Text>{props.title}</Text>
+          <Text style={{ color: theme.foreground }}>{props.title}</Text>
           {courses.length > 0 && (
             <TouchableOpacity onPress={onPressSeeAll}>
-              <Text>{`See all >`}</Text>
+              <Text style={{ color: theme.foreground }}>{`See all >`}</Text>
             </TouchableOpacity>
           )}
         </View>

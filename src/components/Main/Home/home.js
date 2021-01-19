@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { ScrollView, StyleSheet, ActivityIndicator } from "react-native";
+import { ScrollView, ActivityIndicator } from "react-native";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
 import { RecommendCourseContext } from "../../../provider/recommend-course-provider";
 // import { ProcessCourseContext } from "../../../provider/process-course-provider";
@@ -11,6 +11,7 @@ import { TopSellCourseContext } from "../../../provider/top-sell-course-provider
 import { TopRateCourseContext } from "../../../provider/top-rate-course-provider";
 import { ProcessCourseContext } from "../../../provider/process-course-provider";
 import SectionProcessCourses from "./SectionProcessCourses/section-process-courses";
+import { ThemeContext } from "../../../provider/theme-provider";
 
 const Home = (props) => {
   const recommendCourseContext = useContext(RecommendCourseContext);
@@ -21,6 +22,7 @@ const Home = (props) => {
   const categoryContext = useContext(CategoryContext);
 
   const { state } = useContext(AuthenticationContext);
+  const { theme } = useContext(ThemeContext);
   const navigation = props.navigation;
 
   useEffect(() => {
@@ -45,7 +47,7 @@ const Home = (props) => {
   }, [navigation]);
 
   return (
-    <ScrollView style={styles.view}>
+    <ScrollView style={{backgroundColor: theme.background}}>
       {processCourseContext.state.isLoading ? (
         <ActivityIndicator size="large" color="blue" />
       ) : (
@@ -96,9 +98,3 @@ const Home = (props) => {
 };
 
 export default Home;
-
-const styles = StyleSheet.create({
-  view: {
-    margin: 0,
-  },
-});

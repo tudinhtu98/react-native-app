@@ -4,8 +4,10 @@ import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { Rating } from "react-native-ratings";
 import { apiAddComment } from "../../../../core/services/course-service";
 import { AuthenticationContext } from "../../../../provider/authentication-provider";
+import { ThemeContext } from "../../../../provider/theme-provider";
 
 const SectionAddComment = (props) => {
+  const { theme } = useContext(ThemeContext);
   const [isLoading, setLoading] = useState(false);
   const [content, setContent] = useState("");
   const [point, setPoint] = useState(0);
@@ -37,7 +39,11 @@ const SectionAddComment = (props) => {
   return (
     <View style={styles.viewAddComment}>
       <TextInput
-        style={styles.textInput}
+        style={{
+          ...styles.textInput,
+          color: theme.foreground,
+          borderColor: theme.foreground,
+        }}
         value={content}
         onChangeText={(content) => setContent(content)}
       />
@@ -46,7 +52,7 @@ const SectionAddComment = (props) => {
         imageSize={30}
         startingValue={0}
         onFinishRating={ratingCompleted}
-        tintColor="lightgray"
+        tintColor={theme.background}
       />
       <View style={{ alignItems: "center" }}>
         {isLoading ? (

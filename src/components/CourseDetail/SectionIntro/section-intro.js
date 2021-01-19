@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Share,
+  Dimensions,
 } from "react-native";
 import { Rating } from "react-native-ratings";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
@@ -19,9 +20,12 @@ import {
 import { convertHourToMin } from "../../../core/utilities/date-time-utilities";
 import { stylesGlo } from "../../../globals/styles";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
+import { ThemeContext } from "../../../provider/theme-provider";
 
+const { height } = Dimensions.get("window");
 const SectionIntro = (props) => {
   const course = props.route.params.course;
+  const { theme } = useContext(ThemeContext);
   const { state } = useContext(AuthenticationContext);
   const [favoriteIconName, setFavoriteIconName] = useState("favorite-border");
   const [addIconName, setAddIconName] = useState("add");
@@ -118,14 +122,16 @@ const SectionIntro = (props) => {
   };
 
   return (
-    <View style={styles.view}>
-      <Text style={styles.title}>{course.title}</Text>
+    <View style={{ ...styles.view, backgroundColor: theme.background }}>
+      <Text style={{ ...styles.title, color: theme.foreground }}>
+        {course.title}
+      </Text>
       <Rating
         style={styles.rating}
         imageSize={20}
         readonly
         startingValue={course.contentPoint || 0}
-        tintColor="lightgray"
+        tintColor={theme.background}
       />
       <View style={{ flexDirection: "row" }}>
         <TouchableOpacity
@@ -134,7 +140,9 @@ const SectionIntro = (props) => {
           }}
         >
           <View style={styles.author}>
-            <Text>{course.instructor ? course.instructor["name"] : ""}</Text>
+            <Text style={{ color: theme.foreground }}>
+              {course.instructor ? course.instructor["name"] : ""}
+            </Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -151,19 +159,19 @@ const SectionIntro = (props) => {
           disabled={ownStatus}
         >
           <MaterialIcons name={addIconName} size={25} color="green" />
-          <Text>Get Course</Text>
+          <Text style={{ color: theme.foreground }}>Get Course</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.iconCenter} onPress={handleFavorite}>
           <MaterialIcons name={favoriteIconName} size={25} color="red" />
-          <Text>Like</Text>
+          <Text style={{ color: theme.foreground }}>Like</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.iconCenter} onPress={handleShareCourse}>
-          <MaterialIcons name="share" size={25} color="gray" />
-          <Text>Share</Text>
+          <MaterialIcons name="share" size={25} color={theme.foreground} />
+          <Text style={{ color: theme.foreground }}>Share</Text>
         </TouchableOpacity>
       </View>
       <ScrollView style={[styles.scrollIntro, stylesGlo.shadow]}>
-        <Text>{course.description}</Text>
+        <Text style={{ color: theme.foreground }}>{course.description}</Text>
       </ScrollView>
     </View>
   );
@@ -173,8 +181,8 @@ export default SectionIntro;
 
 const styles = StyleSheet.create({
   view: {
-    margin: 10,
-    height: 300,
+    padding: 10,
+    height: (height * 5.5) / 10,
   },
   title: {
     fontSize: 20,
@@ -198,8 +206,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   scrollIntro: {
-    height: 50,
-    marginTop: 20,
+    marginVertical: 10,
     padding: 5,
     borderWidth: 1,
     borderRadius: 10,

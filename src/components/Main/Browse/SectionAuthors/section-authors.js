@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, ScrollView } from "react-native";
+import { ThemeContext } from "../../../../provider/theme-provider";
 import SectionAuthorsItem from "../SectionAuthorsItem/section-authors-item";
 
 const SectionAuthors = (props) => {
+  const { theme } = useContext(ThemeContext);
   const authors = props.authors || [];
 
   const renderListItems = (authors) => {
@@ -17,7 +19,7 @@ const SectionAuthors = (props) => {
   return (
     <View style={{ margin: 5 }}>
       <View>
-        <Text style={{ margin: 5 }}>{props.title}</Text>
+        <Text style={{ margin: 5, color: theme.foreground }}>{props.title}</Text>
       </View>
       <ScrollView horizontal={true}>{renderListItems(authors)}</ScrollView>
     </View>

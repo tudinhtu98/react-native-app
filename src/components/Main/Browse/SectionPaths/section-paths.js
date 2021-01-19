@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
@@ -7,9 +7,11 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { ScreenKey } from "../../../../globals/constants";
+import { ThemeContext } from "../../../../provider/theme-provider";
 import SectionPathsItem from "../SectionPathsItem/section-paths-item";
 
 const SectionPaths = (props) => {
+  const { theme } = useContext(ThemeContext);
   const categories = props.data || [];
   const onPressSectionPathsItem = (item) => {
     props.navigation.navigate(ScreenKey.PathDetail, {
@@ -37,7 +39,7 @@ const SectionPaths = (props) => {
   return (
     <View>
       <View style={styles.titleView}>
-        <Text>{props.title}</Text>
+        <Text style={{ color: theme.foreground }}>{props.title}</Text>
         {/* <TouchableOpacity onPress={onPressSeeAll}>
           <Text>{`See all >`}</Text>
         </TouchableOpacity> */}

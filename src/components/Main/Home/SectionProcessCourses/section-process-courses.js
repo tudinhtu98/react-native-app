@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
@@ -10,8 +10,10 @@ import { ScreenKey } from "../../../../globals/constants";
 import SectionProcessCoursesItem from "../SectionProcessCoursesItem/section-process-courses-item";
 import { textGlo } from "../../../../globals/constants";
 import { stylesGlo } from "../../../../globals/styles";
+import { ThemeContext } from "../../../../provider/theme-provider";
 
 const SectionProcessCourses = (props) => {
+  const { theme } = useContext(ThemeContext);
   const courses = props.data || [];
 
   const onPressSectionProcessCoursesItem = (item) => {
@@ -42,7 +44,7 @@ const SectionProcessCourses = (props) => {
     <View>
       <View>
         <View style={styles.titleView}>
-          <Text>{props.title}</Text>
+          <Text style={{color: theme.foreground}}>{props.title}</Text>
           {/* {courses.length > 0 && (
             <TouchableOpacity onPress={onPressSeeAll}>
               <Text>{`See all >`}</Text>

@@ -9,6 +9,7 @@ import { ScreenKey } from "../../../globals/constants";
 import { AuthorContext } from "../../../provider/author-provider";
 import { NewCourseContext } from "../../../provider/new-course-provider";
 import { RecommendCourseContext } from "../../../provider/recommend-course-provider";
+import { ThemeContext } from "../../../provider/theme-provider";
 import ImageButton from "../../Common/image-button";
 import ImageButtonItem from "../../Common/image-button-item";
 import SectionAuthors from "./SectionAuthors/section-authors";
@@ -16,6 +17,7 @@ import SectionPaths from "./SectionPaths/section-paths";
 import SectionSkills from "./SectionSkills/section-skills";
 
 const Browse = (props) => {
+  const { theme } = useContext(ThemeContext);
   const recommendCourseContext = useContext(RecommendCourseContext);
   const newCourseContext = useContext(NewCourseContext);
   const authorContext = useContext(AuthorContext);
@@ -60,7 +62,7 @@ const Browse = (props) => {
   );
 
   return (
-    <ScrollView>
+    <ScrollView style={{ backgroundColor: theme.background }}>
       <ImageButton title="NEW RELEASES" onPress={onPressNewReleases} />
       <ImageButton title="RECOMMENDED FOR YOU" onPress={onPressRecommend} />
 

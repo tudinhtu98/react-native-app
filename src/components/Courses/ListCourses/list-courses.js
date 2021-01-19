@@ -1,11 +1,13 @@
 import { StackActions } from "@react-navigation/native";
-import React from "react";
+import React, { useContext } from "react";
 import { FlatList, View, Text } from "react-native";
 import { ScreenKey, textGlo } from "../../../globals/constants";
 import { stylesGlo } from "../../../globals/styles";
+import { ThemeContext } from "../../../provider/theme-provider";
 import ListCoursesItem from "../ListCoursesItem/list-courses-item";
 
 const ListCourses = (props) => {
+  const { theme } = useContext(ThemeContext);
   const courses = props.courses;
 
   const renderSeparator = () => {
@@ -33,7 +35,9 @@ const ListCourses = (props) => {
   return (
     <View>
       {courses.length == 0 ? (
-        <Text style={stylesGlo.emptyCourses}>{textGlo.emptyCourse}</Text>
+        <Text style={{ ...stylesGlo.emptyCourses, color: theme.foreground }}>
+          {textGlo.emptyCourse}
+        </Text>
       ) : (
         <FlatList
           data={courses}

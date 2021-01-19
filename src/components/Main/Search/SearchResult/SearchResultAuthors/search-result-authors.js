@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
 import { stylesGlo } from "../../../../../globals/styles";
 import { SearchContext } from "../../../../../provider/search-provider";
+import { ThemeContext } from "../../../../../provider/theme-provider";
 import ListAuthors from "../../../../Authors/ListAuthors/list-authors";
 
 const SearchResultAuthors = (props) => {
+  const { theme } = useContext(ThemeContext);
   const { state } = useContext(SearchContext);
 
   return (
@@ -12,9 +14,13 @@ const SearchResultAuthors = (props) => {
       {state.isLoading ? (
         <ActivityIndicator size="large" color="blue" />
       ) : (
-        <View>
+        <View style={{ backgroundColor: theme.background }}>
           <Text
-            style={[styles.textResult, stylesGlo.textSmall]}
+            style={[
+              styles.textResult,
+              stylesGlo.textSmall,
+              { color: theme.foreground },
+            ]}
           >{`${state.data.instructors.total} results`}</Text>
           <ListAuthors
             navigation={props.navigation}
