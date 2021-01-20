@@ -21,11 +21,13 @@ import { AuthenticationContext } from "../../../provider/authentication-provider
 import { SearchContext } from "../../../provider/search-provider";
 import { ScreenKey } from "../../../globals/constants";
 import { ThemeContext } from "../../../provider/theme-provider";
+import { LanguageContext } from "../../../provider/language-provider";
 
 const Search = (props) => {
   const { state } = useContext(AuthenticationContext);
   const { search } = useContext(SearchContext);
   const { theme } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState({});
 
@@ -112,7 +114,9 @@ const Search = (props) => {
     <ScrollView style={{ padding: 5, backgroundColor: theme.background }}>
       <ViewSearch navigation={props.navigation} />
       <View style={styles.viewTop}>
-        <Text style={{ color: theme.foreground }}>Recent searchs</Text>
+        <Text style={{ color: theme.foreground }}>
+          {language.recentSearchs}
+        </Text>
         {/* <TouchableOpacity onPress={() => Alert.alert("onPress Clear all")}>
           <Text style={styles.buttonClear}>CLEAR ALL</Text>
         </TouchableOpacity> */}

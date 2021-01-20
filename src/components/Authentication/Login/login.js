@@ -14,6 +14,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScreenKey } from "../../../globals/constants";
 import { stylesGlo } from "../../../globals/styles";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
+import { LanguageContext } from "../../../provider/language-provider";
 
 const renderLoginStatus = (state) => {
   if (!state.errorMessage) {
@@ -35,6 +36,8 @@ const storeData = async (key, value) => {
 const Login = (props) => {
   const [textEmail, setTextEmail] = useState("");
   const [textPassword, setTextPassword] = useState("");
+  
+  const { language } = useContext(LanguageContext);
   const authContext = useContext(AuthenticationContext);
 
   useEffect(() => {
@@ -63,7 +66,7 @@ const Login = (props) => {
       ></TextInput>
       <TextInput
         style={styles.textInput}
-        placeholder="Password"
+        placeholder={language.password}
         autoCompleteType="password"
         textContentType="password"
         autoCapitalize="none"
@@ -82,7 +85,7 @@ const Login = (props) => {
           authContext.login(textEmail, textPassword);
         }}
       >
-        <Text style={styles.textWhite}>LOGIN</Text>
+        <Text style={styles.textWhite}>{language.login}</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
@@ -90,7 +93,7 @@ const Login = (props) => {
           props.navigation.navigate(ScreenKey.ForgetPassword);
         }}
       >
-        <Text style={styles.textBlue}>FORGOT PASSWORD?</Text>
+        <Text style={styles.textBlue}>{language.forgotPassword}</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
@@ -98,7 +101,7 @@ const Login = (props) => {
           props.navigation.navigate(ScreenKey.Register);
         }}
       >
-        <Text style={styles.textBlue}>REGISTER FREE</Text>
+        <Text style={styles.textBlue}>{language.registerFree}</Text>
       </TouchableOpacity>
     </View>
   );

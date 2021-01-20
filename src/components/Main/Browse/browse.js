@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import { ScreenKey } from "../../../globals/constants";
 import { AuthorContext } from "../../../provider/author-provider";
+import { LanguageContext } from "../../../provider/language-provider";
 import { NewCourseContext } from "../../../provider/new-course-provider";
 import { RecommendCourseContext } from "../../../provider/recommend-course-provider";
 import { ThemeContext } from "../../../provider/theme-provider";
@@ -18,6 +19,7 @@ import SectionSkills from "./SectionSkills/section-skills";
 
 const Browse = (props) => {
   const { theme } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
   const recommendCourseContext = useContext(RecommendCourseContext);
   const newCourseContext = useContext(NewCourseContext);
   const authorContext = useContext(AuthorContext);
@@ -58,13 +60,19 @@ const Browse = (props) => {
   ];
 
   const renderItem = ({ item }) => (
-    <ImageButtonItem title="NEW RELEASES" onPress={onPressNewReleases} />
+    <ImageButtonItem
+      title={language.newReleases}
+      onPress={onPressNewReleases}
+    />
   );
 
   return (
     <ScrollView style={{ backgroundColor: theme.background }}>
-      <ImageButton title="NEW RELEASES" onPress={onPressNewReleases} />
-      <ImageButton title="RECOMMENDED FOR YOU" onPress={onPressRecommend} />
+      <ImageButton title={language.newReleases} onPress={onPressNewReleases} />
+      <ImageButton
+        title={language.recommendedForYou}
+        onPress={onPressRecommend}
+      />
 
       <FlatList
         // style={styles.viewFlatList}
@@ -83,7 +91,7 @@ const Browse = (props) => {
         <ActivityIndicator size="large" color="blue" />
       ) : (
         <SectionAuthors
-          title="Top authors"
+          title={language.topAuthors}
           navigation={props.navigation}
           authors={authorContext.state.data}
         />

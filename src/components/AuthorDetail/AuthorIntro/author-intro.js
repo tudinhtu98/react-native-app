@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, StyleSheet, Image, Text, Dimensions } from "react-native";
 import { stylesGlo } from "../../../globals/styles";
+import { LanguageContext } from "../../../provider/language-provider";
 
 const { width } = Dimensions.get("window");
 
 const AuthorIntro = (props) => {
+  const { language } = useContext(LanguageContext);
   const author = props.author;
   return (
     <View style={styles.view}>
@@ -15,11 +17,13 @@ const AuthorIntro = (props) => {
       <View style={styles.viewInfo}>
         <Text style={styles.name}>{author.name}</Text>
         <Text>{`Email: ${author.email}`}</Text>
-        <Text>{`Phone: ${author.phone || ""}`}</Text>
-        <Text>{`Skill: ${author.skills ? author.skills.join(", ") : ""}`}</Text>
-        <Text>{`Major skill: ${author.major || ""}`}</Text>
-        <Text>{`Total courses: ${author.totalCourse || ""}`}</Text>
-        <Text>{`Introduction: ${author.intro || ""}`}</Text>
+        <Text>{`${language.phone}: ${author.phone || ""}`}</Text>
+        <Text>{`${language.skill}: ${
+          author.skills ? author.skills.join(", ") : ""
+        }`}</Text>
+        <Text>{`${language.majorSkill}: ${author.major || ""}`}</Text>
+        <Text>{`${language.totalCourses}: ${author.totalCourse || ""}`}</Text>
+        <Text>{`${language.introduction}: ${author.intro || ""}`}</Text>
       </View>
     </View>
   );

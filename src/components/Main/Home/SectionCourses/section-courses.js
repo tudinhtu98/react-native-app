@@ -11,9 +11,11 @@ import SectionCoursesItem from "../SectionCoursesItem/section-courses-item";
 import { textGlo } from "../../../../globals/constants";
 import { stylesGlo } from "../../../../globals/styles";
 import { ThemeContext } from "../../../../provider/theme-provider";
+import { LanguageContext } from "../../../../provider/language-provider";
 
 const SectionCourses = (props) => {
   const { theme } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
   const courses = props.data || [];
 
   const onPressSectionCoursesItem = (item) => {
@@ -47,7 +49,7 @@ const SectionCourses = (props) => {
           <Text style={{ color: theme.foreground }}>{props.title}</Text>
           {courses.length > 0 && (
             <TouchableOpacity onPress={onPressSeeAll}>
-              <Text style={{ color: theme.foreground }}>{`See all >`}</Text>
+              <Text style={{ color: theme.foreground }}>{`${language.seeAll} >`}</Text>
             </TouchableOpacity>
           )}
         </View>

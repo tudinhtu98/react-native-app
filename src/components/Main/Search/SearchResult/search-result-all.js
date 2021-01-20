@@ -15,9 +15,12 @@ import { ThemeContext } from "../../../../provider/theme-provider";
 import ListAuthors from "../../../Authors/ListAuthors/list-authors";
 import ListCourses from "../../../Courses/ListCourses/list-courses";
 import ListPaths from "../../../Paths/ListPaths/list-paths";
+import { capitalizeFirstLetter } from "../../../../core/utilities/string-utilities";
+import { LanguageContext } from "../../../../provider/language-provider";
 
 const SearchResultAll = (props) => {
   const { theme } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
   const { state } = useContext(SearchContext);
 
   const RenderSeparator = () => {
@@ -45,7 +48,9 @@ const SearchResultAll = (props) => {
         <ScrollView>
           {/* Courses Result */}
           <View style={styles.viewRow}>
-            <Text style={{ color: theme.foreground }}>Courses</Text>
+            <Text style={{ color: theme.foreground }}>
+              {capitalizeFirstLetter(language.courses)}
+            </Text>
             <TouchableOpacity
               onPress={() => {
                 props.navigation.navigate(ScreenKey.SearchResultCourses);
@@ -53,7 +58,7 @@ const SearchResultAll = (props) => {
             >
               <Text
                 style={{ ...stylesGlo.textSmall, color: theme.foreground }}
-              >{`${state.data.courses.total} results >`}</Text>
+              >{`${state.data.courses.total} ${language.results} >`}</Text>
             </TouchableOpacity>
           </View>
           <RenderSeparator />
@@ -78,7 +83,7 @@ const SearchResultAll = (props) => {
       <ListPaths navigation={props.navigation} /> */}
           {/* Authors Result */}
           <View style={styles.viewRow}>
-            <Text style={{ color: theme.foreground }}>Authors</Text>
+            <Text style={{ color: theme.foreground }}>{language.authors}</Text>
             <TouchableOpacity
               onPress={() => {
                 props.navigation.navigate(ScreenKey.SearchResultAuthors);
@@ -86,7 +91,7 @@ const SearchResultAll = (props) => {
             >
               <Text
                 style={{ ...stylesGlo.textSmall, color: theme.foreground }}
-              >{`${state.data.instructors.total} results >`}</Text>
+              >{`${state.data.instructors.total} ${language.results} >`}</Text>
             </TouchableOpacity>
           </View>
           <RenderSeparator />

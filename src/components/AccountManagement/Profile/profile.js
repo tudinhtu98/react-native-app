@@ -13,6 +13,7 @@ import {
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ScreenKey } from "../../../globals/constants";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
+import { LanguageContext } from "../../../provider/language-provider";
 import { ThemeContext } from "../../../provider/theme-provider";
 
 const Profile = (props) => {
@@ -20,6 +21,7 @@ const Profile = (props) => {
     AuthenticationContext
   );
   const { theme } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
   const [isEditing, setEditing] = useState(false);
   const [isEditingPass, setEditingPass] = useState(false);
   const [nameUpdate, setNameUpdate] = useState("");
@@ -93,7 +95,7 @@ const Profile = (props) => {
         <Text style={{ ...styles.textMedium, color: theme.foreground }}>
           {email}
         </Text>
-        <Text style={{ color: theme.foreground }}>Phone</Text>
+        <Text style={{ color: theme.foreground }}>{language.phone}</Text>
         <Text style={{ ...styles.textMedium, color: theme.foreground }}>
           {phone}
         </Text>
@@ -102,13 +104,13 @@ const Profile = (props) => {
           style={[styles.button, styles.buttonProfile]}
           onPress={onPressUpdateProfile}
         >
-          <Text style={styles.textStyle}>Update Profile</Text>
+          <Text style={styles.textStyle}>{language.updateProfile}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.button, styles.buttonPassword]}
           onPress={onPressChangePass}
         >
-          <Text style={styles.textStyle}>Change Password</Text>
+          <Text style={styles.textStyle}>{language.changePassword}</Text>
         </TouchableOpacity>
       </View>
       {/* Update infomation */}
@@ -125,7 +127,7 @@ const Profile = (props) => {
             style={{ ...styles.modalView, backgroundColor: theme.background }}
           >
             <Text style={{ ...styles.modalText, color: theme.foreground }}>
-              Name
+              {language.name}
             </Text>
             <TextInput
               style={{
@@ -137,7 +139,7 @@ const Profile = (props) => {
               onChangeText={(name) => setNameUpdate(name)}
             />
             <Text style={{ ...styles.modalText, color: theme.foreground }}>
-              Phone
+              {language.phone}
             </Text>
             <TextInput
               style={{
@@ -155,13 +157,13 @@ const Profile = (props) => {
               style={{ ...styles.openButton, backgroundColor: "darkgreen" }}
               onPress={onPressSaveProfile}
             >
-              <Text style={styles.textStyle}>Save</Text>
+              <Text style={styles.textStyle}>{language.save}</Text>
             </TouchableHighlight>
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
               onPress={onPressCancelProfile}
             >
-              <Text style={styles.textStyle}>Cancel</Text>
+              <Text style={styles.textStyle}>{language.cancel}</Text>
             </TouchableHighlight>
           </View>
         </View>
@@ -180,7 +182,7 @@ const Profile = (props) => {
             style={{ ...styles.modalView, backgroundColor: theme.background }}
           >
             <Text style={{ ...styles.modalText, color: theme.foreground }}>
-              Old Password
+              {language.oldPassword}
             </Text>
             <TextInput
               style={{
@@ -192,7 +194,7 @@ const Profile = (props) => {
               onChangeText={(oldPass) => setOldPass(oldPass)}
             />
             <Text style={{ ...styles.modalText, color: theme.foreground }}>
-              New Password
+              {language.newPassword}
             </Text>
             <TextInput
               style={{
@@ -208,13 +210,13 @@ const Profile = (props) => {
               style={{ ...styles.openButton, backgroundColor: "darkgreen" }}
               onPress={onPressSavePass}
             >
-              <Text style={styles.textStyle}>Save</Text>
+              <Text style={styles.textStyle}>{language.save}</Text>
             </TouchableHighlight>
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
               onPress={onPressCancelChangePass}
             >
-              <Text style={styles.textStyle}>Cancel</Text>
+              <Text style={styles.textStyle}>{language.cancel}</Text>
             </TouchableHighlight>
           </View>
         </View>

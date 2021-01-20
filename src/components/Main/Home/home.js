@@ -12,6 +12,7 @@ import { TopRateCourseContext } from "../../../provider/top-rate-course-provider
 import { ProcessCourseContext } from "../../../provider/process-course-provider";
 import SectionProcessCourses from "./SectionProcessCourses/section-process-courses";
 import { ThemeContext } from "../../../provider/theme-provider";
+import { LanguageContext } from "../../../provider/language-provider";
 
 const Home = (props) => {
   const recommendCourseContext = useContext(RecommendCourseContext);
@@ -23,6 +24,7 @@ const Home = (props) => {
 
   const { state } = useContext(AuthenticationContext);
   const { theme } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
   const navigation = props.navigation;
 
   useEffect(() => {
@@ -52,7 +54,7 @@ const Home = (props) => {
         <ActivityIndicator size="large" color="blue" />
       ) : (
         <SectionProcessCourses
-          title="Continue learning"
+          title={language.continueLearning}
           navigation={navigation}
           data={processCourseContext.state.data}
         />
@@ -61,7 +63,7 @@ const Home = (props) => {
         <ActivityIndicator size="large" color="blue" />
       ) : (
         <SectionCourses
-          title="Recommended For You"
+          title={language.recommendedForYou}
           navigation={navigation}
           data={recommendCourseContext.state.data}
         />
@@ -70,7 +72,7 @@ const Home = (props) => {
         <ActivityIndicator size="large" color="blue" />
       ) : (
         <SectionCourses
-          title="Top Rate"
+          title={language.topRate}
           navigation={navigation}
           data={topRateCourseContext.state.data}
         />
@@ -79,7 +81,7 @@ const Home = (props) => {
         <ActivityIndicator size="large" color="blue" />
       ) : (
         <SectionCourses
-          title="Top Sell"
+          title={language.topSell}
           navigation={navigation}
           data={topSellCourseContext.state.data}
         />
@@ -88,7 +90,7 @@ const Home = (props) => {
         <ActivityIndicator size="large" color="blue" />
       ) : (
         <SectionPaths
-          title="Category"
+          title={language.category}
           navigation={navigation}
           data={categoryContext.state.data}
         />

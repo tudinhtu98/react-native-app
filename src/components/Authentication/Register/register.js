@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   TextInput,
   View,
@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { apiRegister } from "../../../core/services/register-service";
 import { stylesGlo } from "../../../globals/styles";
+import { LanguageContext } from "../../../provider/language-provider";
 
 const renderRegisterStatus = (registerStatus) => {
   if (registerStatus) {
@@ -30,6 +31,7 @@ const renderRegisterStatus = (registerStatus) => {
 };
 
 const Register = (props) => {
+  const { language } = useContext(LanguageContext);
   const [isRegistering, setRegistering] = useState(false);
   const [registerStatus, setRegisterStatus] = useState(null);
   const [email, setEmail] = useState("");
@@ -73,7 +75,7 @@ const Register = (props) => {
         autoCapitalize="none"
         onChangeText={(text) => setEmail(text)}
       ></TextInput>
-      <Text>Phone</Text>
+      <Text>{language.phone}</Text>
       <TextInput
         style={styles.textInput}
         autoCompleteType="tel"
@@ -82,7 +84,7 @@ const Register = (props) => {
         autoCapitalize="none"
         onChangeText={(text) => setPhone(text)}
       ></TextInput>
-      <Text>Password</Text>
+      <Text>{language.password}</Text>
       <TextInput
         style={styles.textInput}
         textContentType="newPassword"
@@ -110,7 +112,7 @@ const Register = (props) => {
         style={[styles.button, styles.buttonRegister]}
         onPress={onPressRegister}
       >
-        <Text style={styles.textWhite}>REGISTER</Text>
+        <Text style={styles.textWhite}>{language.register}</Text>
       </TouchableOpacity>
     </View>
   );

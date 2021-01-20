@@ -20,12 +20,14 @@ import {
 import { convertHourToMin } from "../../../core/utilities/date-time-utilities";
 import { stylesGlo } from "../../../globals/styles";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
+import { LanguageContext } from "../../../provider/language-provider";
 import { ThemeContext } from "../../../provider/theme-provider";
 
 const { height } = Dimensions.get("window");
 const SectionIntro = (props) => {
   const course = props.route.params.course;
   const { theme } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
   const { state } = useContext(AuthenticationContext);
   const [favoriteIconName, setFavoriteIconName] = useState("favorite-border");
   const [addIconName, setAddIconName] = useState("add");
@@ -159,15 +161,15 @@ const SectionIntro = (props) => {
           disabled={ownStatus}
         >
           <MaterialIcons name={addIconName} size={25} color="green" />
-          <Text style={{ color: theme.foreground }}>Get Course</Text>
+          <Text style={{ color: theme.foreground }}>{language.getCourse}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.iconCenter} onPress={handleFavorite}>
           <MaterialIcons name={favoriteIconName} size={25} color="red" />
-          <Text style={{ color: theme.foreground }}>Like</Text>
+          <Text style={{ color: theme.foreground }}>{language.like}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.iconCenter} onPress={handleShareCourse}>
           <MaterialIcons name="share" size={25} color={theme.foreground} />
-          <Text style={{ color: theme.foreground }}>Share</Text>
+          <Text style={{ color: theme.foreground }}>{language.share}</Text>
         </TouchableOpacity>
       </View>
       <ScrollView style={[styles.scrollIntro, stylesGlo.shadow]}>

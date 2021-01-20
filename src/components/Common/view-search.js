@@ -8,11 +8,13 @@ import {
 } from "react-native";
 import { ScreenKey } from "../../globals/constants";
 import { AuthenticationContext } from "../../provider/authentication-provider";
+import { LanguageContext } from "../../provider/language-provider";
 import { SearchContext } from "../../provider/search-provider";
 import { ThemeContext } from "../../provider/theme-provider";
 
 const ViewSearch = (props) => {
   const { theme } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
   const { state } = useContext(AuthenticationContext);
   const { search } = useContext(SearchContext);
   const [keyword, setKeyword] = useState("");
@@ -21,7 +23,7 @@ const ViewSearch = (props) => {
     <View style={{ flexDirection: "row" }}>
       <TextInput
         style={{ ...styles.border, color: theme.foreground }}
-        placeholder="Search text"
+        placeholder={language.searchText}
         placeholderTextColor="gray"
         autoFocus={true}
         onChangeText={(keyword) => setKeyword(keyword)}
@@ -35,7 +37,7 @@ const ViewSearch = (props) => {
           });
         }}
       >
-        <Text style={{ color: "white" }}>Search</Text>
+        <Text style={{ color: "white" }}>{language.search}</Text>
       </TouchableOpacity>
     </View>
   );

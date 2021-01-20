@@ -19,10 +19,12 @@ import { FavoriteCourseContext } from "../../../provider/favorite-course-provide
 import { apiLikeCourse } from "../../../core/services/course-service";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
 import { ThemeContext } from "../../../provider/theme-provider";
+import { LanguageContext } from "../../../provider/language-provider";
 
 const ListFavoriteCoursesItem = (props) => {
   const { state } = useContext(AuthenticationContext);
   const { theme } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
   const { dislikeCourse } = useContext(FavoriteCourseContext);
   const handleShareCourse = () => {
     Share.share({ message: "share course" });
@@ -60,7 +62,7 @@ const ListFavoriteCoursesItem = (props) => {
           </View>
           <Text
             style={stylesGlo.textSmall}
-          >{`${props.item.coursePrice}đ . ${props.item.courseSoldNumber} sold`}</Text>
+          >{`${props.item.coursePrice}đ . ${props.item.courseSoldNumber} ${language.sold}`}</Text>
         </View>
       </TouchableOpacity>
       <View style={styles.dots}>

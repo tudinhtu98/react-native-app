@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { apiGetMe } from "../../core/services/authentication-service";
 import { ThemeContext } from "../../provider/theme-provider";
 import { AuthenticationContext } from "../../provider/authentication-provider";
+import { LanguageContext } from "../../provider/language-provider";
 
 const retrieveData = async (key) => {
   try {
@@ -33,6 +34,7 @@ const checkValidToken = async () => {
 
 const SplashScreen = (props) => {
   const { toggleTheme } = useContext(ThemeContext);
+  const { toggleLanguage } = useContext(LanguageContext);
   const { updateState } = useContext(AuthenticationContext);
   const [state, setState] = useState({
     isChecking: true,
@@ -43,7 +45,11 @@ const SplashScreen = (props) => {
   useEffect(() => {
     const checkDataStorage = async () => {
       const [check, data] = await checkValidToken();
+      const languageName = await retrieveData("languageName");
       const themeName = await retrieveData("themeName");
+      if (languageName == "vietnamese") {
+        toggleLanguage();
+      }
       setState({ isChecking: false, isChecked: check, data });
       if (themeName == "dark") {
         toggleTheme();

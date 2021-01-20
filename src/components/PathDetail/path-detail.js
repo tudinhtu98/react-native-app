@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { LogBox, ScrollView, View, ActivityIndicator } from "react-native";
 import { apiGetCourseByCategoryId } from "../../core/services/category-service";
 import { AuthenticationContext } from "../../provider/authentication-provider";
+import { LanguageContext } from "../../provider/language-provider";
 import { ThemeContext } from "../../provider/theme-provider";
 import ListCourses from "../Courses/ListCourses/list-courses";
 import SectionAuthors from "../Main/Browse/SectionAuthors/section-authors";
@@ -10,6 +11,7 @@ import PathLevel from "./PathLevel/path-level";
 
 const PathDetail = (props) => {
   const { theme } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
   const { state } = useContext(AuthenticationContext);
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState({});
@@ -51,7 +53,7 @@ const PathDetail = (props) => {
             navigation={props.navigation}
           />
           <SectionAuthors
-            title="Authors related"
+            title={language.authorsRelated}
             navigation={props.navigation}
             authors={data.instructors.data}
           />

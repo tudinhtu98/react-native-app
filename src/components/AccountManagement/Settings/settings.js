@@ -7,6 +7,7 @@ import { StackActions } from "@react-navigation/native";
 import { ThemeContext } from "../../../provider/theme-provider";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { LanguageContext } from "../../../provider/language-provider";
 
 const storeData = async (key, value) => {
   try {
@@ -19,6 +20,7 @@ const storeData = async (key, value) => {
 
 const Settings = (props) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const { language, toggleLanguage } = useContext(LanguageContext);
   const authContext = useContext(AuthenticationContext);
   const name =
     authContext.state.userInfo && authContext.state.userInfo.name
@@ -34,6 +36,9 @@ const Settings = (props) => {
   useEffect(() => {
     storeData("themeName", theme.name);
   }, [theme]);
+  useEffect(() => {
+    storeData("languageName", language.languageName);
+  }, [language]);
 
   return (
     <View style={{ ...styles.view, backgroundColor: theme.background }}>
@@ -56,17 +61,29 @@ const Settings = (props) => {
       <View>
         <TouchableOpacity
           style={{ ...styles.button, borderColor: theme.foreground }}
-          onPress={handleSignOut}
+          onPress={toggleTheme}
         >
-          <Text style={{ color: theme.foreground }}>SIGNOUT</Text>
+          <Text style={{ color: theme.foreground }}>
+            {language.changeTheme}
+          </Text>
         </TouchableOpacity>
       </View>
       <View>
         <TouchableOpacity
           style={{ ...styles.button, borderColor: theme.foreground }}
-          onPress={toggleTheme}
+          onPress={toggleLanguage}
         >
-          <Text style={{ color: theme.foreground }}>Change theme</Text>
+          <Text style={{ color: theme.foreground }}>
+            {language.changeLanguage}
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <View>
+        <TouchableOpacity
+          style={{ ...styles.button, borderColor: theme.foreground }}
+          onPress={handleSignOut}
+        >
+          <Text style={{ color: theme.foreground }}>{language.logout}</Text>
         </TouchableOpacity>
       </View>
     </View>

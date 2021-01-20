@@ -4,10 +4,12 @@ import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { Rating } from "react-native-ratings";
 import { apiAddComment } from "../../../../core/services/course-service";
 import { AuthenticationContext } from "../../../../provider/authentication-provider";
+import { LanguageContext } from "../../../../provider/language-provider";
 import { ThemeContext } from "../../../../provider/theme-provider";
 
 const SectionAddComment = (props) => {
   const { theme } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
   const [isLoading, setLoading] = useState(false);
   const [content, setContent] = useState("");
   const [point, setPoint] = useState(0);
@@ -59,7 +61,7 @@ const SectionAddComment = (props) => {
           <ActivityIndicator size="large" color="blue" />
         ) : (
           <TouchableOpacity style={styles.button} onPress={SubmitComment}>
-            <Text style={{ color: "white" }}>Gửi</Text>
+            <Text style={{ color: "white" }}>{language.send}</Text>
           </TouchableOpacity>
         )}
       </View>
