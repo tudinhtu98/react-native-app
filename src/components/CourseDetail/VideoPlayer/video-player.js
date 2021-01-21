@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Dimensions, Platform, View } from "react-native";
-import WebView from "react-native-webview";
+import { WebView } from "react-native-webview";
 
 const { width, height } = Dimensions.get("window");
 
