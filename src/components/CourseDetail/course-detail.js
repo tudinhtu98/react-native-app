@@ -42,19 +42,19 @@ const CourseDetail = (props) => {
       });
   };
 
-  // useEffect(() => {
-  //   const backAction = () => {
-  //     props.navigation.goBack();
-  //     return true;
-  //   };
+  useEffect(() => {
+    const backAction = () => {
+      props.navigation.goBack();
+      return true;
+    };
 
-  //   const backHandler = BackHandler.addEventListener(
-  //     "hardwareBackPress",
-  //     backAction
-  //   );
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
 
-  //   return () => backHandler.remove();
-  // }, []);
+    return () => backHandler.remove();
+  }, []);
 
   useEffect(() => {
     setLoading(true);

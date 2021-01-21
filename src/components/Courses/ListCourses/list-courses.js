@@ -25,7 +25,7 @@ const ListCourses = (props) => {
 
   const onPressListCoursesItem = (item) => {
     props.navigation.dispatch(
-      StackActions.replace(ScreenKey.CourseDetail, {
+      StackActions.push(ScreenKey.CourseDetail, {
         item,
         title: item.title,
       })
