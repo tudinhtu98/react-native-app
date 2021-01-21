@@ -1,7 +1,12 @@
 import React, { useContext, useEffect } from "react";
-import { View, StyleSheet, TouchableOpacity, Text, Image } from "react-native";
-import Profile from "../Profile/profile";
-import { stylesGlo } from "../../../globals/styles";
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  Image,
+  Alert,
+} from "react-native";
 import { ScreenKey } from "../../../globals/constants";
 import { StackActions } from "@react-navigation/native";
 import { ThemeContext } from "../../../provider/theme-provider";
@@ -33,6 +38,10 @@ const Settings = (props) => {
     props.navigation.dispatch(StackActions.replace(ScreenKey.Login));
   };
 
+  const onPressAppVersion = () => {
+    Alert.alert(language.appVersion, "1.0.0");
+  };
+
   useEffect(() => {
     storeData("themeName", theme.name);
   }, [theme]);
@@ -41,50 +50,72 @@ const Settings = (props) => {
   }, [language]);
 
   return (
-    <View style={{ ...styles.view, backgroundColor: theme.background }}>
-      <TouchableOpacity
-        onPress={() => {
-          props.navigation.navigate(ScreenKey.Profile);
-        }}
-      >
-        <View style={styles.viewProfile}>
-          <Image
-            style={styles.avatar}
-            source={{ uri: authContext.state.userInfo.avatar }}
-          />
-          <Text style={{ ...styles.textLarge, color: theme.foreground }}>
-            {name}
-          </Text>
+    <View
+      style={{
+        ...styles.view,
+        backgroundColor: theme.background,
+        flex: 1,
+        flexDirection: "column",
+        justifyContent: "space-between",
+      }}
+    >
+      <View>
+        <TouchableOpacity
+          onPress={() => {
+            props.navigation.navigate(ScreenKey.Profile);
+          }}
+        >
+          <View style={styles.viewProfile}>
+            <Image
+              style={styles.avatar}
+              source={{ uri: authContext.state.userInfo.avatar }}
+            />
+            <Text style={{ ...styles.textLarge, color: theme.foreground }}>
+              {name}
+            </Text>
+          </View>
+        </TouchableOpacity>
+        <View></View>
+        <View>
+          <TouchableOpacity
+            style={{ ...styles.button, borderColor: theme.foreground }}
+            onPress={toggleTheme}
+          >
+            <Text style={{ color: theme.foreground }}>
+              {language.changeTheme}
+            </Text>
+          </TouchableOpacity>
         </View>
-      </TouchableOpacity>
-      <View></View>
-      <View>
-        <TouchableOpacity
-          style={{ ...styles.button, borderColor: theme.foreground }}
-          onPress={toggleTheme}
-        >
-          <Text style={{ color: theme.foreground }}>
-            {language.changeTheme}
-          </Text>
-        </TouchableOpacity>
+        <View>
+          <TouchableOpacity
+            style={{ ...styles.button, borderColor: theme.foreground }}
+            onPress={toggleLanguage}
+          >
+            <Text style={{ color: theme.foreground }}>
+              {language.changeLanguage}
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <TouchableOpacity
+            style={{ ...styles.button, borderColor: theme.foreground }}
+            onPress={onPressAppVersion}
+          >
+            <Text style={{ color: theme.foreground }}>
+              {language.appVersion}
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
       <View>
-        <TouchableOpacity
-          style={{ ...styles.button, borderColor: theme.foreground }}
-          onPress={toggleLanguage}
-        >
-          <Text style={{ color: theme.foreground }}>
-            {language.changeLanguage}
-          </Text>
-        </TouchableOpacity>
-      </View>
-      <View>
-        <TouchableOpacity
-          style={{ ...styles.button, borderColor: theme.foreground }}
-          onPress={handleSignOut}
-        >
-          <Text style={{ color: theme.foreground }}>{language.logout}</Text>
-        </TouchableOpacity>
+        <View>
+          <TouchableOpacity
+            style={{ ...styles.button, borderColor: theme.foreground }}
+            onPress={handleSignOut}
+          >
+            <Text style={{ color: theme.foreground }}>{language.logout}</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
