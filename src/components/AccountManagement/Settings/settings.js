@@ -1,14 +1,31 @@
-import React, { useContext } from "react";
-import { View, StyleSheet, TouchableOpacity, Text, Image } from "react-native";
-import Profile from "../Profile/profile";
-import { stylesGlo } from "../../../globals/styles";
+import React, { useContext, useEffect } from "react";
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  Image,
+  Alert,
+} from "react-native";
 import { ScreenKey } from "../../../globals/constants";
 import { StackActions } from "@react-navigation/native";
 import { ThemeContext } from "../../../provider/theme-provider";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { LanguageContext } from "../../../provider/language-provider";
+
+const storeData = async (key, value) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem(key, jsonValue);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 
 const Settings = (props) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const { language, toggleLanguage } = useContext(LanguageContext);
   const authContext = useContext(AuthenticationContext);
   const name =
     authContext.state.userInfo && authContext.state.userInfo.name
@@ -21,31 +38,84 @@ const Settings = (props) => {
     props.navigation.dispatch(StackActions.replace(ScreenKey.Login));
   };
 
+  const onPressAppVersion = () => {
+    Alert.alert(language.appVersion, "1.0.0");
+  };
+
+  useEffect(() => {
+    storeData("themeName", theme.name);
+  }, [theme]);
+  useEffect(() => {
+    storeData("languageName", language.languageName);
+  }, [language]);
+
   return (
-    <View style={{ ...styles.view, backgroundColor: theme.background }}>
-      <TouchableOpacity
-        onPress={() => {
-          props.navigation.navigate(ScreenKey.Profile);
-        }}
-      >
-        <View style={styles.viewProfile}>
-          <Image
-            style={styles.avatar}
-            source={{ uri: authContext.state.userInfo.avatar }}
-          />
-          <Text style={styles.textLarge}>{name}</Text>
-        </View>
-      </TouchableOpacity>
-      <View></View>
+    <View
+      style={{
+        ...styles.view,
+        backgroundColor: theme.background,
+        flex: 1,
+        flexDirection: "column",
+        justifyContent: "space-between",
+      }}
+    >
       <View>
-        <TouchableOpacity style={styles.button} onPress={handleSignOut}>
-          <Text style={stylesGlo.textBlue}>SIGNOUT</Text>
+        <TouchableOpacity
+          onPress={() => {
+            props.navigation.navigate(ScreenKey.Profile);
+          }}
+        >
+          <View style={styles.viewProfile}>
+            <Image
+              style={styles.avatar}
+              source={{ uri: authContext.state.userInfo.avatar }}
+            />
+            <Text style={{ ...styles.textLarge, color: theme.foreground }}>
+              {name}
+            </Text>
+          </View>
         </TouchableOpacity>
+        <View></View>
+        <View>
+          <TouchableOpacity
+            style={{ ...styles.button, borderColor: theme.foreground }}
+            onPress={toggleTheme}
+          >
+            <Text style={{ color: theme.foreground }}>
+              {language.changeTheme}
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <TouchableOpacity
+            style={{ ...styles.button, borderColor: theme.foreground }}
+            onPress={toggleLanguage}
+          >
+            <Text style={{ color: theme.foreground }}>
+              {language.changeLanguage}
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <TouchableOpacity
+            style={{ ...styles.button, borderColor: theme.foreground }}
+            onPress={onPressAppVersion}
+          >
+            <Text style={{ color: theme.foreground }}>
+              {language.appVersion}
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
       <View>
-        <TouchableOpacity style={styles.button} onPress={toggleTheme}>
-          <Text style={stylesGlo.textBlue}>Change theme</Text>
-        </TouchableOpacity>
+        <View>
+          <TouchableOpacity
+            style={{ ...styles.button, borderColor: theme.foreground }}
+            onPress={handleSignOut}
+          >
+            <Text style={{ color: theme.foreground }}>{language.logout}</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -55,7 +125,8 @@ export default Settings;
 
 const styles = StyleSheet.create({
   view: {
-    margin: 10,
+    padding: 10,
+    height: "100%",
   },
   viewProfile: {
     flexDirection: "row",
@@ -69,7 +140,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: "blue",
   },
   avatar: {
     height: 70,

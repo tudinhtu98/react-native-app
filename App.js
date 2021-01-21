@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -27,6 +27,7 @@ import { AuthorProvider } from "./src/provider/author-provider";
 import { NewCourseProvider } from "./src/provider/new-course-provider";
 import { TopSellCourseProvider } from "./src/provider/top-sell-course-provider";
 import { TopRateCourseProvider } from "./src/provider/top-rate-course-provider";
+import { LanguageProvider } from "./src/provider/language-provider";
 
 const Tab = createBottomTabNavigator();
 const MainNavigationStack = createStackNavigator();
@@ -107,29 +108,31 @@ const MainNavigation = () => {
 export default function App() {
   return (
     <ThemeProvider>
-      <AuthenticationProvider>
-        <CategoryProvider>
-          <AuthorProvider>
-            <TopSellCourseProvider>
-              <TopRateCourseProvider>
-                <NewCourseProvider>
-                  <FavoriteCourseProvider>
-                    <ProcessCourseProvider>
-                      <RecommendCourseProvider>
-                        <MenuProvider>
-                          <NavigationContainer>
-                            <MainNavigation />
-                          </NavigationContainer>
-                        </MenuProvider>
-                      </RecommendCourseProvider>
-                    </ProcessCourseProvider>
-                  </FavoriteCourseProvider>
-                </NewCourseProvider>
-              </TopRateCourseProvider>
-            </TopSellCourseProvider>
-          </AuthorProvider>
-        </CategoryProvider>
-      </AuthenticationProvider>
+      <LanguageProvider>
+        <AuthenticationProvider>
+          <CategoryProvider>
+            <AuthorProvider>
+              <TopSellCourseProvider>
+                <TopRateCourseProvider>
+                  <NewCourseProvider>
+                    <FavoriteCourseProvider>
+                      <ProcessCourseProvider>
+                        <RecommendCourseProvider>
+                          <MenuProvider>
+                            <NavigationContainer>
+                              <MainNavigation />
+                            </NavigationContainer>
+                          </MenuProvider>
+                        </RecommendCourseProvider>
+                      </ProcessCourseProvider>
+                    </FavoriteCourseProvider>
+                  </NewCourseProvider>
+                </TopRateCourseProvider>
+              </TopSellCourseProvider>
+            </AuthorProvider>
+          </CategoryProvider>
+        </AuthenticationProvider>
+      </LanguageProvider>
     </ThemeProvider>
   );
 }

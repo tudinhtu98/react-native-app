@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   TextInput,
   View,
@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { apiForgetPassSendEmail } from "../../../core/services/forget-password-service";
 import { stylesGlo } from "../../../globals/styles";
+import { LanguageContext } from "../../../provider/language-provider";
 
 const renderSendEmail = (status) => {
   if (status) {
@@ -22,6 +23,7 @@ const renderSendEmail = (status) => {
 };
 
 const ForgetPassword = (props) => {
+  const { language } = useContext(LanguageContext);
   const [isSending, setSending] = useState(false);
   const [status, setStatus] = useState("");
   const [email, setEmail] = useState("");
@@ -45,10 +47,7 @@ const ForgetPassword = (props) => {
 
   return (
     <View style={styles.view}>
-      <Text style={styles.textIntro}>
-        Enter your email address and we'll send you a link to reset your
-        password
-      </Text>
+      <Text style={styles.textIntro}>{language.enterYourEmail}</Text>
       <Text>Email</Text>
       <TextInput
         style={styles.textInput}
@@ -63,7 +62,7 @@ const ForgetPassword = (props) => {
         style={[styles.button, styles.buttonBlue]}
         onPress={onPressSendEmail}
       >
-        <Text style={styles.textWhite}>Send email</Text>
+        <Text style={styles.textWhite}>{language.sendEmail}</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={[styles.button, styles.buttonGray]}
@@ -71,7 +70,7 @@ const ForgetPassword = (props) => {
           props.navigation.goBack();
         }}
       >
-        <Text style={styles.textWhite}>Cancel</Text>
+        <Text style={styles.textWhite}>{language.cancel}</Text>
       </TouchableOpacity>
     </View>
   );

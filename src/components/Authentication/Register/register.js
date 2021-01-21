@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   TextInput,
   View,
@@ -9,8 +9,12 @@ import {
   ActivityIndicator,
   Alert,
 } from "react-native";
-import { apiRegister } from "../../../core/services/register-service";
+import {
+  apiRegister,
+  apiSendActiveEmail,
+} from "../../../core/services/register-service";
 import { stylesGlo } from "../../../globals/styles";
+import { LanguageContext } from "../../../provider/language-provider";
 
 const renderRegisterStatus = (registerStatus) => {
   if (registerStatus) {
@@ -30,7 +34,9 @@ const renderRegisterStatus = (registerStatus) => {
 };
 
 const Register = (props) => {
+  const { language } = useContext(LanguageContext);
   const [isRegistering, setRegistering] = useState(false);
+  const [registerSuccess, setRegisterSuccess] = useState(false);
   const [registerStatus, setRegisterStatus] = useState(null);
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -45,6 +51,7 @@ const Register = (props) => {
           data: res.data,
         });
         if (res.status === 200) {
+          setRegisterSuccess(true);
           Alert.alert(
             "Registration successful",
             "Please confirm your email to activate your account"
@@ -62,6 +69,15 @@ const Register = (props) => {
       });
   };
 
+  useEffect(() => {
+    if (registerSuccess) {
+      apiSendActiveEmail(email);
+      setEmail("");
+      setPhone("");
+      setPassword("");
+    }
+  }, [registerSuccess]);
+
   return (
     <View style={styles.view}>
       <Text>Email</Text>
@@ -73,7 +89,7 @@ const Register = (props) => {
         autoCapitalize="none"
         onChangeText={(text) => setEmail(text)}
       ></TextInput>
-      <Text>Phone</Text>
+      <Text>{language.phone}</Text>
       <TextInput
         style={styles.textInput}
         autoCompleteType="tel"
@@ -82,7 +98,7 @@ const Register = (props) => {
         autoCapitalize="none"
         onChangeText={(text) => setPhone(text)}
       ></TextInput>
-      <Text>Password</Text>
+      <Text>{language.password}</Text>
       <TextInput
         style={styles.textInput}
         textContentType="newPassword"
@@ -110,7 +126,7 @@ const Register = (props) => {
         style={[styles.button, styles.buttonRegister]}
         onPress={onPressRegister}
       >
-        <Text style={styles.textWhite}>REGISTER</Text>
+        <Text style={styles.textWhite}>{language.register}</Text>
       </TouchableOpacity>
     </View>
   );

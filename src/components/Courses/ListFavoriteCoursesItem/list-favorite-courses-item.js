@@ -18,9 +18,13 @@ import { stylesGlo } from "../../../globals/styles";
 import { FavoriteCourseContext } from "../../../provider/favorite-course-provider";
 import { apiLikeCourse } from "../../../core/services/course-service";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
+import { ThemeContext } from "../../../provider/theme-provider";
+import { LanguageContext } from "../../../provider/language-provider";
 
 const ListFavoriteCoursesItem = (props) => {
   const { state } = useContext(AuthenticationContext);
+  const { theme } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
   const { dislikeCourse } = useContext(FavoriteCourseContext);
   const handleShareCourse = () => {
     Share.share({ message: "share course" });
@@ -51,12 +55,14 @@ const ListFavoriteCoursesItem = (props) => {
         <Image style={styles.image} source={{ uri: props.item.courseImage }} />
         <View style={styles.view}>
           <View>
-            <Text style={{ flexWrap: "wrap" }}>{props.item.courseTitle}</Text>
+            <Text style={{ flexWrap: "wrap", color: theme.foreground }}>
+              {props.item.courseTitle}
+            </Text>
             <Text style={stylesGlo.textSmall}>{props.item.instructorName}</Text>
           </View>
           <Text
             style={stylesGlo.textSmall}
-          >{`${props.item.coursePrice}đ . ${props.item.courseSoldNumber} đã bán`}</Text>
+          >{`${props.item.coursePrice}đ . ${props.item.courseSoldNumber} ${language.sold}`}</Text>
         </View>
       </TouchableOpacity>
       <View style={styles.dots}>

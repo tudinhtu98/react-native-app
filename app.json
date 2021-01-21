@@ -1,9 +1,10 @@
 {
   "expo": {
-    "name": "1612771-individual-project",
-    "slug": "1612771-individual-project",
+    "name": "1612771-ITEDU",
+    "slug": "1612771-ITEDU",
     "version": "1.0.0",
     "orientation": "portrait",
+    "sdkVersion": "40.0.0",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
@@ -17,13 +18,17 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.tudinhtu.itedu",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.tudinhtu.itedu",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"

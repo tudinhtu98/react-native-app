@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { convertHourToMin } from "../../core/utilities/date-time-utilities";
 import { stylesGlo } from "../../globals/styles";
+import { ThemeContext } from "../../provider/theme-provider";
 
 const ViewCourse = (props) => {
+  const { theme } = useContext(ThemeContext);
   return (
     <View style={styles.view}>
       <View>
-        <Text style={{ flexWrap: "wrap" }}>{props.item.title}</Text>
+        <Text style={{ flexWrap: "wrap", color: theme.foreground }}>
+          {props.item.title}
+        </Text>
         <Text style={stylesGlo.textSmall}>{props.item.subtitle}</Text>
       </View>
       <Text style={stylesGlo.textSmall}>{`${new Date(

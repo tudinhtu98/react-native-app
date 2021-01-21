@@ -7,21 +7,32 @@ import {
   TouchableOpacity,
   ScrollView,
   Share,
+  Dimensions,
 } from "react-native";
+import { Rating } from "react-native-ratings";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import {
   apiGetCourseLikeStatus,
   apiLikeCourse,
+  apiCheckOwnCourseStatus,
+  apiAddCourse,
 } from "../../../core/services/course-service";
 import { convertHourToMin } from "../../../core/utilities/date-time-utilities";
 import { stylesGlo } from "../../../globals/styles";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
+import { LanguageContext } from "../../../provider/language-provider";
+import { ThemeContext } from "../../../provider/theme-provider";
 
+const { height } = Dimensions.get("window");
 const SectionIntro = (props) => {
-  const course = props.course;
+  const course = props.route.params.course;
+  const { theme } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
   const { state } = useContext(AuthenticationContext);
   const [favoriteIconName, setFavoriteIconName] = useState("favorite-border");
+  const [addIconName, setAddIconName] = useState("add");
   const [likeStatus, setLikeStatus] = useState(false);
+  const [ownStatus, setOwnStatus] = useState(false);
 
   const CallAPIGetCourseLikeStatus = () => {
     apiGetCourseLikeStatus(state.token, course.id)
@@ -29,7 +40,20 @@ const SectionIntro = (props) => {
         if (res.status === 200) {
           setLikeStatus(res.data.likeStatus);
         } else {
-          throw new Error(err);
+          throw new Error();
+        }
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  };
+  const CallAPIOwnCourseStatus = () => {
+    apiCheckOwnCourseStatus(state.token, course.id)
+      .then((res) => {
+        if (res.status === 200) {
+          setOwnStatus(res.data.payload.isUserOwnCourse);
+        } else {
+          throw new Error();
         }
       })
       .catch((err) => {
@@ -43,7 +67,7 @@ const SectionIntro = (props) => {
         if (res.status === 200) {
           setLikeStatus(res.data.likeStatus);
         } else {
-          throw new Error(err);
+          throw new Error();
         }
       })
       .catch((err) => {
@@ -51,8 +75,23 @@ const SectionIntro = (props) => {
       });
   };
 
+  const CallAPIAddCourse = () => {
+    apiAddCourse(state.token, course.id)
+      .then((res) => {
+        if (res.status === 200) {
+          setOwnStatus(true);
+        } else {
+          throw new Error();
+        }
+      })
+      .catch((err) => {
+        Alert.alert("Failed!", err.response.data.messsage);
+      });
+  };
+
   useEffect(() => {
     CallAPIGetCourseLikeStatus();
+    CallAPIOwnCourseStatus();
   }, []);
 
   useEffect(() => {
@@ -63,25 +102,49 @@ const SectionIntro = (props) => {
     }
   }, [likeStatus]);
 
+  useEffect(() => {
+    if (ownStatus) {
+      setAddIconName("check");
+    } else {
+      setAddIconName("add");
+    }
+  }, [ownStatus]);
+
   const handleFavorite = () => {
     CallAPILike();
   };
+  const handleAddCourse = () => {
+    CallAPIAddCourse();
+  };
 
   const handleShareCourse = () => {
-    Share.share({ message: "share course" });
+    Share.share({
+      message: "http://dev.letstudy.org/course-detail/" + course.id,
+    });
   };
 
   return (
-    <View style={styles.view}>
-      <Text style={styles.title}>{course.title}</Text>
+    <View style={{ ...styles.view, backgroundColor: theme.background }}>
+      <Text style={{ ...styles.title, color: theme.foreground }}>
+        {course.title}
+      </Text>
+      <Rating
+        style={styles.rating}
+        imageSize={20}
+        readonly
+        startingValue={course.contentPoint || 0}
+        tintColor={theme.background}
+      />
       <View style={{ flexDirection: "row" }}>
         <TouchableOpacity
           onPress={() => {
-            Alert.alert("press author");
+            // Alert.alert("press author");
           }}
         >
           <View style={styles.author}>
-            <Text>{course.instructor["name"]}</Text>
+            <Text style={{ color: theme.foreground }}>
+              {course.instructor ? course.instructor["name"] : ""}
+            </Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -92,17 +155,25 @@ const SectionIntro = (props) => {
         course.totalHours || 0
       )} mins`}</Text>
       <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+        <TouchableOpacity
+          style={styles.iconCenter}
+          onPress={handleAddCourse}
+          disabled={ownStatus}
+        >
+          <MaterialIcons name={addIconName} size={25} color="green" />
+          <Text style={{ color: theme.foreground }}>{language.getCourse}</Text>
+        </TouchableOpacity>
         <TouchableOpacity style={styles.iconCenter} onPress={handleFavorite}>
           <MaterialIcons name={favoriteIconName} size={25} color="red" />
-          <Text>Like</Text>
+          <Text style={{ color: theme.foreground }}>{language.like}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.iconCenter} onPress={handleShareCourse}>
-          <MaterialIcons name="share" size={25} color="gray" />
-          <Text>Share</Text>
+          <MaterialIcons name="share" size={25} color={theme.foreground} />
+          <Text style={{ color: theme.foreground }}>{language.share}</Text>
         </TouchableOpacity>
       </View>
       <ScrollView style={[styles.scrollIntro, stylesGlo.shadow]}>
-        <Text>{course.description}</Text>
+        <Text style={{ color: theme.foreground }}>{course.description}</Text>
       </ScrollView>
     </View>
   );
@@ -112,12 +183,16 @@ export default SectionIntro;
 
 const styles = StyleSheet.create({
   view: {
-    margin: 10,
-    height: 300,
+    padding: 10,
+    height: (height * 5.5) / 10,
   },
   title: {
     fontSize: 20,
     margin: 5,
+  },
+  rating: {
+    margin: 5,
+    alignItems: "flex-start",
   },
   author: {
     backgroundColor: "gray",
@@ -133,8 +208,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   scrollIntro: {
-    height: 50,
-    marginTop: 20,
+    marginVertical: 10,
     padding: 5,
     borderWidth: 1,
     borderRadius: 10,

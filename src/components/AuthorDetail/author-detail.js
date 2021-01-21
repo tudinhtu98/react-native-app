@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ActivityIndicator, LogBox, View } from "react-native";
 import { apiGetAuthorDetail } from "../../core/services/author-service";
+import { ThemeContext } from "../../provider/theme-provider";
 import ListCourses from "../Courses/ListCourses/list-courses";
 import AuthorIntro from "./AuthorIntro/author-intro";
 
 const AuthorDetail = (props) => {
+  const { theme } = useContext(ThemeContext);
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState({});
 
@@ -34,7 +36,7 @@ const AuthorDetail = (props) => {
   }, []);
 
   return (
-    <View>
+    <View style={{ height: "100%", backgroundColor: theme.background }}>
       {isLoading ? (
         <ActivityIndicator size="large" color="blue" />
       ) : (

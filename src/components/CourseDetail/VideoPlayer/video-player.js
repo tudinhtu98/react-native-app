@@ -1,24 +1,23 @@
 import React from "react";
-import { StyleSheet, Dimensions } from "react-native";
-import { Video } from "expo-av";
+import { StyleSheet, Dimensions, Platform, View, Image } from "react-native";
+import { WebView } from "react-native-webview";
 
 const { width, height } = Dimensions.get("window");
 
 const VideoPlayer = (props) => {
   return (
-    <Video
-      source={{
-        uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
-      }}
-      rate={1.0}
-      volume={1.0}
-      isMuted={false}
-      resizeMode="cover"
-      shouldPlay={false}
-      isLooping={false}
-      useNativeControls
-      style={styles.video}
-    />
+    <View style={styles.video}>
+      {props.uriVideo ? (
+        <WebView
+          style={{ marginTop: Platform.OS == "ios" ? 20 : 0 }}
+          javaScriptEnabled={true}
+          domStorageEnabled={true}
+          source={{ uri: props.uriVideo }}
+        />
+      ) : (
+        <Image source={{ uri: props.imageUrl }} style={styles.video} />
+      )}
+    </View>
   );
 };
 

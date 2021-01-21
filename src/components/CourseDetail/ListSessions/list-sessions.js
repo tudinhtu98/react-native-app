@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
+import { ThemeContext } from "../../../provider/theme-provider";
 import ListSessionsItem from "../ListSessionsItem/list-sessions-item";
 
 const ListSessions = (props) => {
-  const sections = props.section;
+  const { theme } = useContext(ThemeContext);
+  const sections = props.route.params.sections;
+  const setUriVideo = props.route.params.setUriVideo;
 
   const renderSeparator = () => {
     return (
@@ -19,11 +22,15 @@ const ListSessions = (props) => {
   };
 
   return (
-    <View style={styles.view}>
+    <View style={{...styles.view, backgroundColor: theme.background}}>
       <FlatList
         data={sections}
         renderItem={({ item }) => (
-          <ListSessionsItem key={item.id.toString()} item={item} />
+          <ListSessionsItem
+            key={item.id.toString()}
+            item={item}
+            setUriVideo={setUriVideo}
+          />
         )}
         ItemSeparatorComponent={renderSeparator}
         keyExtractor={(item, index) => index.toString()}

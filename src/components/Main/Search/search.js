@@ -20,10 +20,14 @@ import { useContext } from "react/cjs/react.development";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
 import { SearchContext } from "../../../provider/search-provider";
 import { ScreenKey } from "../../../globals/constants";
+import { ThemeContext } from "../../../provider/theme-provider";
+import { LanguageContext } from "../../../provider/language-provider";
 
 const Search = (props) => {
   const { state } = useContext(AuthenticationContext);
   const { search } = useContext(SearchContext);
+  const { theme } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState({});
 
@@ -80,7 +84,7 @@ const Search = (props) => {
             }}
           >
             <Icon
-              style={styles.icon}
+              style={{ ...styles.icon, color: theme.foreground }}
               name="delete-outline"
               size={25}
               color={props.color}
@@ -94,12 +98,12 @@ const Search = (props) => {
         >
           <View style={styles.viewItem}>
             <Icon
-              style={styles.icon}
+              style={{ ...styles.icon, color: theme.foreground }}
               name="history"
               size={25}
               color={props.color}
             />
-            <Text>{item.content}</Text>
+            <Text style={{ color: theme.foreground }}>{item.content}</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -107,10 +111,12 @@ const Search = (props) => {
   };
 
   return (
-    <ScrollView style={styles.scrollView}>
+    <ScrollView style={{ padding: 5, backgroundColor: theme.background }}>
       <ViewSearch navigation={props.navigation} />
       <View style={styles.viewTop}>
-        <Text>Recent searchs</Text>
+        <Text style={{ color: theme.foreground }}>
+          {language.recentSearchs}
+        </Text>
         {/* <TouchableOpacity onPress={() => Alert.alert("onPress Clear all")}>
           <Text style={styles.buttonClear}>CLEAR ALL</Text>
         </TouchableOpacity> */}

@@ -8,3 +8,8 @@ export const apiRegister = (email, phone, password) => {
     password,
   });
 };
+export const apiSendActiveEmail = (email) => {
+  return axios.post(host + "/user/send-activate-email", {
+    email,
+  });
+};

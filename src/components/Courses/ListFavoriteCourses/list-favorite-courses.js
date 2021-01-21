@@ -4,10 +4,12 @@ import { ScreenKey, textGlo } from "../../../globals/constants";
 import { stylesGlo } from "../../../globals/styles";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
 import { FavoriteCourseContext } from "../../../provider/favorite-course-provider";
+import { ThemeContext } from "../../../provider/theme-provider";
 import ListFavoriteCoursesItem from "../ListFavoriteCoursesItem/list-favorite-courses-item";
 
 const ListFavoriteCourses = (props) => {
   const { state } = useContext(AuthenticationContext);
+  const { theme } = useContext(ThemeContext);
   const favoriteCourseContext = useContext(FavoriteCourseContext);
   const courses = props.courses;
 
@@ -38,7 +40,9 @@ const ListFavoriteCourses = (props) => {
   return (
     <View>
       {courses.length == 0 ? (
-        <Text style={stylesGlo.emptyCourses}>{textGlo.emptyCourse}</Text>
+        <Text style={{ ...stylesGlo.emptyCourses, color: theme.foreground }}>
+          {textGlo.emptyCourse}
+        </Text>
       ) : (
         <FlatList
           data={courses}
