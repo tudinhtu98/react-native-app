@@ -10,8 +10,6 @@ const VideoPlayer = (props) => {
       {props.uriVideo ? (
         <WebView
           style={{ marginTop: Platform.OS == "ios" ? 20 : 0 }}
-          javaScriptEnabled={true}
-          domStorageEnabled={true}
           source={{ uri: props.uriVideo }}
         />
       ) : (
