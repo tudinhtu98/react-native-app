@@ -25,7 +25,6 @@ const ViewSearch = (props) => {
         style={{ ...styles.border, color: theme.foreground }}
         placeholder={language.searchText}
         placeholderTextColor="gray"
-        autoFocus={true}
         onChangeText={(keyword) => setKeyword(keyword)}
       />
       <TouchableOpacity
