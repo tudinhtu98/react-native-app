@@ -69,7 +69,7 @@ const CourseDetail = (props) => {
         <ActivityIndicator size="large" color="blue" />
       ) : (
         <View style={{ flex: 1 }}>
-          <VideoPlayer uriVideo={uriVideo} />
+          <VideoPlayer uriVideo={uriVideo} imageUrl={course.imageUrl} />
           <View style={{ height: (height * 6.22) / 10 }}>
             <CourseDetailTab course={course} setUriVideo={setUriVideo} />
           </View>
