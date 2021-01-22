@@ -5,7 +5,6 @@ import {
   StyleSheet,
   Text,
   FlatList,
-  ScrollView,
   LogBox,
   ActivityIndicator,
   RefreshControl,
@@ -111,7 +110,9 @@ const Search = (props) => {
   };
 
   return (
-    <ScrollView style={{ padding: 5, backgroundColor: theme.background }}>
+    <View
+      style={{ height: "100%", padding: 5, backgroundColor: theme.background }}
+    >
       <ViewSearch navigation={props.navigation} />
       <View style={styles.viewTop}>
         <Text style={{ color: theme.foreground }}>
@@ -138,7 +139,7 @@ const Search = (props) => {
           />
         </View>
       )}
-    </ScrollView>
+    </View>
   );
 };
 

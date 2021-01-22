@@ -33,10 +33,10 @@ const SearchStackScreen = () => {
           name={ScreenKey.CourseDetail}
           component={CourseDetail}
         />
-        <SearchStack.Screen
+        {/* <SearchStack.Screen
           name={ScreenKey.PathDetail}
           component={PathDetail}
-        />
+        /> */}
         <SearchStack.Screen
           name={ScreenKey.AuthorDetail}
           component={AuthorDetail}

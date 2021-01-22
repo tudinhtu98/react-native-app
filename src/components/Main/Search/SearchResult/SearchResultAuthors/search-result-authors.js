@@ -12,11 +12,11 @@ const SearchResultAuthors = (props) => {
   const { state } = useContext(SearchContext);
 
   return (
-    <View>
+    <View style={{ height: "100%", backgroundColor: theme.background }}>
       {state.isLoading ? (
         <ActivityIndicator size="large" color="blue" />
       ) : (
-        <View style={{ backgroundColor: theme.background }}>
+        <View>
           <Text
             style={[
               styles.textResult,
