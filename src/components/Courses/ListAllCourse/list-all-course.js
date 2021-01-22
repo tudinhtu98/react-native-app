@@ -8,7 +8,7 @@ const ListAllCourse = (props) => {
   const data = props.route.params.data;
 
   return (
-    <View style={{backgroundColor: theme.background}}>
+    <View style={{ height: "100%", backgroundColor: theme.background }}>
       <ListCourses courses={data} navigation={props.navigation} />
     </View>
   );
